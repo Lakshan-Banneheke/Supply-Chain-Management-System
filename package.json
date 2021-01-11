@@ -1,7 +1,7 @@
 {
-  "name": "airline-reservation-system",
+  "name": "supply-chain-management-system",
   "version": "0.0.1",
-  "description": "airline reservation sustem for B airwways developed for semester 4 project",
+  "description": "supply chain management system developed for semester 4 project",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,20 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lakshan-Banneheke/Airline-Reservation-System.git"
+    "url": "git+https://github.com/Lakshan-Banneheke/Supply-Chain-Management-System.git"
   },
   "keywords": [
     "database",
-    "airline",
-    "reservation",
+    "supply",
+    "chain",
+    "management",
     "system"
   ],
-  "author": "Avishka,Dhaura,Thushani,Lakshan,Shashini",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lakshan-Banneheke/Airline-Reservation-System/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/Lakshan-Banneheke/Airline-Reservation-System#readme",
+  "homepage": "",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
