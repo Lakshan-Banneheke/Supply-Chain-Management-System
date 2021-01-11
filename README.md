@@ -70,7 +70,7 @@ Then create a `.env` file in the root with following content.
 You may change database user/password/secret as you may wish.
 
 ```text
-DATABASE_URL=postgres://database_app:password@localhost:5432/supply_chain_db
+DATABASE_URL=postgres://db_app:password@localhost:5432/supply_chain_db
 
 SESSION_SECRET=database
 PORT=3000
