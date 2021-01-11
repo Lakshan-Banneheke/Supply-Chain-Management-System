@@ -25,13 +25,13 @@ index.use(helmet());
 index.use(express.static('./public'));
 
 // session set up
-index.use(session({
-    store: new (pgConnect(session))({ conString: process.env.DATABASE_URL }),
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-}));
+// index.use(session({
+//     store: new (pgConnect(session))({ conString: process.env.DATABASE_URL }),
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+// }));
 // setup routes
 index.use(require('./routes'));
 
