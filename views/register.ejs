@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<!--    <link-->
+<!--      rel="stylesheet"-->
+<!--      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"-->
+<!--    />-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<!--    <script src="../scripts/jquery-3.5.1.min.js"></script>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Register</title>
+  </head>
+  <body>
+    <h1>Register</h1>
+    <% if(registrationError) {%>
+    <div class="alert alert-danger" role="alert">
+      <%=registrationError%>
+    </div>
+    <% } %>
+
+    <form id="register-form" action="/users/register" method="POST">
+      <div>
+        <input type="text" id="name" name="name" placeholder="Name" required value="<%=name%>"/>
+      </div>
+      <div>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+          value="<%=email%>"
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          id="password2"
+          name="password2"
+          placeholder="Confirm Password"
+          required
+        />
+      </div>
+      <div>
+        <input type="text" id="category" name="category" placeholder="Category" required value="<%=category%>"/>
+      </div>
+      <div>
+        <input type="text" id="gender" name="gender" placeholder="Gender" required value="<%=gender%>"/>
+      </div>
+      <div>
+        <input type="text" id="doj" name="doj" placeholder="Date of Joining" required value="<%=doj%>"/>
+      </div>
+      <div>
+        <input type="text" id="contactNo" name="contactNo" placeholder="Contact Number" required value="<%=contactNo%>" />
+      </div>
+      <div>
+        <input type="submit" value="Register" />
+      </div>
+
+      <a href="/users/login">Already registered? Login here</a>
+    </form>
+  </body>
+</html>
