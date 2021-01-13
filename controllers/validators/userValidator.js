@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const registerValidate = Joi.object(
+const register = Joi.object(
 ).options({abortEarly: false}).keys({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
@@ -12,6 +12,15 @@ const registerValidate = Joi.object(
     contactNo : Joi.string().required().label('Contact Number')
 });
 
+const login = Joi.object(
+).options({abortEarly: false}).keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().required().label('Password'),
+});
+
+
+
 module.exports = {
-    registerValidate
+    register,
+    login
 }

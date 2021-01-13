@@ -20,7 +20,7 @@ const viewLogin = async (req, res) => {
 
 const register = async (req, res) => {
     try{
-        const {value, error} = await userValidator.registerValidate.validate(req.body);
+        const {value, error} = await userValidator.register.validate(req.body);
         if (error) throw (error);
         await userService.register(value);
         return res.redirect('login');
@@ -29,6 +29,16 @@ const register = async (req, res) => {
         return res.redirect(`register/?registrationError=${err}&name=${req.body.name}&email=${req.body.email}&category=${req.body.category}&doj=${req.body.doj}&gender=${req.body.gender}&contactNo=${req.body.contactNo}`);
     }
 
+}
+
+const login = async (req, res) => {
+    try{
+        const {value, error} = await userValidator.login.validate(req.body);
+        if (error) throw (error);
+
+    } catch(err) {
+
+    }
 }
 
 module.exports = {
