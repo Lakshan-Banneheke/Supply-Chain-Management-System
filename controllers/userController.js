@@ -69,10 +69,15 @@ const logout = async (req, res) => {
     res.redirect("/users/login");
 }
 
+const viewFaq = async (req, res) => {
+    res.render('faq');
+}
+
 module.exports = {
     viewRegister,
     viewLogin,
     register,
     login,
-    logout
+    logout,
+    viewFaq,
 }
