@@ -1,0 +1,101 @@
+<%- include('_header', {title: 'Registration' }) %>
+<body class="hold-transition register-page">
+<div class="register-box">
+
+
+  <div class="card">
+    <div class="card-body register-card-body">
+<!--      <p class="login-box-msg">Register a new membership</p>-->
+      <div class="register-logo">
+        <b>Register</b>
+      </div>
+      <% if(registrationError) {%>
+      <div class="alert alert-danger" role="alert">
+        <%=registrationError%>
+      </div>
+      <% } %>
+      <form id="register-form" action="/users/register" method="POST">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required value="<%=name%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="<%=email%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="category" name="category" placeholder="Category" required value="<%=category%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-briefcase"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender" required value="<%=gender%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="doj" name="doj" placeholder="Date of Joining" required value="<%=doj%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-calendar-day"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="contactNo" name="contactNo" placeholder="Contact Number" required value="<%=contactNo%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-phone"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+
+      <br>
+      <a href="login" class="text-center">Already registered? Log in</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+</body>
+<%- include('_footer')%>
