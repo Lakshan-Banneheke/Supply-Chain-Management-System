@@ -10,22 +10,22 @@ const pgConnect = require('connect-pg-simple');
 require('dotenv').config();
 
 // Init express
-const index = express();
+const app = express();
 
 // set view engine
-index.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 // setup middleware and configs
-index.use(bodyParser.urlencoded({ extended: true }));
-index.use(bodyParser.json());
-index.use(cookieParser());
-index.use(helmet());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(helmet());
 
 // setup static files
-index.use(express.static('./public'));
+app.use(express.static('./public'));
 
 // session set up
-// index.use(session({
+// app.use(session({
 //     store: new (pgConnect(session))({ conString: process.env.DATABASE_URL }),
 //     secret: process.env.SESSION_SECRET,
 //     resave: false,
@@ -33,20 +33,20 @@ index.use(express.static('./public'));
 //     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
 // }));
 // setup routes
-index.use(require('./routes'));
+app.use(require('./routes'));
 
 // uncomment on deployment
 // const errorLogger = defaultLogger('error-handler');
 
-// index.use((err, req, res, next) => {
+// app.use((err, req, res, next) => {
 //     const { query, params, body } = req;
 //     errorLogger.error({ err, req: { query, params, body } });
 //     res.sendStatus(500);
 // });
 
 /* Listen on the port for requests */
-index.listen(process.env.PORT || 3000, () => {
-    console.log('Express server listening on port %d in %s mode', process.env.PORT, index.settings.env);
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Express server listening on port %d in %s mode', process.env.PORT, app.settings.env);
 });
 
-module.exports = index;
+module.exports = app;
