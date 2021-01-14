@@ -3025,3 +3025,7 @@ input[type=button].btn-block {
   right: 0;
   left: auto;
 }
+
+#sidebar-new{
+    height: 100%;
+}

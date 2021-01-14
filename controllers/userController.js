@@ -46,10 +46,13 @@ const login = async (req, res) => {
     }
 
 }
-
+const viewFaq = async (req, res) => {
+    res.render('faq');
+}
 module.exports = {
     viewRegister,
     viewLogin,
+    viewFaq,
     register,
     login
 }
