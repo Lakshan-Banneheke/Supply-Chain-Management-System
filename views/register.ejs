@@ -48,7 +48,15 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="category" name="category" placeholder="Category" required value="<%=category%>">
+          <select class="form-select form-control" id="category" name="category" aria-label="Default select example" required>
+            <option selected>Category</option>
+            <option value="1">Quantity Surveyor</option>
+            <option value="2">Expeditor</option>
+            <option value="3">On-Site Supervisor</option>
+            <option value="4">Storekeeper</option>
+            <option value="5">Fleet Manager</option>
+          </select>
+<!--          <input type="text" class="form-control" id="category" name="category" placeholder="Category" required value="<%=category%>">-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-briefcase"></span>
@@ -56,7 +64,13 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender" required value="<%=gender%>">
+          <select class="form-select form-control" id="gender" name="gender" aria-label="Default select example" required value="<%=gender%>">
+            <option selected="Gender">Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+<!--          <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender" required value="<%=gender%>">-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -64,7 +78,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="doj" name="doj" placeholder="Date of Joining" required value="<%=doj%>">
+          <input type="date" class="form-control" id="doj" name="doj" placeholder="Date of Joining" required value="<%=doj%>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-calendar-day"></span>
@@ -72,7 +86,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="contactNo" name="contactNo" placeholder="Contact Number" required value="<%=contactNo%>">
+          <input type="number" class="form-control" id="contactNo" name="contactNo" placeholder="Contact Number" required value="<%=contactNo%>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-phone"></span>
