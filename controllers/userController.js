@@ -1,6 +1,6 @@
 const userValidator = require('./validators/userValidator');
 const userService = require('../services/UserServices');
-
+const bcrypt = require('bcrypt');
 
 const viewRegister = async (req, res) => {
     res.render('register', {
@@ -31,28 +31,48 @@ const register = async (req, res) => {
 
 }
 
-const login = async (req, res) => {
+const login = async (email, password, done) => {
     try{
-        const {value, error} = await userValidator.login.validate(req.body);
+        const {value, error} = await userValidator.login.validate({email:email, password: password});
         if (error) throw (error);
-        console.log("value and error");
-        console.log(value);
-        console.log(error);
-        await userService.login(value);
-        return res.redirect('/');
+        const user = await userService.login(value);
+        if (user != null) {
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+                if (err) {
+                    throw err;
+                }
+                if (isMatch) {
+                    return done(null, user);
+                } else {
+                    //password is incorrect
+                    return done(null, false, { message: "Password is incorrect" });
+                }
+            });
+        } else {
+            // No user
+            return done(null, false, {
+                message: "No user with that email address"
+            });
+        }
 
     } catch (err){
-        return res.redirect(`login/?loginError=${err}`);
+        return done(null, false, {
+            message: "Login Error"
+        });
     }
 
 }
-const viewFaq = async (req, res) => {
-    res.render('faq');
+
+const logout = async (req, res) => {
+    req.logout();
+    req.flash("logoutMessage","Logged out successfully!");
+    res.redirect("/users/login");
 }
+
 module.exports = {
     viewRegister,
     viewLogin,
-    viewFaq,
     register,
-    login
+    login,
+    logout
 }

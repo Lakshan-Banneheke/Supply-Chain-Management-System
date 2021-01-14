@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const passport = require("passport");
+const flash = require("express-flash");
 const session = require('express-session');
 const helmet = require('helmet');
 const pgConnect = require('connect-pg-simple');
-// const { defaultLogger } = require('./config/logger');
+const initializePassport = require("./config/passport");
+
+// const { defaultLogger} = require('./config/logger');
 
 // Make all variables from our .env file available in our process
 require('dotenv').config();
@@ -16,22 +20,30 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // setup middleware and configs
+initializePassport(passport);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());
 
+
+
 // setup static files
 app.use(express.static('./public'));
 
 // session set up
-// app.use(session({
-//     store: new (pgConnect(session))({ conString: process.env.DATABASE_URL }),
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-// }));
+app.use(session({
+    // store: new (pgConnect(session))({ conString: process.env.DATABASE_URL }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+
 // setup routes
 app.use(require('./routes'));
 

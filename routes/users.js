@@ -1,11 +1,20 @@
 const express = require('express');
 const UserController = require('../controllers/userController');
 const router = express.Router();
+const passport = require("passport");
+const auth = require('../config/auth');
 
-router.get('/register', UserController.viewRegister);
-router.get('/login', UserController.viewLogin);
-router.get('/faq',UserController.viewFaq);
+
+router.get('/register',auth.checkAuthenticated, UserController.viewRegister);
+router.get('/login', auth.checkAuthenticated, UserController.viewLogin);
 router.post('/register', UserController.register);
-router.post('/login', UserController.login);
+router.post('/login',
+    passport.authenticate("local",{
+        successRedirect: "../",
+        failureRedirect: "login",
+        failureFlash: true
+    })
+);
+router.get('/logout', auth.checkNotAuthenticated, UserController.logout);
 
 module.exports = router;
