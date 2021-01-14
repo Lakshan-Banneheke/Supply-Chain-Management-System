@@ -1,75 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-<!--    <link-->
-<!--      rel="stylesheet"-->
-<!--      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"-->
-<!--    />-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<!--    <script src="../scripts/jquery-3.5.1.min.js"></script>-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<%- include('_header', {title: 'Registration' }) %>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <b>Register</b>
+  </div>
 
-    <title>Register</title>
-  </head>
-  <body>
-    <h1>Register</h1>
-    <% if(registrationError) {%>
-    <div class="alert alert-danger" role="alert">
-      <%=registrationError%>
+  <div class="card">
+    <div class="card-body register-card-body">
+<!--      <p class="login-box-msg">Register a new membership</p>-->
+      <% if(registrationError) {%>
+      <div class="alert alert-danger" role="alert">
+        <%=registrationError%>
+      </div>
+      <% } %>
+      <form id="register-form" action="/users/register" method="POST">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required value="<%=name%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value="<%=email%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="category" name="category" placeholder="Category" required value="<%=category%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender" required value="<%=gender%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="doj" name="doj" placeholder="Date of Joining" required value="<%=doj%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="contactNo" name="contactNo" placeholder="Contact Number" required value="<%=contactNo%>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+
+
+      <a href="login" class="text-center">I already have a membership</a>
     </div>
-    <% } %>
-
-    <form id="register-form" action="/users/register" method="POST">
-      <div>
-        <input type="text" id="name" name="name" placeholder="Name" required value="<%=name%>"/>
-      </div>
-      <div>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          required
-          value="<%=email%>"
-        />
-      </div>
-      <div>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-      </div>
-      <div>
-        <input
-          type="password"
-          id="password2"
-          name="password2"
-          placeholder="Confirm Password"
-          required
-        />
-      </div>
-      <div>
-        <input type="text" id="category" name="category" placeholder="Category" required value="<%=category%>"/>
-      </div>
-      <div>
-        <input type="text" id="gender" name="gender" placeholder="Gender" required value="<%=gender%>"/>
-      </div>
-      <div>
-        <input type="text" id="doj" name="doj" placeholder="Date of Joining" required value="<%=doj%>"/>
-      </div>
-      <div>
-        <input type="text" id="contactNo" name="contactNo" placeholder="Contact Number" required value="<%=contactNo%>" />
-      </div>
-      <div>
-        <input type="submit" value="Register" />
-      </div>
-
-      <a href="/users/login">Already registered? Login here</a>
-    </form>
-  </body>
-</html>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+</body>
+<%- include('_footer')%>
