@@ -7,6 +7,7 @@ const auth = require('../config/auth');
 
 router.get('/register',auth.checkAuthenticated, UserController.viewRegister);
 router.get('/login', auth.checkAuthenticated, UserController.viewLogin);
+router.get('/faq', auth.checkNotAuthenticated, UserController.viewFaq);
 router.post('/register', UserController.register);
 router.post('/login',
     passport.authenticate("local",{

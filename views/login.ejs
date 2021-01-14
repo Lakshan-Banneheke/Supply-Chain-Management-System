@@ -10,11 +10,13 @@
             <b>Login</b>
         </div>
         <% if (messages.logoutMessage) {%>
-        <p class="login-box-msg"><%= messages.logoutMessage %></p>
+
+        <p class="login-box-msg"> <div class="alert alert-success text-center" role="alert"><%= messages.logoutMessage %></div></p>
+
         <% }%>
 
         <% if (messages.error) { %>
-            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+            <div class="alert alert-danger text-center" role="alert"><%= messages.error %></div>
         <% } %>
 
       <form action="/users/login" method="post">
