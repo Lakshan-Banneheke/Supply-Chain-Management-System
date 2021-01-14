@@ -31,23 +31,25 @@ class UserService {
     static async login({ email, password }) {
         console.log("user service login called");
         const user = await User.getRegisteredUserByEmail(email);
-        console.log(user);
-        if (!user) {
-            console.log("no user returned");
-            throw new Errors.BadRequest('Email is not registered');
-        }
-
-        const hashedPassword = user.password;
-        console.log(hashedPassword);
-        console.log(password);
-        const passwordCorrect = await bcrypt.compare(password, hashedPassword);
-        console.log(passwordCorrect);
-        if (!passwordCorrect) {
-            console.log('Invalid Email or Password');
-            throw new Errors.BadRequest('Invalid Email or Password');
-        }
-
         return user;
+
+
+        // if (!user) {
+        //     console.log("no user returned");
+        //     throw new Errors.BadRequest('Email is not registered');
+        // }
+        //
+        // const hashedPassword = user.password;
+        // console.log(hashedPassword);
+        // console.log(password);
+        // const passwordCorrect = await bcrypt.compare(password, hashedPassword);
+        // console.log(passwordCorrect);
+        // if (!passwordCorrect) {
+        //     console.log('Invalid Email or Password');
+        //     throw new Errors.BadRequest('Invalid Email or Password');
+        // }
+        //
+        // return user;
     }
 
     // eslint-disable-next-line no-empty-function

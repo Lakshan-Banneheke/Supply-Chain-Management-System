@@ -1,13 +1,21 @@
 <%- include('_header', {title: 'Login'})%>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <b>Login</b>
-  </div>
+
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-<!--      <p class="login-box-msg">Sign in to start your session</p>-->
+<!--      <p class="login-box-msg"><b>Log in</b></p>-->
+        <div class="login-logo">
+            <b>Login</b>
+        </div>
+        <% if (messages.logoutMessage) {%>
+        <p class="login-box-msg"><%= messages.logoutMessage %></p>
+        <% }%>
+
+        <% if (messages.error) { %>
+            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+        <% } %>
 
       <form action="/users/login" method="post">
         <div class="input-group mb-3">
@@ -44,8 +52,7 @@
       </form>
 
 
-
-
+        <br>
       <p class="mb-0">
         <a href="register" class="text-center">Register a new membership</a>
       </p>

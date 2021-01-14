@@ -38,6 +38,7 @@
     "ejs": "^3.1.5",
     "eslint-plugin-unicorn": "^26.0.1",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "helmet": "^4.2.0",
     "joi": "^17.3.0",

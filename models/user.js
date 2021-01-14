@@ -15,13 +15,15 @@ class User {
 
     static async getRegisteredUserByEmail(email) {
         console.log("getRegisteredUserByEmail");
-        const query=`SELECT * FROM user_profile WHERE email = '${email}'`;
-        //const query=`SELECT * FROM user_profile`
-        const out = await db.query(query);
-        console.log(out.rows);
-        //if (out.rows.length > 0) {
+        const query=`SELECT * FROM user_profile WHERE email = $1`;
+        const out = await db.query(query, [email]);
         return out.rows[0];
-        //}
+    }
+
+    static async getRegisteredUserByID(id) {
+        const query=`SELECT * FROM user_profile WHERE user_id = $1`;
+        const out = await db.query(query, [id]);
+        return out.rows[0];
     }
 }
 
