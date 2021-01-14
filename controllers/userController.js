@@ -20,7 +20,7 @@ const viewLogin = async (req, res) => {
 
 const register = async (req, res) => {
     try{
-        const {value, error} = await userValidator.registerValidate.validate(req.body);
+        const {value, error} = await userValidator.register.validate(req.body);
         if (error) throw (error);
         await userService.register(value);
         return res.redirect('login');
@@ -33,7 +33,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try{
-        const {value, error} = await userValidator.loginValidate.validate(req.body);
+        const {value, error} = await userValidator.login.validate(req.body);
         if (error) throw (error);
         console.log("value and error");
         console.log(value);
