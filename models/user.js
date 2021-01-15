@@ -8,9 +8,13 @@ class User {
     //     return out.rows;
     // }
     static async registerUser(name, email, hashedPassword, category, gender, doj, contactNo) {
-        const query  = `CALL registerUser ($1, $2, $3, $4, $5, $6, $7)`;
-        const out = await db.query(query, [name, hashedPassword, email, category, contactNo, gender, doj]);
-        return out.rows;
+        try {
+            const query = `CALL registerUser ($1, $2, $3, $4, $5, $6, $7)`;
+            const out = await db.query(query, [name, hashedPassword, email, category, contactNo, gender, doj]);
+            return out.rows;
+        } catch (e) {
+            throw (`Email ${e} already registered`);
+        }
     }
 
     static async getRegisteredUserByEmail(email) {
