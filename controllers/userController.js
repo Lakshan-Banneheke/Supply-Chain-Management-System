@@ -34,10 +34,14 @@ const register = async (req, res) => {
         const {value, error} = await userValidator.register.validate(req.body);
         if (error) throw (error);
         await userService.register(value);
-        return res.redirect('login');
+        return res.status(200).send({result: 'redirect', url: 'login'});
 
     } catch (err){
-        return res.redirect(`register/?registrationError=${err}&name=${req.body.name}&email=${req.body.email}&category=${req.body.category}&doj=${req.body.doj}&gender=${req.body.gender}&contactNo=${req.body.contactNo}`);
+        return res.status(200).send({
+            result: 'redirect',
+            url:`register/?registrationError=${err}&name=${req.body.name}&email=${req.body.email}&category=${req.body.category}&doj=${req.body.doj}&gender=${req.body.gender}&contactNo=${req.body.contactNo}`
+
+    });
     }
 
 }

@@ -14,7 +14,7 @@
         <%=registrationError%>
       </div>
       <% } %>
-      <form id="register-form" action="/users/register" method="POST">
+      <form id="register-form" >
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="name" name="name" placeholder="Name" required value="<%=name%>">
           <div class="input-group-append">
@@ -97,7 +97,7 @@
 
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block" >Register</button>
           </div>
           <!-- /.col -->
         </div>
