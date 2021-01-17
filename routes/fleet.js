@@ -18,4 +18,7 @@ router.get('/vehicles/edit/:id', auth.checkAuthenticated, FleetController.editVe
 router.post('/vehicles/editSubmit', auth.checkAuthenticated, FleetController.editVehiclesSubmit);
 router.get('/vehicles/delete/:id', auth.checkAuthenticated, FleetController.deleteVehicles);
 
+router.get('/supplies', auth.checkAuthenticated, FleetController.supplies);
+router.get('/supplies/new', auth.checkAuthenticated, FleetController.newSupply);
+
 module.exports = router;

@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const dateformat = require('dateformat');
 
 const brands = (req, res) => {
     db.query( 'SELECT * FROM brands', (error, result) => {
@@ -96,6 +97,25 @@ const deleteVehicles = (req, res) => {
     });
 }
 
+const supplies = (req, res) => {
+    db.query( 'SELECT * FROM supplies', (error, result) => {
+        if( error ) console.log('Sql error', error);
+        else {
+            res.render('./fleet/supplies', {result: result.rows});
+        }
+    });
+}
+
+const newSupply = (req, res) => {
+    db.query( 'SELECT * FROM supplies', (error, result) => {
+        if( error ) console.log('Sql error', error);
+        else {
+            const now = new Date();
+            res.render('./fleet/newSupply', {date: dateformat(now, "dd/mm/yyyy")});
+        }
+    });
+}
+
 module.exports = {
     brands,
     newBrand,
@@ -106,5 +126,7 @@ module.exports = {
     addNewVehicles,
     editVehicles,
     editVehiclesSubmit,
-    deleteVehicles
+    deleteVehicles,
+    supplies,
+    newSupply
 }
