@@ -52,32 +52,6 @@
 </div>
 <!-- /.card -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-id="0">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit Brand</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Brand Title</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Brand Name" name="brandname">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary save-btn">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <%- include('../_bottom') %>
 
 <!-- DataTables  & Plugins -->
@@ -100,18 +74,5 @@
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-      $('.edit-pop').unbind('click').click( e => {
-        e.preventDefault();
-        var ele = e.target;
-        var id = $(ele).parents('tr').attr('data-id');
-        $('#exampleModalCenter').attr({'data-id': id});
-        $('#exampleModalCenter input[name=brandname').val($(ele).parents('td').prev().html());
-        $('#exampleModalCenter').modal('show');
-      } );
     });
-
-    $('#exampleModalCenter .save-btn').unbind('click').click( _ => {
-      location = `/fleet-management/brands/edit/${ $('#exampleModalCenter').attr('data-id') }/${ $('#exampleModalCenter input[name=brandname').val() }`;
-    })
   </script>
