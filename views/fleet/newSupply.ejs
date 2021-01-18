@@ -1,6 +1,10 @@
 <!-- header-section start -->
 <%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
 <!-- header-section end -->
+<!-- daterange picker -->
+<link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+<!-- Jquery ui-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <section class="content">
     <div class="container-fluid">
@@ -19,34 +23,57 @@
               <!-- /.col -->
             </div>
             <!-- info row -->
-            <div class="row invoice-info">
-              <div class="col-sm-4 invoice-col">
-                From
-                <address>
-                  <strong>Admin, Inc.</strong><br>
-                  795 Folsom Ave, Suite 600<br>
-                  San Francisco, CA 94107<br>
-                  Phone: (804) 123-5432<br>
-                  Email: info@almasaeedstudio.com
-                </address>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4 invoice-col">
-                To
-                <address>
-                  <strong>John Doe</strong><br>
-                    <textarea></textarea>
-                </address>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4 invoice-col">
-                <b>Invoice #007612</b><br>
-                <br>
-                <b>Order ID:</b> 4F3S8J<br>
-                <b>Payment Due:</b> 2/22/2014<br>
-                <b>Account:</b> 968-34567
-              </div>
-              <!-- /.col -->
+            <div class="invoice-info">
+                <!-- form start -->
+                <form class="form-horizontal row">
+                  <div class="col-4">
+                    <div class="form-group row">
+                      <label for="reference" class="col-sm-3 col-form-label">Reference</label>
+                      <div class="col-sm-9 input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-pager"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="created" class="col-sm-3 col-form-label">Created</label>
+                      <div class="col-sm-9 input-group date" id="reservationdate" data-target-input="nearest">
+                        <div class="input-group-prepend" data-target="#reservationdate" data-toggle="datetimepicker">
+                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text" class="form-control datetimepicker-input" name="created" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask  data-target="#reservationdate">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group row">
+                      <label for="reservation" class="col-sm-3 col-form-label">Period</label>
+                      <div class="col-sm-9 input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control float-right" name="period" id="reservation">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="remarks" class="col-sm-3 col-form-label">Remarks</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Address</label>
+                      <div class="col-sm-9 input-group">
+                        <textarea class="form-control" rows="3" placeholder="Address" style="margin-top: 0px; margin-bottom: 0px; height: 81px;" name="address"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
             </div>
             <!-- /.row -->
 
@@ -55,43 +82,28 @@
               <div class="col-12 table-responsive">
                 <table class="table table-striped">
                   <thead>
-                  <tr>
-                    <th>Qty</th>
-                    <th>Product</th>
-                    <th>Serial #</th>
-                    <th>Description</th>
-                    <th>Subtotal</th>
-                  </tr>
+                    <tr>
+                      <th>#</th>
+                      <th>Vehicle</th>
+                      <th>Qty</th>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th></th>
+                    </tr>
                   </thead>
+                  <tbody  id="body">
+                    
+                  </tbody>
                   <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Call of Duty</td>
-                    <td>455-981-221</td>
-                    <td>El snort testosterone trophy driving gloves handsome</td>
-                    <td>$64.50</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Need for Speed IV</td>
-                    <td>247-925-726</td>
-                    <td>Wes Anderson umami biodiesel</td>
-                    <td>$50.00</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Monsters DVD</td>
-                    <td>735-845-642</td>
-                    <td>Terry Richardson helvetica tousled street art master</td>
-                    <td>$10.70</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Grown Ups Blue Ray</td>
-                    <td>422-568-642</td>
-                    <td>Tousled lomo letterpress</td>
-                    <td>$25.99</td>
-                  </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="input" placeholder="Vehicle name">
+                        </div>
+                      </td>
+                      <td colspan="4"></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -103,10 +115,10 @@
               <!-- accepted payments column -->
               <div class="col-6">
                 <p class="lead">Payment Methods:</p>
-                <img src="../../dist/img/credit/visa.png" alt="Visa">
-                <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                <img src="/dist/img/credit/visa.png" alt="Visa">
+                <img src="/dist/img/credit/mastercard.png" alt="Mastercard">
+                <img src="/dist/img/credit/american-express.png" alt="American Express">
+                <img src="/dist/img/credit/paypal2.png" alt="Paypal">
 
                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                   Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
@@ -165,6 +177,9 @@
 
   <%- include('../_bottom') %>
 
+  <!-- jQuery -->
+  <script src="/plugins/jquery/jquery.min.js"></script>
+
   <!-- DataTables  & Plugins -->
   <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -178,12 +193,62 @@
   <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  
+
+  <!-- InputMask -->
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+
+<!-- Jquery ui-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <script>
       $(function () {
         $("#example1").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false,
           "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('[data-mask]').inputmask();
+        /*$('#reservationdate').datetimepicker({
+            format: 'L'
+        });*/
+        $('#reservation').daterangepicker();
+
+        var vehicles = JSON.parse('<%- JSON.stringify(vehicles) %>');
+        vehicles.forEach( vehicle => {
+          vehicle.value = vehicle.id;
+          vehicle.label = vehicle.title;
+        })
+        $( "#input" ).autocomplete({
+          minLength: 0,
+          source: vehicles,
+          focus: function( event, ui ) {
+            $( "#input" ).val( ui.item.label );
+            return false;
+          },
+          select: function( event, ui ) {
+            $( "#project" ).val( '' );
+            $( "#body" ).append( 
+              $(`
+                <tr>
+                  <td></td>
+                  <td>${ui.item.label}</td>
+                  <td><input type="text" class="form-control" placeholder="Qty"></td>
+                  <td><input type="text" class="form-control" placeholder="Description"></td>
+                  <td><input type="text" class="form-control" placeholder="Amount"></td>
+                  <td></td>
+                </tr>
+                `)
+             );
+    
+            return false;
+          }
+        })
+        .autocomplete( "instance" )._renderItem = function( ul, item ) {
+          return $( "<li>" )
+            .append( "<div>" + item.label + "<br>" + item.desc + "</div>" )
+            .appendTo( ul );
+        };
       });
   </script>

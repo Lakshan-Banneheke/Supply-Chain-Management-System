@@ -107,11 +107,11 @@ const supplies = (req, res) => {
 }
 
 const newSupply = (req, res) => {
-    db.query( 'SELECT * FROM supplies', (error, result) => {
+    db.query( 'SELECT * FROM vehicles', (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
             const now = new Date();
-            res.render('./fleet/newSupply', {date: dateformat(now, "dd/mm/yyyy")});
+            res.render('./fleet/newSupply', {date: dateformat(now, "dd/mm/yyyy"), vehicles: result.rows});
         }
     });
 }
