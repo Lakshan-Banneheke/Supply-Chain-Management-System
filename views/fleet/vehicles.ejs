@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th>#</th>
+            <th>Title</th>
             <th>Plate Number</th>
             <th>Brand</th>
             <th>Registrations</th>
@@ -25,6 +26,7 @@
           <% result.forEach( row => { %>
             <tr data-id="<%= row.id %>">
               <td><%= count++ %></td>
+              <td><%= row.title %></td>
               <td><%= row.plate_number %></td>
               <td><%= row.title %></td>
               <td><%= row.registrations %></td>
@@ -39,6 +41,7 @@
         <tfoot>
           <tr>
             <th>#</th>
+            <th>Title</th>
             <th>Plate Number</th>
             <th>Brand</th>
             <th>Registrations</th>

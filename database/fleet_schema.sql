@@ -9,6 +9,7 @@ CREATE TABLE brands (
 
 CREATE TABLE vehicles (
 	id SERIAL,
+	title varchar(50),
 	brand int,
 	plate_number varchar(10) not null,
 	registrations varchar(100),

@@ -40,7 +40,7 @@ const editBrand = (req, res) => {
 }
 
 const vehicles = (req, res) => {
-    db.query( 'SELECT v.*, b.*, v.id id FROM vehicles v LEFT JOIN brands b on v.brand=b.id', (error, result) => {
+    db.query( 'SELECT v.*, b.*, v.id id, v.title title FROM vehicles v LEFT JOIN brands b on v.brand=b.id', (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
             res.render('./fleet/vehicles', {result: result.rows});
@@ -58,8 +58,8 @@ const newVehicles = (req, res) => {
 }
 
 const addNewVehicles = (req, res) => {
-    const {brand, plate_number, registrations, remarks} = req.body;
-    db.query( 'INSERT INTO vehicles (brand, plate_number, registrations, remarks) values ($1, $2, $3, $4)', [brand, plate_number, registrations, remarks], (error, result) => {
+    const {title, brand, plate_number, registrations, remarks} = req.body;
+    db.query( 'INSERT INTO vehicles (title, brand, plate_number, registrations, remarks) values ($1, $2, $3, $4)', [title, brand, plate_number, registrations, remarks], (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
             res.redirect('/fleet-management/vehicles');
@@ -78,8 +78,8 @@ const editVehicles = async (req, res) => {
 }
 
 const editVehiclesSubmit = (req, res) => {
-    const {plate_number, brand, registrations, remarks, id} = req.body;
-    db.query( 'UPDATE vehicles SET plate_number=$1, brand=$2, registrations=$3, remarks=$4 WHERE id=$5', [plate_number, brand, registrations, remarks, id], (error, result) => {
+    const {title, plate_number, brand, registrations, remarks, id} = req.body;
+    db.query( 'UPDATE vehicles SET plate_number=$1, brand=$2, registrations=$3, remarks=$4, title=$5 WHERE id=$6', [plate_number, brand, registrations, remarks, title, id], (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
             res.redirect('/fleet-management/vehicles');
@@ -107,7 +107,7 @@ const supplies = (req, res) => {
 }
 
 const newSupply = (req, res) => {
-    db.query( 'SELECT * FROM vehicles', (error, result) => {
+    db.query( 'SELECT v.title, v.id, b.title brand FROM vehicles v left join brands b on v.brand = b.id;', (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
             const now = new Date();
