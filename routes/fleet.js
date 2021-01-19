@@ -20,5 +20,9 @@ router.get('/vehicles/delete/:id', auth.checkAuthenticated, FleetController.dele
 
 router.get('/supplies', auth.checkAuthenticated, FleetController.supplies);
 router.get('/supplies/new', auth.checkAuthenticated, FleetController.newSupply);
+router.post('/supplies/addNew', auth.checkAuthenticated, FleetController.addNewSupply);
+router.get('/supplies/edit/:id', auth.checkAuthenticated, FleetController.editSupply);
+router.post('/supplies/editSupplySubmit', auth.checkAuthenticated, FleetController.editSupplySubmit);
+router.get('/supplies/delete/:id', auth.checkAuthenticated, FleetController.deleteSupply);
 
 module.exports = router;

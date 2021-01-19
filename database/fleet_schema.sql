@@ -26,6 +26,7 @@ CREATE TABLE supplies (
 	to_date date,
 	to_address varchar(200),
 	remarks text,
+	address varchar(100),
 	status int,
 	PRIMARY KEY (id)
 );
@@ -35,6 +36,8 @@ CREATE TABLE supply_items (
 	supply int,
 	vehicle int,
 	qty int,
+	amount DOUBLE PRECISION,
+	description varchar(50),
 	status int,
 	PRIMARY KEY (id),
 	FOREIGN KEY (vehicle) REFERENCES vehicles(id),

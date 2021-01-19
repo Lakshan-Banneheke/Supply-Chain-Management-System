@@ -101,7 +101,7 @@ const supplies = (req, res) => {
     db.query( 'SELECT * FROM supplies', (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
-            res.render('./fleet/supplies', {result: result.rows});
+            res.render('./fleet/supplies', {result: result.rows, dateformat});
         }
     });
 }
@@ -111,7 +111,54 @@ const newSupply = (req, res) => {
         if( error ) console.log('Sql error', error);
         else {
             const now = new Date();
-            res.render('./fleet/newSupply', {date: dateformat(now, "dd/mm/yyyy"), vehicles: result.rows});
+            res.render('./fleet/newSupply', {date: dateformat(now, "dd/mm/yyyy"), vehicles: result.rows, supply: false});
+        }
+    });
+}
+
+const addNewSupply = async (req, res) => {
+    var {reference, created, period, remarks, address, vehicle, qty, description, amount} = req.body;
+    const from_date = dateformat(period.split(' - ')[0], "yyyy-mm-dd");
+    const to_date = dateformat(period.split(' - ')[1], "yyyy-mm-dd");
+    created = (created === '') ? dateformat(new Date, "yyyy-mm-dd") : created;
+    const query = `INSERT INTO supplies (reference, from_date, to_date, remarks, status, created, address) values ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
+    const supply =  await db.query(query, [reference, from_date, to_date, remarks, '1', created, address]).then( result => result.rows[0].id).catch( console.log);
+    var q = ``;
+    vehicle.forEach( (item, id) => {
+        q += ` ('${supply}', '${vehicle[id]}', '${(qty[id]?qty[id]:0)}', '${amount[id]?amount[id]:0}', '${description[id]}', '1'),`
+    });
+    q = q.substring(0, q.length-1);
+    const query2 = `INSERT INTO supply_items (supply, vehicle, qty, amount, description, status) values ${q}`;
+    db.query(query2).then( _ => {
+        res.redirect('/fleet-management/supplies');
+    }).catch(console.log);
+}
+
+const editSupply = async (req, res) => {
+    const id = req.params.id;
+    const supply = await db.query(`SELECT * FROM supplies where id=$1`, [id]).then( result => result.rows[0]).catch(console.log);
+    const items = await db.query(`SELECT * FROM supply_items where supply=$1`, [id]).then( result => result.rows).catch(console.log);
+    const vehicles = await db.query( 'SELECT v.title, v.id, b.title brand FROM vehicles v left join brands b on v.brand = b.id;').then( result => result.rows).catch(console.log);
+    const now = new Date();
+    res.render('./fleet/newSupply', {date: dateformat(now, "dd/mm/yyyy"), vehicles, supply, items, dateformat});
+}
+
+const editSupplySubmit = (req, res) => {
+    var {reference, created, period, remarks, address, vehicle, qty, description, amount, supply} = req.body;
+    console.log(period.split(' - ')[0], created);
+    const from_date = dateformat(period.split(' - ')[0], "yyyy-mm-dd");
+    //const to_date = dateformat(period.split(' - ')[1], "yyyy-mm-dd");
+    //created = (created === '') ? dateformat(new Date(), "yyyy-mm-dd") : created;
+    //db.query('UPDATE supplies SET reference=$1, from_date=$2, to_date=$3, remarks=$4, status=$5, created=$6, address=$7 WHERE id=$8', [reference, from_date, to_date, remarks, '1', created, address, supply]).catch(console.log);
+    //res.redirect('/fleet-management/supplies');
+}
+
+const deleteSupply = (req, res) => {
+    id = req.params.id;
+    db.query( 'DELETE FROM vehicles WHERE id = $1', [id], (error, result) => {
+        if( error ) console.log('Sql error', error);
+        else {
+            res.redirect('/fleet-management/vehicles');
         }
     });
 }
@@ -128,5 +175,9 @@ module.exports = {
     editVehiclesSubmit,
     deleteVehicles,
     supplies,
-    newSupply
+    newSupply,
+    addNewSupply,
+    editSupply,
+    editSupplySubmit,
+    deleteSupply
 }

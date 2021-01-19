@@ -9,167 +9,133 @@
 <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <!-- Main content -->
-          <div class="invoice p-3 mb-3 mt-3">
-            <!-- title row -->
-            <div class="row">
-              <div class="col-12">
-                <h4>
-                  <i class="fas fa-globe"></i> ABC Company
-                  <small class="float-right">Date: <%= date %></small>
-                </h4>
+        <form action="/fleet-management/supplies/<%= (supply !== false )? 'editSupplySubmit' :'addNew' %>" method="post">
+          <% if(supply !== false) { %>
+            <input type="hidden" name="supply" value="<%= supply.id %>">
+          <% } %>
+          <div class="col-12">
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3 mt-3">
+              <!-- title row -->
+              <div class="row">
+                <div class="col-12">
+                  <h4>
+                    <i class="fas fa-globe"></i> ABC Company
+                    <small class="float-right">Date: <%= date %></small>
+                  </h4>
+                </div>
+                <!-- /.col -->
               </div>
-              <!-- /.col -->
-            </div>
-            <!-- info row -->
-            <div class="invoice-info">
-                <!-- form start -->
-                <form class="form-horizontal row">
-                  <div class="col-4">
-                    <div class="form-group row">
-                      <label for="reference" class="col-sm-3 col-form-label">Reference</label>
-                      <div class="col-sm-9 input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="fas fa-pager"></i></span>
+              <!-- info row -->
+              <div class="invoice-info">
+                  <!-- form start -->
+                  <div class="form-horizontal row">
+                    <div class="col-4">
+                      <div class="form-group row">
+                        <label for="reference" class="col-sm-3 col-form-label">Reference</label>
+                        <div class="col-sm-9 input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-pager"></i></span>
+                          </div>
+                          <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference" value="<%= (supply !== false )? supply.reference :'' %>">
                         </div>
-                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference">
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="created" class="col-sm-3 col-form-label">Created</label>
-                      <div class="col-sm-9 input-group date" id="reservationdate" data-target-input="nearest">
-                        <div class="input-group-prepend" data-target="#reservationdate" data-toggle="datetimepicker">
-                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                      <div class="form-group row">
+                        <label for="created" class="col-sm-3 col-form-label">Created</label>
+                        <div class="col-sm-9 input-group date" id="reservationdate" data-target-input="nearest">
+                          <div class="input-group-prepend" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          </div>
+                          <input type="text" class="form-control datetimepicker-input" name="created" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask  data-target="#reservationdate"  value="<%= (supply !== false )? dateformat(supply.created, 'dd/mm/yyyy') :'' %>">
                         </div>
-                        <input type="text" class="form-control datetimepicker-input" name="created" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask  data-target="#reservationdate">
                       </div>
                     </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="form-group row">
-                      <label for="reservation" class="col-sm-3 col-form-label">Period</label>
-                      <div class="col-sm-9 input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="far fa-calendar-alt"></i>
-                          </span>
+                    <div class="col-4">
+                      <div class="form-group row">
+                        <label for="reservation" class="col-sm-3 col-form-label">Period</label>
+                        <div class="col-sm-9 input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control float-right" name="period" id="reservation"  value="<%= (supply !== false )? dateformat(supply.from_date, 'dd/mm/yyyy') +' - '+dateformat(supply.to_date, 'dd/mm/yyyy') :'' %>">
                         </div>
-                        <input type="text" class="form-control float-right" name="period" id="reservation">
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="remarks" class="col-sm-3 col-form-label">Remarks</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Address</label>
-                      <div class="col-sm-9 input-group">
-                        <textarea class="form-control" rows="3" placeholder="Address" style="margin-top: 0px; margin-bottom: 0px; height: 81px;" name="address"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-            </div>
-            <!-- /.row -->
-
-            <!-- Table row -->
-            <div class="row">
-              <div class="col-12 table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Vehicle</th>
-                      <th>Qty</th>
-                      <th>Description</th>
-                      <th>Amount</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody  id="body">
-                    
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td>
+                      <div class="form-group row">
+                        <label for="remarks" class="col-sm-3 col-form-label">Remarks</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="input" placeholder="Vehicle name">
+                          <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks"  value="<%= (supply !== false )? supply.remarks :'' %>">
                         </div>
-                      </td>
-                      <td colspan="4"></td>
-                    </tr>
-                  </tbody>
-                </table>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9 input-group">
+                          <textarea class="form-control" rows="3" placeholder="Address" style="margin-top: 0px; margin-bottom: 0px; height: 81px;" name="address"><%= (supply !== false )? supply.address :'' %></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
+              <!-- /.row -->
 
-            <div class="row">
-              <!-- accepted payments column -->
-              <div class="col-6">
-                <p class="lead">Payment Methods:</p>
-                <img src="/dist/img/credit/visa.png" alt="Visa">
-                <img src="/dist/img/credit/mastercard.png" alt="Mastercard">
-                <img src="/dist/img/credit/american-express.png" alt="American Express">
-                <img src="/dist/img/credit/paypal2.png" alt="Paypal">
-
-                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                  Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                  plugg
-                  dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                </p>
-              </div>
-              <!-- /.col -->
-              <div class="col-6">
-                <p class="lead">Amount Due 2/22/2014</p>
-
-                <div class="table-responsive">
-                  <table class="table">
-                    <tr>
-                      <th style="width:50%">Subtotal:</th>
-                      <td>$250.30</td>
-                    </tr>
-                    <tr>
-                      <th>Tax (9.3%)</th>
-                      <td>$10.34</td>
-                    </tr>
-                    <tr>
-                      <th>Shipping:</th>
-                      <td>$5.80</td>
-                    </tr>
-                    <tr>
-                      <th>Total:</th>
-                      <td>$265.24</td>
-                    </tr>
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Vehicle</th>
+                        <th>Qty</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody  id="body">
+                      
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="input" placeholder="Vehicle name">
+                          </div>
+                        </td>
+                        <td colspan="4"></td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
+                <!-- /.col -->
               </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
+              <!-- /.row -->
 
-            <!-- this row will not appear when printing -->
-            <div class="row no-print">
-              <div class="col-12">
-                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                  Payment
-                </button>
-                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                  <i class="fas fa-download"></i> Generate PDF
-                </button>
+              <div class="row">
+                
+              </div>
+
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Submit</button>
+                  <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                    Payment
+                  </button>
+                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Generate PDF
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- /.invoice -->
-        </div><!-- /.col -->
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+        </form>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
@@ -213,7 +179,11 @@
         /*$('#reservationdate').datetimepicker({
             format: 'L'
         });*/
-        $('#reservation').daterangepicker();
+        $('#reservation').daterangepicker({
+          locale: {
+            format: 'DD/MM/YYYY'
+          }
+        });
 
         var vehicles = JSON.parse('<%- JSON.stringify(vehicles) %>');
         vehicles.forEach( vehicle => {
@@ -228,21 +198,7 @@
             return false;
           },
           select: function( event, ui ) {
-            $( "#project" ).val( '' );
-            $( "#body" ).append( 
-              $(`
-                <tr>
-                  <td></td>
-                  <td>${ui.item.label}</td>
-                  <td><input type="text" class="form-control" placeholder="Qty"></td>
-                  <td><input type="text" class="form-control" placeholder="Description"></td>
-                  <td><input type="text" class="form-control" placeholder="Amount"></td>
-                  <td></td>
-                </tr>
-                `)
-             );
-    
-            return false;
+            add_item(ui.item);
           }
         })
         .autocomplete( "instance" )._renderItem = function( ul, item ) {
@@ -250,5 +206,21 @@
             .append( "<div>" + item.label + " - " + item.brand + "</div>" )
             .appendTo( ul );
         };
+        function add_item ( item ){
+          $( "#body" ).append( 
+            `
+              <tr>
+                <td></td>
+                <td>${item.label}<input type="hidden" name="vehicle[]" value="${item.id}"/></td>
+                <td><input type="text" class="form-control" placeholder="Qty" name="qty[]"></td>
+                <td><input type="text" class="form-control" placeholder="Description" name="description[]"></td>
+                <td><input type="text" class="form-control" placeholder="Amount" name="amount[]"></td>
+                <td><i class="fas fa-trash-alt del-item" onclick="{$(this).parents('tr').remove()}"></i></td>
+              </tr>
+              `
+            );
+            $( "#input" ).val( '' );
+            return false;
+        }
       });
   </script>

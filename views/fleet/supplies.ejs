@@ -14,9 +14,11 @@
           <tr>
             <th>#</th>
             <th>Reference</th>
+            <th>Created</th>
             <th>From</th>
             <th>To</th>
-            <th>Status</th>
+            <th>Remarks</th>
+            <th>Address</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -26,12 +28,14 @@
             <tr data-id="<%= row.id %>">
               <td><%= count++ %></td>
               <td><%= row.reference %></td>
-              <td><%= row.from_date %></td>
-              <td><%= row.to_date %></td>
+              <td><%= dateformat(row.created, 'dd/mm/yyyy') %></td>
+              <td><%= dateformat(row.from_date, 'dd/mm/yyyy') %></td>
+              <td><%= dateformat(row.to_date, 'dd/mm/yyyy') %></td>
               <td><%= row.remarks %></td>
+              <td><%= row.address %></td>
               <td>
-                <a href="/fleet-management/vehicles/edit/<%= row.id %>"><i class="fas fa-edit"></i></button>
-                <a href="/fleet-management/vehicles/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></button>
+                <a href="/fleet-management/supplies/edit/<%= row.id %>"><i class="fas fa-edit"></i></button>
+                <a href="/fleet-management/supplies/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></button>
               </td>
             </tr>
           <% }) %>
@@ -39,10 +43,12 @@
         <tfoot>
           <tr>
             <th>#</th>
-            <th>Plate Number</th>
-            <th>Brand</th>
-            <th>Registrations</th>
+            <th>Reference</th>
+            <th>Created</th>
+            <th>From</th>
+            <th>To</th>
             <th>Remarks</th>
+            <th>Address</th>
             <th>Action</th>
           </tr>
         </tfoot>
