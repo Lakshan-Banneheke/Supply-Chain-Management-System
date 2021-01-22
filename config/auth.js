@@ -12,7 +12,21 @@ const checkNotAuthenticated = (req, res, next) => {
     res.redirect("/users/login")
 }
 
+const checkFleetManager = (req, res, next) => {
+    if (req.isAuthenticated()){
+        if (req.user.cat_id === 6){
+            return next();
+        } else {
+            res.redirect('../405');
+        }
+    } else {
+        res.redirect("/users/login");
+    }
+}
+
+
 module.exports = {
     checkAuthenticated,
-    checkNotAuthenticated
+    checkNotAuthenticated,
+    checkFleetManager
 }
