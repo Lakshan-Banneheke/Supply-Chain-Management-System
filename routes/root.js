@@ -19,9 +19,6 @@ route.get("/consum-repot", supervisorController.renderReqReport)
 route.post("/consum-repot", supervisorController.renderReport)
 
 
-route.get("/check-notification", supervisorController.renderNotification)
-route.post("/mark-as-read", supervisorController.reqMarkAsRead)
-
 //-----------end supervisor-------------
 
 module.exports = router;
