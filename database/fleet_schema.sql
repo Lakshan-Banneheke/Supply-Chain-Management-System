@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS brands CASCADE;
 DROP TABLE IF EXISTS vehicles CASCADE;
+DROP TABLE IF EXISTS supplies CASCADE;
+DROP TABLE IF EXISTS supply_items CASCADE;
 
 CREATE TABLE brands (
 	id SERIAL ,
@@ -15,7 +17,7 @@ CREATE TABLE vehicles (
 	registrations varchar(100),
 	remarks text,
 	PRIMARY KEY (id),
-	FOREIGN KEY (brand) REFERENCES brands(id)
+	FOREIGN KEY (brand) REFERENCES brands(id) ON DELETE CASCADE
 );
 
 CREATE TABLE supplies (
@@ -40,6 +42,6 @@ CREATE TABLE supply_items (
 	description varchar(50),
 	status int,
 	PRIMARY KEY (id),
-	FOREIGN KEY (vehicle) REFERENCES vehicles(id),
-	FOREIGN KEY (supply) REFERENCES supplies(id)
+	FOREIGN KEY (vehicle) REFERENCES vehicles(id) ON DELETE CASCADE,
+	FOREIGN KEY (supply) REFERENCES supplies(id) ON DELETE CASCADE
 );

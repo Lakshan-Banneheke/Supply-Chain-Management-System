@@ -25,4 +25,7 @@ router.get('/supplies/edit/:id', auth.checkAuthenticated, FleetController.editSu
 router.post('/supplies/editSupplySubmit', auth.checkAuthenticated, FleetController.editSupplySubmit);
 router.get('/supplies/delete/:id', auth.checkAuthenticated, FleetController.deleteSupply);
 
+
+router.get('/test', auth.checkAuthenticated, FleetController.test);
+
 module.exports = router;
