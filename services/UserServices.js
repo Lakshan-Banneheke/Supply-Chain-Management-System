@@ -51,7 +51,7 @@ class UserService {
         //
         // return user;
     }
-
+   
     // eslint-disable-next-line no-empty-function
     static async logout() {}
 }
