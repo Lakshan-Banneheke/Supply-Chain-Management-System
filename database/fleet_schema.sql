@@ -45,3 +45,8 @@ CREATE TABLE supply_items (
 	FOREIGN KEY (vehicle) REFERENCES vehicles(id) ON DELETE CASCADE,
 	FOREIGN KEY (supply) REFERENCES supplies(id) ON DELETE CASCADE
 );
+
+GRANT ALL ON TABLE public.brands to db_app;
+GRANT ALL ON TABLE public.vehicles to db_app;
+GRANT ALL ON TABLE public.supplies to db_app;
+GRANT ALL ON TABLE public.supply_items to db_app;
