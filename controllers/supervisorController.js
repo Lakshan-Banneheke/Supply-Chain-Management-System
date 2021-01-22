@@ -21,7 +21,7 @@ const renderDashboard = async (req,res)=>{
     user_id = req.user.name;
     user_name = req.user.name;
  
-    res.render('supervisor_dashB',{
+    res.render('supervisorDashboard',{
         desig:designation,
         name: user_name,
         error: errors
@@ -107,7 +107,7 @@ const collectSumbitData = async (req,res)=>{
 
 const sendToExpeditor = async (req,res)=>{
     var msg = saveToNotificationTable(req.body.msg,"Expeditor","on-site-supervisor")
-    res.render('supervisor_dashB', {
+    res.render('supervisorDashboard', {
     desig:designation,
     name: loggedUser,
     error: msg      // msg
