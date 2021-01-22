@@ -51,17 +51,25 @@ const login = async (email, password, done) => {
         if (error) throw (error);
         const user = await userService.login(value);
         if (user != null) {
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) {
-                    throw err;
-                }
-                if (isMatch) {
-                    return done(null, user);
-                } else {
-                    //password is incorrect
-                    return done(null, false, { message: "Password is incorrect" });
-                }
-            });
+            if (!user.verified){
+                return done(null, false, {
+                    message: "Email has not been approved yet"
+                });
+            } else {
+
+
+                bcrypt.compare(password, user.password, (err, isMatch) => {
+                    if (err) {
+                        throw err;
+                    }
+                    if (isMatch) {
+                        return done(null, user);
+                    } else {
+                        //password is incorrect
+                        return done(null, false, {message: "Password is incorrect"});
+                    }
+                });
+            }
         } else {
             // No user
             return done(null, false, {
