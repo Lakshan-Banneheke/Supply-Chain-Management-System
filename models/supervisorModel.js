@@ -60,27 +60,24 @@ class superviosrModel {
     }
 //----------------------------------
     static async addNotification(message,to_designation,state,from_designation,date) {
-        try{
             const query  = `INSERT INTO notification (message, to_designation, state,from_designation,date) VALUES ($1,$2,$3,$4,$5)`;
             const out = await db.query(query,[message,to_designation,state,from_designation,date]);
             return out.rows;
-        } catch(e){
-
-        }
+        
 
     }
 
-    static async getNotification(to_designation) {
-        const query  = `SELECT * FROM notification WHERE to_designation = $1 AND state ="unread" ORDER BY date DESC`;
-        const out = await db.query(query,[to_designation]);
-        return out.rows;
-    }
+    // static async getNotification(to_designation) {
+    //     const query  = `SELECT * FROM notification WHERE to_designation = $1 AND state ="unread" ORDER BY date DESC`;
+    //     const out = await db.query(query,[to_designation]);
+    //     return out.rows;
+    // }
 
-    static async markNotification(notifi_id) {
-        const query  = `UPDATE notification SET state = "read" WHERE notifi_id = $1`;
-        const out = await db.query(query,[notifi_id]);
-        return out.rows;
-    }
+    // static async markNotification(notifi_id) {
+    //     const query  = `UPDATE notification SET state = "read" WHERE notifi_id = $1`;
+    //     const out = await db.query(query,[notifi_id]);
+    //     return out.rows;
+    // }
 
 }
 
