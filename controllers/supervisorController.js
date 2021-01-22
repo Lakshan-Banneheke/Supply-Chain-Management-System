@@ -93,7 +93,7 @@ const collectSumbitData = async (req,res)=>{
         saveToSiteReqTable(projectData,matLis)
         initiateProject()
         var msg = saveToNotificationTable("New Material Request Create","store-keeper","on-site-supervisor")
-        return res.status(200).send({ result: 'redirect', url: '/' });
+        return res.status(200).send({ result: 'redirect', url: '/supervisor-dashboard' });
     } catch (err) {
         console.log(err)
             return res.status(200).send({
