@@ -50,6 +50,7 @@ const login = async (email, password, done) => {
         const {value, error} = await userValidator.login.validate({email:email, password: password});
         if (error) throw (error);
         const user = await userService.login(value);
+        // console.log(user);
         if (user != null) {
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if (err) {

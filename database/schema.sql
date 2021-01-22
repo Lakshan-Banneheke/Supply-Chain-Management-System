@@ -99,3 +99,4 @@ INSERT INTO user_category(cat_name) VALUES ('Quantity Surveyor'), ('Expeditor'),
 ------------------Priviledges----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;
