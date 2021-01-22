@@ -64,7 +64,7 @@ const newVehicles = (req, res) => {
 
 const addNewVehicles = (req, res) => {
     const {title, brand, plate_number, registrations, remarks} = req.body;
-    db.query( 'INSERT INTO vehicles (title, brand, plate_number, registrations, remarks) values ($1, $2, $3, $4)', [title, brand, plate_number, registrations, remarks], (error, result) => {
+    db.query( 'INSERT INTO vehicles (title, brand, plate_number, registrations, remarks) values ($1, $2, $3, $4, $5)', [title, brand, plate_number, registrations, remarks], (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
             res.redirect('/fleet-management/vehicles');
