@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS test CASCADE;
 DROP TABLE IF EXISTS User_Profile CASCADE;
 DROP TABLE IF EXISTS User_Category CASCADE;
 
@@ -56,15 +55,10 @@ CREATE TABLE User_Profile (
   contact_num varchar(20),
   gender gender_enum,
   date_joined date,
+  verified bool DEFAULT false,
   PRIMARY KEY (user_id),
   FOREIGN KEY (cat_id) REFERENCES User_Category(cat_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
-
-
-
-
 
 
 --------------------------Procedures------------------------
@@ -94,8 +88,10 @@ $$;
 
 
 ----------------Insert statements------------------
-INSERT INTO user_category(cat_name) VALUES ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
+INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
+INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
 
 ------------------Priviledges----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;

@@ -5,6 +5,7 @@ const error404 = require('../controllers/errorController');
 
 router.use('/', require('./root'));
 router.use('/users', require('./users'));
+router.use('/admin', require('./admin'));
 
 router.use(error404);
 
