@@ -6,26 +6,26 @@ const auth = require('../config/auth');
 
 
 
-router.get('/brands', auth.checkAuthenticated, FleetController.brands);
-router.post('/brands/new', auth.checkAuthenticated, FleetController.newBrand);
-router.get('/brands/del/:id', auth.checkAuthenticated, FleetController.delBrand);
-router.get('/brands/edit/:id/:title', auth.checkAuthenticated, FleetController.editBrand);
+router.get('/brands', auth.checkNotAuthenticated, FleetController.brands);
+router.post('/brands/new', auth.checkNotAuthenticated, FleetController.newBrand);
+router.get('/brands/del/:id', auth.checkNotAuthenticated, FleetController.delBrand);
+router.get('/brands/edit/:id/:title', auth.checkNotAuthenticated, FleetController.editBrand);
 
-router.get('/vehicles', auth.checkAuthenticated, FleetController.vehicles);
-router.get('/vehicles/new', auth.checkAuthenticated, FleetController.newVehicles);
-router.post('/vehicles/new', auth.checkAuthenticated, FleetController.addNewVehicles);
-router.get('/vehicles/edit/:id', auth.checkAuthenticated, FleetController.editVehicles);
-router.post('/vehicles/editSubmit', auth.checkAuthenticated, FleetController.editVehiclesSubmit);
-router.get('/vehicles/delete/:id', auth.checkAuthenticated, FleetController.deleteVehicles);
+router.get('/vehicles', auth.checkNotAuthenticated, FleetController.vehicles);
+router.get('/vehicles/new', auth.checkNotAuthenticated, FleetController.newVehicles);
+router.post('/vehicles/new', auth.checkNotAuthenticated, FleetController.addNewVehicles);
+router.get('/vehicles/edit/:id', auth.checkNotAuthenticated, FleetController.editVehicles);
+router.post('/vehicles/editSubmit', auth.checkNotAuthenticated, FleetController.editVehiclesSubmit);
+router.get('/vehicles/delete/:id', auth.checkNotAuthenticated, FleetController.deleteVehicles);
 
-router.get('/supplies', auth.checkAuthenticated, FleetController.supplies);
-router.get('/supplies/new', auth.checkAuthenticated, FleetController.newSupply);
-router.post('/supplies/addNew', auth.checkAuthenticated, FleetController.addNewSupply);
-router.get('/supplies/edit/:id', auth.checkAuthenticated, FleetController.editSupply);
-router.post('/supplies/editSupplySubmit', auth.checkAuthenticated, FleetController.editSupplySubmit);
-router.get('/supplies/delete/:id', auth.checkAuthenticated, FleetController.deleteSupply);
+router.get('/supplies', auth.checkNotAuthenticated, FleetController.supplies);
+router.get('/supplies/new', auth.checkNotAuthenticated, FleetController.newSupply);
+router.post('/supplies/addNew', auth.checkNotAuthenticated, FleetController.addNewSupply);
+router.get('/supplies/edit/:id', auth.checkNotAuthenticated, FleetController.editSupply);
+router.post('/supplies/editSupplySubmit', auth.checkNotAuthenticated, FleetController.editSupplySubmit);
+router.get('/supplies/delete/:id', auth.checkNotAuthenticated, FleetController.deleteSupply);
 
 
-router.get('/test', auth.checkAuthenticated, FleetController.test);
+router.get('/test', auth.checkNotAuthenticated, FleetController.test);
 
 module.exports = router;
