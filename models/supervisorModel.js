@@ -32,7 +32,6 @@ class superviosrModel {
         return out.rows;
     }
 
-//----------------------
     static async createNewRequest(projectID,sectionID,userID,requestDate,request_note) {
         const query  = `INSERT INTO site_request ( project_id, section_id, user_id, request_state, request_date,request_note) VALUES ($1,$2,$3,'not-complete',$4,$5)`;
         const out = await db.query(query,[projectID,sectionID,userID,requestDate,request_note]);
@@ -44,21 +43,22 @@ class superviosrModel {
         const out = await db.query(query, [projectID,sectionID]);
         return out.rows[0];
     }
-//--------------------
+
 
     static async addReqMaterial(requestID,materialName,materialQt) {
         const query  = `INSERT INTO material_request (request_id, material_name, requested_quantity) VALUES ($1,$2,$3)`;
         const out = await db.query(query,[requestID,materialName,materialQt]);
         return out.rows;
     }
+//--------------------
 
-    static async getConsumptionReport(projectID) {
-        const query  = `SELECT material_name, received_quantity FROM site_request JOIN material_request USING (request_id) WHERE project_id =$1`;
-        const out = await db.query(query,[projectID]);
+    static async getConsumptionReport(projectID,sectionID) {
+        const query  = `SELECT material_name, received_quantity FROM site_request JOIN material_request USING (request_id) WHERE project_id =$1 AND section_id =$2 GROUP BY section_id`;
+        const out = await db.query(query,[projectID,sectionID]);
         return out.rows;
         
     }
-
+//----------------------------------
     static async addNotification(message,to_designation,state,from_designation,date) {
         try{
             const query  = `INSERT INTO notification (message, to_designation, state,from_designation,date) VALUES ($1,$2,$3,$4,$5)`;

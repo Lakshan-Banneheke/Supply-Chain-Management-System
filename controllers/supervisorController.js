@@ -1,16 +1,16 @@
 const supervisorModel = require('../model/supervisorModel')
 
-var loggedUser = "Uditha Isuranga"
-var designation = 'On Site Supervisor'
+
+var designation = 'on-site-supervisor'
 
 var user_id = 0
+var user_name = ""
 
 var project_id = 0 
 var section_id = 0
 
 var project_name = ""
 var section_name = ''
-
 var req_note = ''
 
 var errors = ''
@@ -18,10 +18,12 @@ var errors = ''
 var tempNotificationt =[]
 
 const renderDashboard = async (req,res)=>{
-    //user_id = req.session
+    user_id = req.user.name;
+    user_name = req.user.name;
+ 
     res.render('supervisor_dashB',{
         desig:designation,
-        name: loggedUser,
+        name: user_name,
         error: errors
     });
 }
@@ -51,7 +53,7 @@ const renderReqForm = async (req,res)=>{
     var MaterialsInStock = await supervisorModel.getAllmaterial()
     var today = new Date()
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
     var date = yyyy + '-' + mm + '-' + dd;
     res.render('material_req_form',{
@@ -60,7 +62,7 @@ const renderReqForm = async (req,res)=>{
         projectSection: section_name.section_name, // section_name
         note: req_note,
         date: date,
-        materials: MaterialsInStock,  //MaterialsInStock
+        materials: MaterialsInStock,  
 
     })
 }
@@ -70,7 +72,7 @@ const collectSumbitData = async (req,res)=>{
     
     var today = new Date()
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
     var date = yyyy + '-' + mm + '-' + dd;
     var projectData = { project_id,section_id,user_id,req_note,date}
@@ -104,7 +106,7 @@ const collectSumbitData = async (req,res)=>{
 
 
 const sendToExpeditor = async (req,res)=>{
-    var msg = saveToNotificationTable(req.body.msg,"expeditor","on-site-supervisor")
+    var msg = saveToNotificationTable(req.body.msg,"Expeditor","on-site-supervisor")
     res.render('supervisor_dashB', {
     desig:designation,
     name: loggedUser,
@@ -125,12 +127,9 @@ function initiateProject(){
 
 
 const saveToSiteReqTable = async (projectData,materialData)=>{
-    //console.log("Save To Site req")
-    //console.log(projectData)
-    //console.log(materialData)
 
     var out_put =  await supervisorModel.createNewRequest(projectData['project_id'],projectData['section_id'],projectData['user_id'],projectData['date'],projectData['req_note']);
-    var req_id = out_put.request_id //out_put["request_id"];
+    var req_id = out_put.request_id 
     for (var i = 0; i < materialData.length; i++) {
         saveToMatReqTable(req_id,materialData[i])
     }
@@ -138,25 +137,19 @@ const saveToSiteReqTable = async (projectData,materialData)=>{
 
 }
 const saveToMatReqTable = async (rID,materialSingleData)=>{
-    // console.log("Mat_req made");
-    // console.log(rID+" data"+ materialSingleData["material_name"]+ materialSingleData["material_qt"]);
+   
     var out_put =  await supervisorModel.addReqMaterial(rID,materialSingleData["material_name"],materialSingleData["material_qt"]);
 }
 
 const saveToNotificationTable = async (msg,to_d,from_d) =>{
     var today = new Date()
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
     var today = yyyy + '-' + mm + '-' + dd;
     var out_put =  await supervisorModel.addNotification(msg,to_d,"unread",from_d,today);
     return "Send Success";
 }
-
-
-
-
-
 
 
 //-----------------Get Report----------------
@@ -192,12 +185,13 @@ const renderReport = async (req,res)=>{
 
     })
 }
+//--------------
 
 const renderNotification = async (req,res)=>{
     var allNotifications = await supervisorModel.getNotification("on-site-supervisor");
     
     res.render('notification_view', {
-        notifications: allNotifications, //allNotifications
+        notifications: allNotifications, 
 
     })
 }
@@ -207,16 +201,20 @@ const reqMarkAsRead = async (req,res)=>{
     for (var i = 0; i < allNotifications.length; i++) {
         readMark(allNotifications[i].notifi_id);
     }
-    res.render('supervisor_dashB', {
+    var user_name = req.user.name;
+ 
+    res.render('supervisor_dashB',{
         desig:designation,
-        name: loggedUser,
-        error: ""       
+        name: user_name,
+        error: errors
     });
 }
 
 const readMark = async(n_id)=>{
     var out = await supervisorModel.markNotification(n_id);
 }
+
+//----------------------------------------
 
 module.exports = {
     renderDashboard,
