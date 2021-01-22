@@ -68,6 +68,7 @@
                         </ul>
                     </li>
 
+                    <% if (cat_id == 6 ) { %>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-tractor"></i>
@@ -97,15 +98,23 @@
                             </li>
                         </ul>
                     </li>
+                    <% } %>
 
                     <li class="nav-item">
+                        <% if (url == '/') {%>
                         <a href="users/logout" class="nav-link">
+                            <% }else { %>
+                            <a href="../users/logout" class="nav-link">
+                                <%}%>
                             <i class="fas fa-sign-out-alt"></i>
                             <p>
                                 Log out
                             </p>
                         </a>
                     </li>
+
+
+
 
                     <li class="nav-item">
                         <a href="users/faq" class="nav-link">
