@@ -1,25 +1,39 @@
+<%
+  // This page is common for both fleet manager's supply part and expedictor's request part
+  if(! req ){     //check for if this page for expeditor's request page or fleet manager's supply page
+    var current_menu = {parent: 'Supplies', child: 'View'};         //configuration for fleet manager
+    var pageTitle= 'Supplies';
+    var button= 'Add New Supply';
+    var href= '/fleet-management/supplies/new';
+  } else {                                                          // configuration for expeditor - request
+    var current_menu = {parent: 'Fleet Requests', child: 'View'};
+    var pageTitle= 'Fleet Requests';
+    var button= 'Request Fleet';
+    var href= '/fleet-management/supplies/new/req';
+  }
+%>
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu}) %>
 <!-- header-section end -->
 
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Supplies</h3>
-      <a class="btn btn-primary float-right" href="/fleet-management/supplies/new">Add new Supply</a>
+      <h3 class="card-title"><%= pageTitle %></h3>
+      <a class="btn btn-primary float-right" href="<%= href %>"><%= button %></a>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>#</th>
+            <th style="width: 40px">#</th>
             <th>Reference</th>
             <th>Created</th>
             <th>From</th>
             <th>To</th>
             <th>Remarks</th>
             <th>Address</th>
-            <th>Action</th>
+            <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,9 +47,9 @@
               <td><%= dateformat(row.to_date, 'dd/mm/yyyy') %></td>
               <td><%= row.remarks %></td>
               <td><%= row.address %></td>
-              <td>
-                <a href="/fleet-management/supplies/edit/<%= row.id %>"><i class="fas fa-edit"></i></button>
-                <a href="/fleet-management/supplies/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></button>
+              <td class="text-center">
+                <a href="/fleet-management/supplies/edit/<%= row.id %>"><i class="fas fa-edit"></i></a>
+                <a href="/fleet-management/supplies/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           <% }) %>
@@ -49,7 +63,7 @@
             <th>To</th>
             <th>Remarks</th>
             <th>Address</th>
-            <th>Action</th>
+            <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </tfoot>
       </table>

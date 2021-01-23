@@ -467,4 +467,5 @@ GRANT ALL ON TABLE public.Material_Order to db_app;
 GRANT ALL ON TABLE public.Machine_Request to db_app;
 GRANT ALL ON TABLE public.Machine to db_app;
 GRANT ALL ON TABLE public.Req_Mac to db_app;
+
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;
