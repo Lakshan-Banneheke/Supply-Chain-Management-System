@@ -12,7 +12,6 @@ DROP TABLE IF EXISTS brands CASCADE;
 DROP TABLE IF EXISTS vehicles CASCADE;
 DROP TABLE IF EXISTS supplies CASCADE;
 DROP TABLE IF EXISTS supply_items CASCADE;
-DROP TABLE IF EXISTS Project CASCADE;
 DROP TABLE IF EXISTS Estimate CASCADE;
 DROP TABLE IF EXISTS MaterialValue CASCADE;
 DROP TABLE IF EXISTS Est_Mat CASCADE;
@@ -81,19 +80,49 @@ CREATE TABLE User_Profile (
   FOREIGN KEY (cat_id) REFERENCES User_Category(cat_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 CREATE TABLE project (
-    project_id SERIAL not null,
+    project_id SERIAL,
     project_name varchar(255) NOT NULL,
+    start_date date,
     PRIMARY KEY (project_id)
 );
 
 CREATE TABLE project_section (
-    section_id SERIAL not null,
+    section_id SERIAL,
     section_name varchar(255) NOT NULL,
     project_id int NOT NULL,
     PRIMARY KEY (section_id),
     FOREIGN KEY (project_id) REFERENCES project(project_id)
 );
+
+CREATE TABLE Estimate (
+  E_id SERIAL,
+  project_id int NOT NULL,
+  create_date date NOT NULL,
+  submit_status boolean,
+  submit_date date,
+  PRIMARY KEY (E_id),
+  FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE MaterialValue (
+  M_id SERIAL,
+  m_name varchar(30) NOT NULL,
+  m_amount varchar(20) NOT NULL,
+  m_cost DECIMAL NOT NULL,
+  PRIMARY KEY (M_id)
+);
+
+CREATE TABLE Est_Mat (
+  E_id int NOT NULL,
+  M_id int NOT NULL,
+  quantity int NOT NULL,
+  PRIMARY KEY (E_id,M_id),
+  FOREIGN KEY (E_id) REFERENCES Estimate(E_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 
 CREATE TABLE site_request (
     request_id SERIAL not null,
@@ -132,14 +161,6 @@ CREATE TABLE Stock(
 );
 
 ---------------------------new material order tables--------------
-CREATE TABLE MaterialValue (
-  M_id SERIAL,
-  m_name varchar(30) NOT NULL,
-  m_amount varchar(20) NOT NULL,
-  m_cost DECIMAL NOT NULL,
-  PRIMARY KEY (M_id)
-);
-
 
 CREATE TABLE Material_Order(
     order_id SERIAL not null,
@@ -222,51 +243,17 @@ CREATE TABLE supply_items (
 	FOREIGN KEY (supply) REFERENCES supplies(id) ON DELETE CASCADE
 );
 
----expedi/qs ----
-CREATE TABLE Project (
-  P_id SERIAL,
-  name varchar(30) NOT NULL,
-  start_date date,
-  duration varchar(30),
-  PRIMARY KEY (P_id)
-);
-
-CREATE TABLE Estimate (
-  E_id SERIAL,
-  P_id int NOT NULL,
-  create_date date NOT NULL,
-  submit_status boolean,
-  submit_date date,
-  PRIMARY KEY (E_id),
-  FOREIGN KEY (P_id) REFERENCES Project(P_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE MaterialValue (
-  M_id SERIAL,
-  m_name varchar(30) NOT NULL,
-  m_amount varchar(20) NOT NULL,
-  m_cost DECIMAL NOT NULL,
-  PRIMARY KEY (M_id)
-);
-
-CREATE TABLE Est_Mat (
-  E_id int NOT NULL,
-  M_id int NOT NULL,
-  quantity int NOT NULL,
-  PRIMARY KEY (E_id,M_id),
-  FOREIGN KEY (E_id) REFERENCES Estimate(E_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+---expedi----
 
 CREATE TABLE Material_Order (
   O_id SERIAL,
-  P_id int NOT NULL,
+  project_id int NOT NULL,
   shop_name varchar(30) NOT NULL,
   order_date date,
   ordered boolean,
   received boolean,
   PRIMARY KEY (O_id),
-  FOREIGN KEY (P_id) REFERENCES Project(P_id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Order_items (
@@ -280,11 +267,11 @@ CREATE TABLE Order_items (
 
 CREATE TABLE Machine_Request (
   R_id int NOT NULL,
-  P_id int NOT NULL,
+  project_id int NOT NULL,
   request_date date NOT NULL,
   duration varchar(30),
   PRIMARY KEY (R_id),
-  FOREIGN KEY (P_id) REFERENCES Project(P_id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Machine (
@@ -374,8 +361,41 @@ $$;
 
 
 ----------------Insert statements------------------
+INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
 
-INSERT INTO user_category(cat_name) VALUES ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
+INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
+
+------------QS-------------------
+INSERT INTO project(project_name,start_date) VALUES ('First project','2021-01-01');
+INSERT INTO project(project_name,start_date) VALUES ('Second project','2021-01-05');
+INSERT INTO project(project_name,start_date) VALUES ('Third project','2021-01-15');
+
+
+INSERT INTO project_section(section_name,project_id) VALUES ('Roof',1);
+
+
+INSERT INTO estimate(project_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-02','1','2021-01-05');
+INSERT INTO estimate(project_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-06','1','2021-01-09');
+INSERT INTO estimate(project_id,create_date,submit_status,submit_date) VALUES (2,'2021-01-16','1','2021-01-19');
+INSERT INTO estimate(project_id,create_date,submit_status) VALUES (3,'2021-01-19','0');
+
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Steel','7ft x 80in',40000);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Concrete','Cubic yard',10000);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine','2in x 4in - 12ft',600);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine','2in x 4in - 16ft',800);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Latex Paint','Gallon 2 coats',3000);
+
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (1,1,5);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (1,2,3);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (1,4,1);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (2,2,10);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (2,4,8);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (3,1,4);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (3,2,6);
+INSERT INTO est_mat(e_id,m_id,quantity) VALUES (4,1,6);
+
+--------------------------------------------------------
+
 
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Cement',100,'pct');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Sand',100,'cube');
@@ -442,35 +462,6 @@ INSERT INTO Notification(message,to_designation,state,from_designation,date) VAL
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor2','expeditor','unread','expeditor2','2020-12-20');
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor3','storekeeper','unread','expeditor3','2020-12-20');
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor4','storekeeper','unread','expeditor4','2020-12-20');
-
-------------QS/Expeditor-------------------
-INSERT INTO project(name,start_date,duration) VALUES ('First project','2021-01-01','3 months');
-INSERT INTO project(name,start_date,duration) VALUES ('Second project','2021-01-05','5 months');
-INSERT INTO project(name,start_date,duration) VALUES ('Third project','2021-01-15','6 months');
-
-INSERT INTO estimate(p_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-02','1','2021-01-05');
-INSERT INTO estimate(p_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-06','1','2021-01-09');
-INSERT INTO estimate(p_id,create_date,submit_status,submit_date) VALUES (2,'2021-01-16','1','2021-01-19');
-INSERT INTO estimate(p_id,create_date,submit_status) VALUES (3,'2021-01-19','0');
-
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Concrete','Cubic yard',10000);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Steel','7ft x 80in',40000);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine','2in x 4in - 12ft',600);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine','2in x 4in - 16ft',800);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Latex Paint','Gallon 2 coats',3000);
-
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (1,1,5);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (1,2,3);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (1,4,1);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (2,2,10);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (2,4,8);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (3,1,4);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (3,2,6);
-INSERT INTO est_mat(e_id,m_id,quantity) VALUES (4,1,6);
-
-
-INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
-INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
 
 
 ------------------Priviledges----------------------
