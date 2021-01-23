@@ -1,13 +1,9 @@
 # Supply-Chain-Management-System
 
-## Guide
-
 ### Database setup
 
-#### Windows
 
-Install [postgresql](https://www.postgresql.org/) in the local machine and setup correctly. Use following command to login to the `psql` shell as postgres user.Use the following command on terminal
-
+Install [postgresql](https://www.postgresql.org/) in the local machine and setup correctly. Use following command on terminal to login to the `psql` shell as postgres user.
 ```bash
 psql -U postgres
 ```
@@ -38,11 +34,7 @@ import the current DDL and DML schema. Here give the full path to the schema
 Login to pgAdmin (Search on start) using the username and password used in the installation process of postgres.
 
 
-Then rclick Server>postgres>Databases and check for `supply_chain_db`. Then expand it go to Schemas>Tables>Test>rclick>View edit data>All rows
-
-Now you are done with the database setup.
-
-
+Then rclick Server>postgres>Databases and check for `supply_chain_db`. 
 ### Node.js setup
 
 First clone this project directory.
@@ -66,8 +58,8 @@ cd directory/project
 npm install
 ```
 
-Then create a `.env` file in the root with following content.
-You may change database user/password/secret as you may wish.
+Create a `.env` file in the root to store the environment variables.
+
 
 ```text
 DATABASE_URL=postgres://db_app:password@localhost:5432/supply_chain_db
