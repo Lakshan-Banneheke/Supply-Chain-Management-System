@@ -18,7 +18,6 @@ class User {
     }
 
     static async getRegisteredUserByEmail(email) {
-        console.log("getRegisteredUserByEmail");
         const query=`SELECT * FROM user_profile WHERE email = $1`;
         const out = await db.query(query, [email]);
         return out.rows[0];
@@ -29,6 +28,7 @@ class User {
         const out = await db.query(query, [id]);
         return out.rows[0];
     }
+
 }
 
 module.exports = User;

@@ -14,7 +14,7 @@
             let contactNo =$("#contactNo").val();
 
             let genderList=['Male','Female','Other'];
-            let categoryList = ['1', '2', '3', '4', '5'];
+            let categoryList = ['2', '3', '4', '5', '6'];
             let error_msgs="<strong>Registration Error</strong>";
 
             try{
