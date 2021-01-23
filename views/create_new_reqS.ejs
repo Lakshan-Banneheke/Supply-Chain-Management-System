@@ -113,55 +113,51 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-12">
-                <!-- <h1>Icons</h1> -->
-                <%- include('_card') %>
-              </div>
-            </div>
-          </div><!-- /.container-fluid -->
+            <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-12">
+                    <div class="card card-success">
+                        <div class="card-body">
+                            <div class="row">
+                                <form action="/supervisor/material-req-form" method="post" width = 100%>
+                                    <div class="form-group">
+                                        <label for="text">Selected Project:</label>
+                                        <input type="text" class="form-control" value="<%= selectedProjectName %>" placeholder="" id="" disabled="" name="projectSelect">
+                                    </div>
+                                    
+                                    <div class="form-group" id = "sections">
+                                        <label for="sectionSelect">Select a project</label>
+                                        <select name="sectionSelect" class="form-control" id="sectionSelect" required>
+                                            <option value="">Select one</option>
+                                            <% for (var i = 0; i < sections.length; i++) { %>
+                                                <option value=<%=sections[i].section_id %>>
+                                                   <%= sections[i].section_name %>
+                                                </option>
+                                            <% } %>                             
+                                        </select>
+                                    </div>
+                
+                                    <div class="form-group">
+                                        <label for="shortnote">Short Note (reason):</label>
+                                        <input type="text" class="form-control" id="shortnote" name="shortnote" required>
+                                    </div>
+                
+                                    <button type="submit" class="btn btn-primary" onclick="validity()" >Next</button>
+                                </form>
+                                    <button type="submit" class="btn btn-primary" onclick="history.back()" >Change Project</button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+                     
+                  </div>
+                </div>
+              </div><!-- /.container-fluid -->
         </section>
     
         <!-- Main content -->
-        <%if (cat_id == 4) { %>
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">On Site Supervisor</h3>
-              </div> <!-- /.card-body -->
-              <div class="card-body">
-                <div>
-                  <a href="/supervisor/create-new-reqP">Create a material Request</a><br>
-                  <a href="/supervisor/consum-repo">Get Consumption Report</a><br>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
-    <% } else { %>
-
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">Tasks</h3>
-              </div> <!-- /.card-body -->
-              <div class="card-body">
-                <p>Add your tasks buttons/ report summary or anything here</p>
-                <strong>and link to side nav bar</strong>
-                <div>
-                  <a href="#">Task1</a><br>
-                  <a href="#">Task2</a><br>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
-        <%}%>
-
-        <!-- /.content -->
+    
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -179,4 +175,18 @@
     </div>
     <!-- ./wrapper -->
     </body>
+
+    <script>
+       function validity() {
+            var e = document.getElementById("sectionSelect");
+            var value = e.options[e.selectedIndex].value;
+            var text = e.options[e.selectedIndex].text;
+            if(text == "Select one"){
+                alert("You want to select a Section");
+            }else{
+                alert("You selected " + text + " ?");
+            }
+        } 
+    </script>
+
     <%- include('_footer') %>

@@ -113,55 +113,41 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-12">
-                <!-- <h1>Icons</h1> -->
-                <%- include('_card') %>
-              </div>
-            </div>
-          </div><!-- /.container-fluid -->
+            <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-12">
+                    <div class="card card-success">
+                        <div class="card-body">
+                            <div class="row">
+                                <form action="/supervisor/consum-repot" method="post" width = 100%>
+                            
+                            <div class="form-group">
+                              <label for="projectSelect">Select a project</label>
+                              <select name="projectSelect" class="form-contro" id="projectSelect" required>
+                                <option value="" class = "">Select one</option>
+                                <% for (var i = 0; i < projects.length; i++) { %>
+                                    <option value=<%=projects[i].project_id%>>
+                                       <%= projects[i].project_name %>
+                                    </option>
+                                    <% } %>
+                              </select>
+                            </div>
+        
+                            <button type="submit" class="btn btn-primary" onclick="myFunction()" >Generate Report</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+    
+                    
+                     
+                  </div>
+                </div>
+              </div><!-- /.container-fluid -->
         </section>
     
         <!-- Main content -->
-        <%if (cat_id == 4) { %>
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">On Site Supervisor</h3>
-              </div> <!-- /.card-body -->
-              <div class="card-body">
-                <div>
-                  <a href="/supervisor/create-new-reqP">Create a material Request</a><br>
-                  <a href="/supervisor/consum-repo">Get Consumption Report</a><br>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
-    <% } else { %>
-
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">Tasks</h3>
-              </div> <!-- /.card-body -->
-              <div class="card-body">
-                <p>Add your tasks buttons/ report summary or anything here</p>
-                <strong>and link to side nav bar</strong>
-                <div>
-                  <a href="#">Task1</a><br>
-                  <a href="#">Task2</a><br>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
-        <%}%>
-
-        <!-- /.content -->
+    
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -179,4 +165,18 @@
     </div>
     <!-- ./wrapper -->
     </body>
+
+    <script>
+        function myFunction() {
+            var e = document.getElementById("projectSelect");
+            var value = e.options[e.selectedIndex].value;
+            var text = e.options[e.selectedIndex].text;
+            if(text == "Select one"){
+                alert("You want to select a project");
+            }else{
+                alert("You selected " + text + " ?");
+            }            
+        }
+    </script>
+
     <%- include('_footer') %>

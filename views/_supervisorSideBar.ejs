@@ -38,31 +38,31 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <%if (cat_id == 4 ){%>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                On Site Supervisor
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/supervisor/create-new-reqP" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>Create new request</p>
+                                </a>
 
-                                <p>
-                                    On Site Supervisor
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/supervisor/create-new-reqP" class="nav-link">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Create new request</p>
-                                    </a>
-
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/supervisor/consum-repot" class="nav-link">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Get Report</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/supervisor/consum-repot" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>Get Report</p>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
 
                     <%  } else  if (cat_id == 6 ) { %>
                     <li class="nav-item menu-open">
