@@ -20,12 +20,12 @@ CREATE TABLE project (
 
 CREATE TABLE Estimate (
   E_id SERIAL,
-  P_id int NOT NULL,
+  project_id int NOT NULL,
   create_date date NOT NULL,
   submit_status boolean,
   submit_date date,
   PRIMARY KEY (E_id),
-  FOREIGN KEY (P_id) REFERENCES Project(P_id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Est_Mat (
@@ -134,7 +134,7 @@ DECLARE
 BEGIN
     for  i in 1..arraylength
     loop
-      INSERT INTO Order_items (O_id, M_id, quantity) VALUES(o_id, materials[i], quantiies[i]);
+      INSERT INTO Order_item (order_id, M_id, ordered_quantity) VALUES(o_id, materials[i], quantiies[i]);
     end loop;
   
 END;
