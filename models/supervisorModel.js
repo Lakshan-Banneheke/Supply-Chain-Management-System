@@ -53,7 +53,7 @@ class supervisorModel {
 //--------------------
 
     static async getConsumptionReport(projectID,sectionID) {
-        const query  = `SELECT material_name, SUM(received_quantity) FROM site_request JOIN material_request USING (request_id) WHERE project_id =$1 AND section_id =$2 GROUP BY material_name`;
+        const query  = `SELECT material_name, unit, SUM(received_quantity) FROM site_request JOIN material_request USING (request_id) JOIN stock USING(material_name) WHERE project_id =$1 AND section_id =$2 GROUP BY material_name, unit`;
         const out = await db.query(query,[projectID,sectionID]);
         return out.rows;
         
