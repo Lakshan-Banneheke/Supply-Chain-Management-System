@@ -106,7 +106,7 @@
       </nav>
       <!-- /.navbar -->
  
-          <%- include('_supervisorSideBar') %>
+          <%- include('_sidebar') %>
       
     
       <!-- Content Wrapper. Contains page content -->
@@ -127,7 +127,7 @@
                                       <p>Note/Reason: <%=note%></p>
                                       <p>Request Date: <%=date%></p>
                                     </div>
-                                    <form method="GET" action="/create-new-reqP">
+                                    <form method="GET" action="/supervisor/create-new-reqP">
                                         <input type="submit" value="Change Project" />
                                     </form>                                 
                                 
@@ -141,7 +141,7 @@
 
         <section class="content-header">
             <div class="container-fluid">
-                <form action="/send-to-expeditor" method="POST">
+                <form action="/supervisor/send-to-expeditor" method="POST">
                     <div class="form-group" margin = 10px>
                         <label for="newMaterial">Ask Expeditor for New Material</label>
                         <input type="text" class="form-control" id="newMaterial" placeholder="Write Material name" name = "msg" required>
@@ -274,7 +274,7 @@
             
             $.ajax({
                           type: "POST",
-                          url: '/collect-form-data',
+                          url: '/supervisor/collect-form-data',
                           data: {
                             "len": table1.length,
                             "table": table1

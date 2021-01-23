@@ -106,7 +106,7 @@
       </nav>
       <!-- /.navbar -->
  
-          <%- include('_supervisorSideBar') %>
+          <%- include('_sidebar') %>
       
     
       <!-- Content Wrapper. Contains page content -->
@@ -127,7 +127,6 @@
                             <th scope="col"></th>
                             <th scope="col">Material Name</th>
                             <th scope="col">Total Quantity</th>
-                            <th scope="col">Unit</th>
                         </tr>
                         </thead>
                         <tbody>     
@@ -138,12 +137,12 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <% for (var i = 0; i < report[i][1].length; i++) { %> 
+                                <% for (var j = 0; j < report[i][1].length; j++) { %>
+                                <% console.log(report[i][1][j])%>
                                 <tr>
                                     <td></td> 
-                                    <td><%= report[i][1].materialName %></td>
-                                    <td><%= report[i][1].quantity %></td>
-                                    <td><%= report[i][1].unit %></td>
+                                    <td><%= report[i][1][j].material_name %></td>
+                                    <td><%= report[i][1][j].sum %></td>
                                 </tr>
                                 <% } %> 
                             </tr> 

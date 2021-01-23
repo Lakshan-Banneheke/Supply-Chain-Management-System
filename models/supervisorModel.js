@@ -35,7 +35,7 @@ class supervisorModel {
     static async createNewRequest(projectID,sectionID,userID,requestDate,request_note) {
         const query  = `INSERT INTO site_request ( project_id, section_id, user_id, request_state, request_date,request_note) VALUES ($1,$2,$3,'not-complete',$4,$5)`;
         const out = await db.query(query,[projectID,sectionID,userID,requestDate,request_note]);
-        return superviosrModel.getRequestID(projectID, sectionID);
+        return supervisorModel.getRequestID(projectID, sectionID);
     }
 
     static async getRequestID(projectID,sectionID) {
@@ -53,7 +53,7 @@ class supervisorModel {
 //--------------------
 
     static async getConsumptionReport(projectID,sectionID) {
-        const query  = `SELECT material_name, received_quantity FROM site_request JOIN material_request USING (request_id) WHERE project_id =$1 AND section_id =$2 GROUP BY section_id`;
+        const query  = `SELECT material_name, SUM(received_quantity) FROM site_request JOIN material_request USING (request_id) WHERE project_id =$1 AND section_id =$2 GROUP BY material_name`;
         const out = await db.query(query,[projectID,sectionID]);
         return out.rows;
         

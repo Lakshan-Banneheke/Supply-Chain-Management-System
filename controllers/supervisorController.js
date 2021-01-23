@@ -21,7 +21,7 @@ const renderDashboard = async (req,res)=>{
     user_id = req.user.user_id;
     user_name = req.user.name;
  
-    res.render('supervisorDashboard',{
+    res.render('/',{
         // desig:designation,
         // name: user_name,
         // error: errors
@@ -29,6 +29,9 @@ const renderDashboard = async (req,res)=>{
 }
 
 const renderCreateNewReqP = async (req,res)=>{
+    user_id = req.user.user_id;
+    user_name = req.user.name;
+    console.log(user_id);
     var allprojects = await supervisorModel.getAllprojects();
     initiateProject();
     res.render('create_new_reqP',{
@@ -76,16 +79,15 @@ const collectSumbitData = async (req,res)=>{
     var yyyy = today.getFullYear();
     var date = yyyy + '-' + mm + '-' + dd;
     var projectData = { project_id,section_id,user_id,req_note,date}
-    console.log(section_id);
-    console.log(projectData);
+
     try {
  
         var materialData = req.body
         var len = materialData["len"];
         var matLis = []
         for (var i = 0; i < len; i ++) {
-            var material_name = materialData["table["+i+"][Material Name]"];
-            var material_qt =  parseInt(materialData["table["+i+"][Quantity]"]) ;
+            var material_name = materialData['table'][i]['Material Name'];
+            var material_qt =  parseInt(materialData['table'][i]['Quantity']) ;
             var material = {material_name,material_qt}
             matLis.push(material);
         }
@@ -93,12 +95,12 @@ const collectSumbitData = async (req,res)=>{
         saveToSiteReqTable(projectData,matLis)
         initiateProject()
         var msg = saveToNotificationTable("New Material Request Create","store-keeper","on-site-supervisor")
-        return res.status(200).send({ result: 'redirect', url: '/supervisor-dashboard' });
+        return res.status(200).send({ result: 'redirect', url: '/' });
     } catch (err) {
         console.log(err)
             return res.status(200).send({
                 result: 'redirect',
-                url: `/material-req-form`
+                url: `/supervisor/material-req-form`
             });
     }
    
@@ -107,7 +109,7 @@ const collectSumbitData = async (req,res)=>{
 
 const sendToExpeditor = async (req,res)=>{
     var msg = saveToNotificationTable(req.body.msg,"Expeditor","On-Site-Supervisor")
-    res.render('supervisorDashboard', {
+    res.render('/', {
         // desig:designation,
         // name: loggedUser,
         // error: msg      // msg
@@ -129,7 +131,7 @@ function initiateProject(){
 const saveToSiteReqTable = async (projectData,materialData)=>{
 
     var out_put =  await supervisorModel.createNewRequest(projectData['project_id'],projectData['section_id'],projectData['user_id'],projectData['date'],projectData['req_note']);
-    var req_id = out_put.request_id 
+    var req_id = out_put.request_id
     for (var i = 0; i < materialData.length; i++) {
         saveToMatReqTable(req_id,materialData[i])
     }
@@ -178,9 +180,10 @@ const renderReport = async (req,res)=>{
         section.push(projectConsump);
         Details.push(section);
     }
+    console.log(Details);
 
     res.render('report_show',{
-        projectName: project_name,
+        projectName: project_name.project_name,
         report: Details,
 
     })
