@@ -160,7 +160,7 @@ CREATE TABLE Stock(
     primary key(stock_id)
 );
 
----------------------------new material order tables--------------
+--------------expedi order-------------
 
 CREATE TABLE Material_Order(
     order_id SERIAL not null,
@@ -183,8 +183,8 @@ CREATE TABLE Order_item(
   FOREIGN KEY (order_id) REFERENCES Material_Order(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-------------------------------------------------------------------
 
+--------------------------------------------------------------
 
 
 CREATE TABLE Notification(
@@ -243,28 +243,7 @@ CREATE TABLE supply_items (
 	FOREIGN KEY (supply) REFERENCES supplies(id) ON DELETE CASCADE
 );
 
----expedi----
-
-CREATE TABLE Material_Order (
-  O_id SERIAL,
-  project_id int NOT NULL,
-  shop_name varchar(30) NOT NULL,
-  order_date date,
-  ordered boolean,
-  received boolean,
-  PRIMARY KEY (O_id),
-  FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE Order_items (
-  O_id int NOT NULL,
-  M_id int NOT NULL,
-  quantity int NOT NULL,
-  PRIMARY KEY (O_id,M_id),
-  FOREIGN KEY (O_id) REFERENCES Material_Order(O_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
+---expedi machine----
 CREATE TABLE Machine_Request (
   R_id int NOT NULL,
   project_id int NOT NULL,
