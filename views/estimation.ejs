@@ -1,0 +1,427 @@
+<%- include('_header',{title:"Dashboard"}) %>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a class="nav-link">Welcome</a>
+          </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+          <!--<li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+              <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+              <form class="form-inline">
+                <div class="input-group input-group-sm">
+                  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>-->
+
+          <!-- Messages Dropdown Menu -->
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-comments"></i>
+              <span class="badge badge-danger navbar-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <a href="#" class="dropdown-item">
+                <!-- Message Start -->
+                <div class="media">
+                  <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                      Brad Diesel
+                      <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                    </h3>
+                    <p class="text-sm">Call me whenever you can...</p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+                <!-- Message End -->
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <!-- Message Start -->
+                <div class="media">
+                  <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                      John Pierce
+                      <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                    </h3>
+                    <p class="text-sm">I got your message bro</p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+                <!-- Message End -->
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <!-- Message Start -->
+                <div class="media">
+                  <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title">
+                      Nora Silvester
+                      <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                    </h3>
+                    <p class="text-sm">The subject goes here</p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  </div>
+                </div>
+                <!-- Message End -->
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+        <a href="/" class="brand-link">
+          <img src="../../dist/img/AdminLTELogo.png" alt="Company Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+          <span class="brand-text font-weight-light">ABC Company</span>
+        </a>
+
+
+        <div class="sidebar">
+          <!-- Sidebar -->
+          <div class="sidebar" id="sidebar-new">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+              <div class="image">
+                <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+              </div>
+              <div class="info">
+                <a class="d-block">Hello <%= name %></a>
+              </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+              <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-sidebar">
+                    <i class="fas fa-search fa-fw"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+
+            <nav class="mt-2">
+              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+         with font-awesome or any other icon font library -->
+                <li class="nav-item menu-open">
+                  <a href="#" class="nav-link active">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                      Tasks
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="" class="nav-link active">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>Create Estimation</p>
+                      </a>
+
+                    </li>
+                    <li class="nav-item">
+                      <a href="estimationView" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>View Estimation</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="createProject" class="nav-link">
+                          <i class="nav-icon fas fa-edit"></i>
+                          <p>Create Project</p>
+                      </a>
+                  </li>
+                  </ul>
+                </li>
+
+                <li class="nav-item">
+                  <a href="../users/logout" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p>
+                      Log out
+                    </p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="../users/faq" class="nav-link">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <p>
+                      FAQ
+                    </p>
+                  </a>
+                </li>
+
+              </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+          </div>
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+        <!-- <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <h1>Icons</h1>
+                <%- include('_card') %>
+              </div>
+            </div>
+          </div>
+        </section> -->
+
+        <!-- Main content -->
+      </br>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="card card-primary card-outline card-tabs">
+              <div class="card-header p-0 pt-1 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
+                      href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">
+                      Create Estimation</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill"
+                      href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile"
+                      aria-selected="false">Material</a>
+                  </li>
+
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content" id="custom-tabs-three-tabContent">
+                  <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel"
+                    aria-labelledby="custom-tabs-three-home-tab">
+                    
+                    <div class="card-header">
+                      <h3 class="card-title">Create new Estimation</h3>
+                    </div>
+
+                    <form  action="estimation" method="POST" id="estimate_form">
+                      <div class="card-body">
+                        <div id="err_msg0">
+                          <!-- for error msg -->
+                        </div>
+
+                        <div class="form-group">
+                          <label for="material">Choose Material</label>
+                          <select class="form-control" id='material_select' >
+                            <option value="" disabled selected>select a material</option>
+                            <% if (materials.length > 0){ %>
+                              <% materials.forEach(material => { %>
+                                <option><%= material.m_name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= material.m_amount %></option>
+                              <% }) %>
+                            <% } else { %>
+                                <p>no materials</p>
+                            <% } %>
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="quantity">quantity</label>
+                          <input type="number" step="any" class="form-control" id="quantity_enter" name="quantity" placeholder="Enter material quantity">
+                        </div>
+                        <div>
+                          <button style="background-color: rgb(12,187,50);color: black;" class="btn btn-add" type="button" id="btn-add">Add Material</button>
+                        </div>
+                        <br/>
+                        <% if(estimate_materials.length>0) {%> 
+                        <table id="estimatecreate_table" class="table table-bordered table-striped table-hover">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Material</th>
+                              <th>Size/Description</th>
+                              <th>Quantity</th>
+                              <th>TotalCost</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for(var i=0; i< estimate_materials.length; i++){ %>
+                            <tr>
+                              <td><%= i+1 %></td>
+                              <td><%= estimate_materials[i].material_name %></td>
+                              <td><%= estimate_materials[i].material_amount %></td>
+                              <td><%= estimate_materials[i].material_quantity %></td>
+                              <td><%= estimate_materials[i].material_cost %></td>
+                              </tr>
+                            <% } %>
+                          </tbody>
+                        </table>
+                        <br/>
+                        <div>
+                          <button style="background-color: rgb(230, 13, 13);color: black;" class="btn btn-remove " type="button" id="btn-remove">Remove</button>
+                        </div>
+                        <% } %>
+
+                        <br/>
+                        <div class="form-group">
+                          <label for="project">Select Project</label>
+                          <select class="form-control" id='project_select' required>
+                            <option value="" disabled selected>select a project</option>
+                            <% if (allprojects.length > 0){ %>
+                              <% allprojects.forEach(project => { %>
+                                <option><%= project.name %></option>
+                                <% }) %>
+                            <% } else { %>
+                              <p>no projects</p>
+                            <% } %>
+                          </select>
+                          </div>
+                      </div>
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                    </form>
+                  </div>
+
+
+                  <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Material Table</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Size/Description</th>
+                          <th>Cost</th>
+          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(var i=0; i< materials.length; i++){ %>
+                        <tr>
+                          <td><%= i+1 %></td>
+                          <td><%= materials[i].m_name %></td>
+                          <td><%= materials[i].m_amount %></td>
+                          <td><%= materials[i].m_cost %></td>
+                          </tr>
+                        <% } %>
+                      </tbody>                
+                    </table>
+                  </div>
+                </div>
+                
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Add new material</h3>
+                  </div>
+
+  <form  id="addNewMaterial-form" >
+    <div class="card-body">
+    
+        <div id="err_msg">
+        <!-- for error msg -->
+        </div>
+       
+      <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" class="form-control" id="m_name" name="m_name" placeholder="Enter material name" required>
+      </div>
+      <div class="form-group">
+        <label for="">Size/Description</label>
+        <input type="text" class="form-control" id="m_amount" name="m_amount" placeholder="Enter material amount" required>
+      </div>
+      <div class="form-group">
+        <label for="">Cost</label>
+        <input type="number" step="any" class="form-control" id="m_cost" name="m_cost" placeholder="Enter material cost" required>
+      </div>
+     
+     
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Add</button>
+      
+    </div>
+  </form>
+</div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                   
+                  </div>
+               
+
+                </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>All rights reserved</b>
+        </div>
+        <strong>Copyright &copy; 2021 <a>SE-Group 12</a>.</strong>
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+      </aside>
+      <!-- /.control-sidebar -->
+    </div>
+  </body>
+  <%- include('_footer') %>
+</div>
