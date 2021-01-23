@@ -28,6 +28,7 @@ class User {
         const out = await db.query(query, [id]);
         return out.rows[0];
     }
+
 }
 
 module.exports = User;
