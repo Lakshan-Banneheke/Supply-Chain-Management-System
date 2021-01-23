@@ -106,27 +106,6 @@ CREATE TABLE Stock(
 );
 
 
-CREATE TABLE Material_Order(
-    order_id SERIAL not null,
-    shop_name varchar(255) not null,
-    order_date date not null,
-    received_date date,
-    order_state varchar(255) not null,
-    primary key(order_id)
-);
-
-
-CREATE TABLE Order_Item(
-    order_item_id SERIAL not null,
-    order_id int not null,
-    material_name varchar(255) not null,
-    unit varchar(255) not null,
-    ordered_quantity int not null,
-    received_quantity int,
-    primary key(order_item_id),
-    foreign key(order_id) references Material_Order(order_id)
-
-);
 
 
 CREATE TABLE Notification(
