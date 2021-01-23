@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const RootController = require('../controllers/rootController');
+const auth = require('../config/auth');
 
+//--------------SUPERVISOR---------------
 const supervisorController = require('../controllers/supervisorController')
 
 router.get('/', RootController.root);
@@ -20,5 +22,17 @@ route.post("/consum-repot", supervisorController.renderReport)
 
 
 //-----------end supervisor-------------
+
+
+const checkAdmin = (req, res, next) => {
+    if (req.user.cat_id !== 1){
+        return next();
+    }
+    res.redirect("/admin");
+}
+
+router.get('/', auth.checkNotAuthenticated, checkAdmin ,RootController.root);
+
+
 
 module.exports = router;
