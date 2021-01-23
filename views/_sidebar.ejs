@@ -151,6 +151,38 @@
                             </li>
                         </ul>
                     </li>
+
+                    <%  } else  if (cat_id == 5 ) { %>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
+                                <p>
+                                    Store Keeper
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/store/stock" class="nav-link">
+                                        <i class="nav-icon fas fa-industry"></i>
+                                        <p>View Stock</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/store/materialrequests" class="nav-link">
+                                        <i class="nav-icon fas fa-industry"></i>
+                                        <p>Material Requests</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/store/materialorders" class="nav-link">
+                                        <i class="nav-icon fas fa-industry"></i>
+                                        <p>Material Orders</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                     <% } else if (cat_id==1) { %>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
@@ -161,6 +193,7 @@
                         </p>
                         </a>
                     </li>
+
                     <% } %>
 
                     <li class="nav-item">
@@ -176,22 +209,20 @@
                         </a>
                     </li>
 
-
-
-
-                    <li class="nav-item">
-                        <a href="users/faq" class="nav-link">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                            <p>
-                                FAQ
-                            </p>
-                        </a>
-                    </li>
-
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
+          <li class="nav-item">
+            <a href="users/faq" class="nav-link">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              <p>
+                Help
+              </p>
+            </a>
+          </li>
+          
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
     </div>
     <!-- /.sidebar -->
+
 </aside>
