@@ -413,7 +413,7 @@
                             $('#showOrder_err_msg').attr("class", 'alert alert-success text-center');
                             $('#showOrder_err_msg').attr("role", 'alert');
                             $('#order_details_table').html('');
-                            $('#sendDelete').html("");
+                            $('#sendDelete').attr("style", 'display:none');
                         }
 
                     },
@@ -446,7 +446,7 @@
                             $(msg_id).text('Order Successfully Send');
                             $(msg_id).attr("class", 'alert alert-success text-center');
                             $(msg_id).attr("role", 'alert');
-
+                            $('#sendDelete').attr("style", 'display:none');
                         }
 
                     },
