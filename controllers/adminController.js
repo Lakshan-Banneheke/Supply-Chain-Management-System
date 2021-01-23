@@ -33,8 +33,10 @@ const viewAdminEditInfo = async (req, res) => {
     res.render('adminEditInfo',{
         existing_name:req.user.name,
         existing_email:req.user.email,
-        existing_contactNum:req.user.contact_num
-        
+        existing_contactNum:req.user.contact_num,
+        changePasswordError: req.query.changePasswordError,
+
+
     });
 
     // });

@@ -109,7 +109,7 @@
                                 <!-- edit info form start -->
                     <form action="/admin/changePassword" method="post">
                         <div class="card-body">
-                            <% if(typeof changePasswordError!=='undefined') {%>
+                            <% if(changePasswordError) {%>
                                 <div class="alert alert-danger" role="alert">
                                   <%=changePasswordError%>
                                 </div>
