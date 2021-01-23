@@ -135,7 +135,7 @@
                     <% for (var i = 0; i < report.length; i++) { %>
 
                         <tr>
-                            <td class="tg-0lax" rowspan="<%= report[i][1].length +1%>"> <%= report[i][0] %></td>
+                            <td class="tg-0lax" rowspan="<%= report[i][1].length == 0 ? 1 : report[i][1].length %>"> <%= report[i][0] %></td>
                             <td class="tg-0lax"></td>
                             <td class="tg-0lax"></td>
                             <td class="tg-0lax"></td>
