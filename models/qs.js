@@ -23,12 +23,12 @@ class QS {
     
     static async saveNewEstimateTodb(project_name,estimate_materials) {
         console.log("saveNewEstimateTodb");
-        const query1=`select p_id from project where name=$1;`;
+        const query1=`select project_id from project where project_name=$1;`;
         const out1 = await db.query(query1,[project_name]);
         const p_id = out1.rows[0].p_id;
         const out2 = await db.query(`select to_char(current_date :: DATE, 'yyyy-mm-dd');`);
         const today = out2.rows[0].to_char;
-        const query3=`INSERT INTO estimate(p_id, create_date,submit_status) VALUES($1,$2,$3) RETURNING e_id;`;
+        const query3=`INSERT INTO estimate(project_id, create_date,submit_status) VALUES($1,$2,$3) RETURNING e_id;`;
         const out3 = await db.query(query3,[p_id,today,'no']);
         const e_id = out3.rows[0].e_id;
 
@@ -46,7 +46,7 @@ class QS {
 
     static async getEstimate(e_id) {
         console.log(`getEstimate`);
-        const query=`select materialvalue.m_name,materialvalue.m_amount,quantity,m_cost,estimate.p_id from estimate,est_mat,materialvalue where estimate.e_id=est_mat.e_id and est_mat.m_id=materialvalue.m_id and estimate.e_id=$1`;
+        const query=`select materialvalue.m_name,materialvalue.m_amount,quantity,m_cost,estimate.project_id from estimate,est_mat,materialvalue where estimate.e_id=est_mat.e_id and est_mat.m_id=materialvalue.m_id and estimate.e_id=$1`;
         const out = await db.query(query,[e_id]);
         return out.rows;
     }
@@ -71,34 +71,34 @@ class QS {
     
     static async getEst_Project(e_id) {
         console.log("getProject");
-        const query=`select project.p_id,project.name,project.start_date,estimate.e_id,estimate.submit_status,estimate.create_date,estimate.submit_date from estimate,project where estimate.p_id=project.p_id and estimate.e_id=$1`;
+        const query=`select project.project_id,project.project_name,project.start_date,estimate.e_id,estimate.submit_status,estimate.create_date,estimate.submit_date from estimate,project where estimate.project_id=project.project_id and estimate.e_id=$1`;
         const out = await db.query(query,[e_id]);
         return out.rows;
     }
     static async getAllProjects() {
         console.log("getProject");
-        const query=`select p_id,name,start_date from project;`;
+        const query=`select project_id,project_name,start_date from project;`;
         const out = await db.query(query);
         return out.rows;
     }
 
     static async ViewProjects(from_date,to_date) {
         console.log("viewProject");
-        const query=`select p_id,name,TO_CHAR(start_date :: DATE,'yyyy-mm-dd'),duration from project where start_date between $1 and $2;`;
+        const query=`select project_id,project_name,TO_CHAR(start_date :: DATE,'yyyy-mm-dd'),duration from project where start_date between $1 and $2;`;
         const out = await db.query(query,[from_date,to_date]);
         return out.rows;
     }
 
     static async getProjectIdFromName(name) {
         console.log("getProjectId");
-        const query=`SELECT p_id FROM project WHERE name = $1`;
+        const query=`SELECT project_id FROM project WHERE project_name = $1`;
         const out = await db.query(query,[name]);
         return out.rows[0].p_id;
     }
 
     static async getProjectEstimations(p_id) {
         console.log("estimationsOfProject");
-        const query=`SELECT * FROM Estimate where p_id = $1;`;
+        const query=`SELECT * FROM Estimate where project_id = $1;`;
         const out = await db.query(query,[p_id]);
         return out.rows;
     }
@@ -116,8 +116,8 @@ class QS {
         if(similarProject != ""){
             throw ('This project name is alrredy there, please choose an another name.');
         }else{
-        const query=`INSERT INTO project(name, start_date, duration) VALUES($1,$2,$3)`;
-        const out = await db.query(query,[project_name,project_startDate, project_duration]);
+        const query=`INSERT INTO project(project_name, start_date) VALUES($1,$2)`;
+        const out = await db.query(query,[project_name,project_startDate]);
         return out.rows;
         }
     }
