@@ -1,19 +1,19 @@
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Vehicles', child: 'Vehicle Brands'} }) %>
 <!-- header-section end -->
 
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title">DataTable with default features</h3>
+      <h3 class="card-title">Brands</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>#</th>
+            <th style="width: 40px">#</th>
             <th>Brand</th>
-            <th>Action</th>
+            <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -22,9 +22,9 @@
             <tr data-id="<%= row.id %>">
               <td><%= count++ %></td>
               <td><%= row.title %></td>
-              <td>
-                <a href="/fleet-management/" class="edit-pop"><i class="fas fa-edit"></i></button>
-                <a href="/fleet-management/brands/del/<%= row.id %>"><i class="fas fa-trash-alt"></i></button>
+              <td class="text-center">
+                <a href="/fleet-management/" class="edit-pop"><i class="fas fa-edit"></i></a>
+                <a href="/fleet-management/brands/del/<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           <% }) %>
@@ -33,7 +33,7 @@
         <tr>
           <th>#</th>
           <th>Brand</th>
-          <th>Action</th>
+          <th class="text-center">Action</th>
         </tr>
         </tfoot>
       </table>
@@ -42,7 +42,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">New Brand</span>
           </div>
-          <input type="text" class="form-control" placeholder="Brand Name" name="brandname">
+          <input type="text" class="form-control" placeholder="Brand Name" name="brandname" required>
           <div class="input-group-append col-5">
             <button type="submit" class="btn btn-primary">Add</button>
           </div>
