@@ -23,6 +23,11 @@ class Admin {
         const out = await db.query(query, [new_name, new_email,new_contact_num,id]);
         return out.rows[0];
     }
+    static async changePassword(hashed_new_password,id) {
+        const query = `UPDATE user_profile SET password= $1 WHERE user_id = $2`;
+        const out = await db.query(query, [hashed_new_password,id]);
+        return out.rows[0];
+    }
 }
 
 module.exports = Admin;

@@ -22,11 +22,13 @@ const editInfo = Joi.object().options({abortEarly: false}).keys({
         new_email: Joi.string().email().required().label('Email'),
         new_contact_num : Joi.string().required().label('Contact Number')
     });
+
 const changePassword = Joi.object().options({abortEarly: false}).keys({
     new_password: Joi.string().required().label('New Password'),
     confirm_new_password: Joi.string().required().label('New Password Confirmation'),
     old_password : Joi.string().required().label('Old Password')
 });
+
 module.exports = {
     register,
     login,
