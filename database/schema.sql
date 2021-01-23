@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS Stock CASCADE;
 DROP TABLE IF EXISTS Material_Order CASCADE;
 DROP TABLE IF EXISTS Order_Item CASCADE;
 DROP TABLE IF EXISTS Notification CASCADE;
+DROP TABLE IF EXISTS project CASCADE;
+DROP TABLE IF EXISTS project_section CASCADE;
 
 
 DROP DOMAIN IF EXISTS UUID4 CASCADE;
@@ -52,28 +54,45 @@ CREATE TABLE User_Category (
   PRIMARY KEY (cat_id)
 );
 
+CREATE TABLE project (
+    project_id SERIAL not null,
+    project_name varchar(255) NOT NULL,
+    PRIMARY KEY (project_id)
+);
 
-CREATE TABLE Site_Request(
-    request_id SERIAL NOT NULL,
-    project_id int,
-    section_id int,
-    user_id varchar(255),
-    request_state varchar(255) not null,
-    request_date date,
-    issue_date date,
-    primary key (request_id)
+CREATE TABLE project_section (
+    section_id SERIAL not null,
+    section_name varchar(255) NOT NULL,
+    project_id int NOT NULL,
+    PRIMARY KEY (section_id),
+    FOREIGN KEY (project_id) REFERENCES project(project_id)
+);
+
+CREATE TABLE site_request (
+    request_id SERIAL not null,
+    project_id int NOT NULL,
+    section_id int NOT NULL,
+    user_id uuid4 NOT NULL,
+    request_state  varchar(20),
+    request_date  DATE NOT NULL,
+    issue_date DATE ,
+    request_note varchar(255),
+
+    PRIMARY KEY (request_id),
+    FOREIGN KEY (section_id) REFERENCES project_section(section_id),
+    FOREIGN KEY (project_id) REFERENCES project(project_id),
+    FOREIGN KEY (user_id) REFERENCES user_profile(user_id)
 );
 
 
-CREATE TABLE Material_Request(
---     material_request_id SERIAL not null,
+CREATE TABLE material_request (
+    mr_id SERIAL not null,
     request_id int NOT NULL,
-    material_name varchar(255) not null,
-    unit varchar(255) not null,
-    requested_quntity int not null,
-    received_quantity int,
---     primary key(material_request_id),
-    foreign key(request_id) references Site_Request(request_id) ON DELETE CASCADE ON UPDATE CASCADE
+    material_name varchar(255) NOT NULL,
+    requested_quantity int NOT NULL,
+    received_quantity int ,
+    PRIMARY KEY (mr_id),
+    FOREIGN KEY (request_id) REFERENCES site_request(request_id)
 );
 
 
@@ -131,7 +150,6 @@ CREATE TABLE User_Profile (
   PRIMARY KEY (user_id),
   FOREIGN KEY (cat_id) REFERENCES User_Category(cat_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 
 
 --------------------------Procedures------------------------
@@ -245,4 +263,6 @@ GRANT ALL ON TABLE public.Stock to db_app;
 GRANT ALL ON TABLE public.Material_Order to db_app;
 GRANT ALL ON TABLE public.Order_Item to db_app;
 GRANT ALL ON TABLE public.Notification to db_app;
+GRANT ALL ON TABLE public.project to db_app;
+GRANT ALL ON TABLE public.project_section to db_app;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;

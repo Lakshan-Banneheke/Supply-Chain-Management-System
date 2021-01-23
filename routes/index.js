@@ -13,6 +13,11 @@ router.use('/fleet-management', auth.checkFleetManager,  (req, res, next)=>{
     next();
 },require('./fleet'));
 
+router.use('/supervisor', auth.checkSupervisor, (req, res, next)=>{
+    res.set("Content-Security-Policy", "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'");
+    next();
+}, require('./supervisor'));
+
 router.get('/405', errors.error405);
 
 router.use(errors.error404);

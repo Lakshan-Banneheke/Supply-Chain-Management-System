@@ -49,6 +49,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.5.1",
     "postgres": "^1.0.2",
+    "table-to-json": "^1.0.0",
     "winston": "^3.3.3",
     "xo": "^0.37.1"
   },
