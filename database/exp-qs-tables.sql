@@ -11,12 +11,11 @@ DROP TABLE IF EXISTS Req_Mac CASCADE;
 ------------------ Tables --------------------
 
 ---expedi/qs ----
-CREATE TABLE Project (
-  P_id SERIAL,
-  name varchar(30) NOT NULL,
+CREATE TABLE project (
+  project_id SERIAL,
+  project_name varchar(255) NOT NULL,
   start_date date,
-  duration varchar(30),
-  PRIMARY KEY (P_id)
+  PRIMARY KEY (project_id)
 );
 
 CREATE TABLE Estimate (
