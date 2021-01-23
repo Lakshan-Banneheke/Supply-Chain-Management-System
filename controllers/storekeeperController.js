@@ -1,8 +1,5 @@
 const storekeeperModel = require('../models/storekeeperModel')
 
-var loggedUser = 'Pasan Madushan'
-
-
 var passNotification = []
 var notificationView = ''
 
@@ -28,7 +25,7 @@ const renderDashboard = async(req,res)=> {
     passNotification = notifications;
     notificationView = "/"
     res.render('dashboard', {
-            name:loggedUser,
+            name:req.user.name,
             notifications:notifications,
             not_dates:not_dates
         });
@@ -41,7 +38,7 @@ const renderStock = async(req,res)=>{
     passNotification = notifications;
     notificationView = "/store/stock"
     res.render('stock',{
-            name:loggedUser,
+            name:req.user.name,
             notifications:notifications,
             stocks: await storekeeperModel.getStock(),
             not_dates:not_dates
@@ -52,7 +49,7 @@ const renderStock = async(req,res)=>{
 
 const renderStockUpdate = async(req,res) =>{
     res.render('stockupdates',{
-        name:loggedUser,
+        name:req.user.name,
         materialOrders: await storekeeperModel.getStockUpdateRequests()
     });
 }
@@ -82,7 +79,7 @@ const renderMaterialRequests = async (req,res) =>{
     }
 
     res.render('materialrequests',{
-        name:loggedUser,
+        name:req.user.name,
         materialRequests: material_req,
         request_dates:req_dates,
         count_req:count_req.count,
@@ -119,7 +116,7 @@ const renderMaterialRequestView  = async (req,res) =>{
     let req_det = await storekeeperModel.getMaterialRequestByID(req_id);
 
     res.render('materialrequestview',{
-        name:loggedUser,
+        name:req.user.name,
         materials: req_materials,
         req_det:req_det[0],
         req_id:req_id
@@ -140,7 +137,7 @@ const handleReqSubmission = async (req,res) => {
     if(availability.length==0){
 
         res.render('materialrequestsuccessview',{
-            name:loggedUser,
+            name:req.user.name,
             materials: req_materials,
             req_det:req_det[0],
             req_id:id,
@@ -157,7 +154,7 @@ const handleReqSubmission = async (req,res) => {
         let available_materials = await storekeeperModel.getMaterialsStocks(id);
 
         res.render('materialrequestrevisionview',{
-            name:loggedUser,
+            name:req.user.name,
             materials:req_materials,
             req_det:req_det[0],
             req_id:id,
@@ -243,7 +240,7 @@ const renderMaterialOrders = async (req,res) =>{
     }
 
     res.render('materialorders',{
-        name:loggedUser,
+        name:req.user.name,
         orders: orders,
         order_dates:ord_dates,
         all_ord:all_orders.count,
@@ -278,7 +275,7 @@ const renderMaterialOrderView  = async (req,res) =>{
     let req_det = await storekeeperModel.getOrderByID(req_id);
 
     res.render('materialorderview',{
-        name:loggedUser,
+        name:req.user.name,
         materials: req_materials,
         req_det:req_det[0],
         req_id:req_id
@@ -294,7 +291,7 @@ const renderChangeMaterialOrderView = async(req,res) =>{
     let req_det = await storekeeperModel.getOrderByID(req_id);
     res.render('materialorderchangeview',
         {
-            name:loggedUser,
+            name:req.user.name,
             materials: req_materials,
             req_det:req_det[0],
         })
