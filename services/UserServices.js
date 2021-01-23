@@ -29,7 +29,7 @@ class UserService {
     }
 
     static async login({ email, password }) {
-        console.log("user service login called");
+        //console.log("user service login called");
         const user = await User.getRegisteredUserByEmail(email);
         return user;
 
@@ -51,7 +51,7 @@ class UserService {
         //
         // return user;
     }
-
+   
     // eslint-disable-next-line no-empty-function
     static async logout() {}
 }

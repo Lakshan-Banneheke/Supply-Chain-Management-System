@@ -15,84 +15,43 @@
     
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-          <!-- Navbar Search -->
-          <!--<li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-              <i class="fas fa-search"></i>
-            </a>
-            <div class="navbar-search-block">
-              <form class="form-inline">
-                <div class="input-group input-group-sm">
-                  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                  <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </li>-->
+
     
           <!-- Messages Dropdown Menu -->
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="far fa-comments"></i>
-              <span class="badge badge-danger navbar-badge">3</span>
+              <span class="badge badge-danger navbar-badge"> <%= notifications.length %> </span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <a href="#" class="dropdown-item">
+
                 <!-- Message Start -->
-                <div class="media">
-                  <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <% for (var i=0;i<notifications.length;i++){  %>
+
+                <div class="media p-3">
                   <div class="media-body">
                     <h3 class="dropdown-item-title">
-                      Brad Diesel
-                      <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                    From:  <%= notifications[i].from_designation %>
                     </h3>
-                    <p class="text-sm">Call me whenever you can...</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                    <p class="text-sm">  <%= notifications[i].message %> </p>
+                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>  <%= not_dates[i]  %> </p>
                   </div>
                 </div>
                 <!-- Message End -->
-              </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <!-- Message Start -->
-                <div class="media">
-                  <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      John Pierce
-                      <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">I got your message bro</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- Message End -->
+
+              <% } %>
               </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <!-- Message Start -->
-                <div class="media">
-                  <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                  <div class="media-body">
-                    <h3 class="dropdown-item-title">
-                      Nora Silvester
-                      <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                    </h3>
-                    <p class="text-sm">The subject goes here</p>
-                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                  </div>
-                </div>
-                <!-- Message End -->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+              <div class="dropdown-divider" ></div>
+
+              <form action="/store/markasread" method="POST" >
+
+                <% if(notifications.length>0){ %>
+                  <button  class="btn" type="submit">Mark As Read</button>
+                <% } else{ %>
+                  <div class="p-2"><p>No Notifications</p></div>
+                <% } %>
+              </form>
             </div>
           </li>
          
@@ -124,7 +83,48 @@
         </section>
     
         <!-- Main content -->
-        <%if (cat_id == 4) { %>
+
+
+        <% if (cat_id == 2) { %>
+          <section class="content">
+            <div class="container-fluid">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                  <h3 class="card-title">Quantity Surveyor</h3>
+                </div> <!-- /.card-body -->
+                <div class="card-body">
+                  <div>
+                    <a id="nav_t_1" href="qs/estimation"> Create Estimation </a><br>
+                    <a id="nav_t_2" href="qs/estimationView">View Estimation</a><br>
+                    <a id="nav_t_3" href="qs/createProject">Create Project</a><br>
+
+                  </div>
+                </div><!-- /.card-body -->
+              </div>
+            </div><!-- /.container-fluid -->
+          </section>
+
+        <% }  else if (cat_id == 3) { %>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Expeditor</h3>
+              </div> <!-- /.card-body -->
+              <div class="card-body">
+                <div>
+                  <a href="expeditor/sendRequest">Send Request</a><br>
+                  <a href="expeditor/order">Order</a><br>
+                  <a href="expeditor/usedMaterial">Get Report</a><br>
+
+                </div>
+              </div><!-- /.card-body -->
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+
+
+        <% } else if (cat_id == 4) { %>
         <section class="content">
           <div class="container-fluid">
             <div class="card card-primary card-outline">
@@ -140,26 +140,41 @@
             </div>
           </div><!-- /.container-fluid -->
         </section>
-    <% } else { %>
-
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">Tasks</h3>
-              </div> <!-- /.card-body -->
-              <div class="card-body">
-                <p>Add your tasks buttons/ report summary or anything here</p>
-                <strong>and link to side nav bar</strong>
-                <div>
-                  <a href="#">Task1</a><br>
-                  <a href="#">Task2</a><br>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
-        <%}%>
+        
+        
+      <% } else if (cat_id == 5){ %>
+           <h3 class="card-title">Store Keeper</h3>
+                </div> <!-- /.card-body -->
+                <div class="card-body">
+                  <div>
+                    <a href="/store/stock">View Stock</a><br>
+                    <a href="/store/materialrequests">Material Requests</a><br>
+                    <a href="/store/materialorders">Material Orders</a><br>
+                    /div>
+                </div><!-- /.card-body -->
+              </div>
+            </div><!-- /.container-fluid -->
+          </section>
+        
+        
+        <% } else if (cat_id == 6) { %>
+          <section class="content">
+            <div class="container-fluid">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                  <h3 class="card-title">Fleet Manager</h3>
+                </div> <!-- /.card-body -->
+                <div class="card-body">
+                  <div>
+                    <a href="/fleet-management/brands">Vehicle Brands</a><br>
+                    <a href="/fleet-management/vehicles">Vehicles</a><br>
+                    <a href="/fleet-management/supplies">Supplies</a><br>
+                  </div>
+                </div><!-- /.card-body -->
+              </div>
+            </div><!-- /.container-fluid -->
+          </section>
+        <% } %>
 
         <!-- /.content -->
       </div>
