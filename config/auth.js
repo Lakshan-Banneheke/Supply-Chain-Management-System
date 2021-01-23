@@ -36,7 +36,7 @@ const checkExpeditor = (req, res, next) => {
     }
 }
 
-const checkOnSite = (req, res, next) => {
+const checkSupervisor = (req, res, next) => {
     if (req.isAuthenticated()){
         if (req.user.cat_id === 4){
             return next();
@@ -78,7 +78,7 @@ module.exports = {
     checkNotAuthenticated,
     checkQS,
     checkExpeditor,
-    checkOnSite,
+    checkSupervisor,
     checkStorekeeper,
     checkFleetManager
 }
