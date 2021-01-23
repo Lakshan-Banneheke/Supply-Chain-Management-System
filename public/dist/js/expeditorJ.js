@@ -48,7 +48,7 @@
                                     table += `
                                     <tr>
                                         <td>${num + 1}</td>
-                                        <td>${order.o_id}</td>
+                                        <td>${order.order_id}</td>
                                         <td>${order.shop_name}</td>`;
                                         if(order.order_date!==null){
                                             table += `<td>${order.order_date.substring(0, 8)}${order.order_date.substring(8, 10)*1 + 1}</td>`;
@@ -171,7 +171,7 @@
                                     <td>${num + 1}</td>
                                     <td>${order_item.m_name}</td>
                                     <td>${order_item.m_amount}</td>
-                                    <td>${order_item.quantity}</td>
+                                    <td>${order_item.ordered_quantity}</td>
                                   
                                 </tr>
                                 `;
