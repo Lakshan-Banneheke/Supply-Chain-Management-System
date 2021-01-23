@@ -136,31 +136,7 @@
           </ul>
         </li-->
 
-        <% menus.forEach( menu => { %>
-          <li class="nav-item <%= (menu.title===current_menu.parent)?'menu-open':'' %>">
-            <a href="<%= menu.href %>" class="nav-link <%= (menu.title===current_menu.parent)?'active':'' %>">
-              <i class="nav-icon <%= menu.icon %>"></i>
-              <p>
-                <%= menu.title %>
-                <% if(menu.children){ %>
-                  <i class="right fas fa-angle-left"></i>
-                <% } %>
-              </p>
-            </a>
-            <% if(menu.children){ %>
-              <ul class="nav nav-treeview">
-                <% menu.children.forEach( child => { %>
-                  <li class="nav-item">
-                    <a href="<%= child.href %>" class="nav-link <%= (menu.title===current_menu.parent&&child.title===current_menu.child)?'active':'' %>">
-                      <i class="nav-icon <%= child.icon %>"></i>
-                      <p><%= child.title %></p>
-                    </a>
-                  </li>
-                <% }) %>
-              </ul>
-            <% } %>
-          </li>
-        <% }) %>
+
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -251,35 +227,31 @@
                         </ul>
                     </li>
                     <% } else if(cat_id==6) { %>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tractor"></i>
-                            <p>
-                                Fleet Management
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/fleet-management/brands" class="nav-link">
-                                    <i class="nav-icon fas fa-align-left"></i>
-                                    <p>Vehicle Brands</p>
+                        <% menus.forEach( menu => { %>
+                            <li class="nav-item <%= (menu.title===current_menu.parent)?'menu-open':'' %>">
+                                <a href="<%= menu.href %>" class="nav-link <%= (menu.title===current_menu.parent)?'active':'' %>">
+                                    <i class="nav-icon <%= menu.icon %>"></i>
+                                    <p>
+                                        <%= menu.title %>
+                                        <% if(menu.children){ %>
+                                            <i class="right fas fa-angle-left"></i>
+                                        <% } %>
+                                    </p>
                                 </a>
+                                <% if(menu.children){ %>
+                                    <ul class="nav nav-treeview">
+                                        <% menu.children.forEach( child => { %>
+                                            <li class="nav-item">
+                                                <a href="<%= child.href %>" class="nav-link <%= (menu.title===current_menu.parent&&child.title===current_menu.child)?'active':'' %>">
+                                                    <i class="nav-icon <%= child.icon %>"></i>
+                                                    <p><%= child.title %></p>
+                                                </a>
+                                            </li>
+                                        <% }) %>
+                                    </ul>
+                                <% } %>
                             </li>
-                            <li class="nav-item">
-                                <a href="/fleet-management/vehicles" class="nav-link">
-                                    <i class="nav-icon fas fa-tractor"></i>
-                                    <p>Vehicles</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/fleet-management/supplies" class="nav-link">
-                                    <i class="nav-icon fas fa-truck-loading"></i>
-                                    <p>Supplies</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <% }) %>
 
                     <%  } else  if (cat_id == 5 ) { %>
                         <li class="nav-item menu-open">
