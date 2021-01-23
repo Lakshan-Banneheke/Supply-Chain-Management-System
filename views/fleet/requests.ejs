@@ -1,11 +1,10 @@
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Vehicles', child: 'Vehicles'} }) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Requests', child: ''} }) %>
 <!-- header-section end -->
 
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Vehicles</h3>
-      <a class="btn btn-primary float-right" href="/fleet-management/vehicles/new">Add new vehicle</a>
+      <h3 class="card-title">Supply Requests</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -13,11 +12,12 @@
         <thead>
           <tr>
             <th style="width: 40px">#</th>
-            <th>Title</th>
-            <th>Plate Number</th>
-            <th>Brand</th>
-            <th>Registrations</th>
+            <th>Reference</th>
+            <th>Created</th>
+            <th>From</th>
+            <th>To</th>
             <th>Remarks</th>
+            <th>Address</th>
             <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </thead>
@@ -26,14 +26,21 @@
           <% result.forEach( row => { %>
             <tr data-id="<%= row.id %>">
               <td><%= count++ %></td>
-              <td><%= row.title %></td>
-              <td><%= row.plate_number %></td>
-              <td><%= row.brand %></td>
-              <td><%= row.registrations %></td>
+              <td><%= row.reference %></td>
+              <td><%= dateformat(row.created, 'dd/mm/yyyy') %></td>
+              <td><%= dateformat(row.from_date, 'dd/mm/yyyy') %></td>
+              <td><%= dateformat(row.to_date, 'dd/mm/yyyy') %></td>
               <td><%= row.remarks %></td>
-              <td class="text-center">
-                <a href="/fleet-management/vehicles/edit/<%= row.id %>"><i class="fas fa-edit"></i></a>
-                <a href="/fleet-management/vehicles/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
+              <td><%= row.address %></td>
+              <td class="text-center d-flex">
+                <form method="post" action="/fleet-management/requests/">
+                  <input type="hidden" name="action" value="approve">
+                  <button type="submit" class="btn btn-success mr-3" name="id" value="<%= row.id %>">Approve</button>
+                </form>
+                <form method="post" action="/fleet-management/requests/">
+                  <input type="hidden" name="action" value="reject">
+                  <button type="submit" class="btn btn-danger" name="id" value="<%= row.id %>">Reject</button>
+                </form>
               </td>
             </tr>
           <% }) %>
@@ -41,11 +48,12 @@
         <tfoot>
           <tr>
             <th>#</th>
-            <th>Title</th>
-            <th>Plate Number</th>
-            <th>Brand</th>
-            <th>Registrations</th>
+            <th>Reference</th>
+            <th>Created</th>
+            <th>From</th>
+            <th>To</th>
             <th>Remarks</th>
+            <th>Address</th>
             <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </tfoot>
@@ -78,4 +86,4 @@
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
-  </script>
+</script>

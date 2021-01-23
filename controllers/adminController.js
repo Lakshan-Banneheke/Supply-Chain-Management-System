@@ -6,7 +6,6 @@ const viewAdminDashboard = async (req, res) => {
     res.render('adminDashboard', {
         name: req.user.name,
         unverifiedUsers : unverifiedUsers,
-        cat_id: req.user.cat_id
     });
 }
 
