@@ -35,6 +35,7 @@ const viewAdminEditInfo = async (req, res) => {
         existing_email:req.user.email,
         existing_contactNum:req.user.contact_num,
         changePasswordError: req.query.changePasswordError,
+        editInfoError:req.query.editInfoError
 
 
     });
@@ -50,7 +51,7 @@ const editInfo = async (req, res) => {
         //console.log(typeof value);
         //console.log(value);
         await adminService.editInfo(value);
-        //return res.status(200).send({result: 'redirect', url: '/admin'});
+        //return res.status(200).send({result: 'redirect', url: '/admin/'});
         
         res.redirect('/admin');
     } catch (err){
