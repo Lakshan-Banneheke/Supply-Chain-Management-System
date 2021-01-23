@@ -1,25 +1,23 @@
+DROP TABLE IF EXISTS Est_Mat CASCADE;
+DROP TABLE IF EXISTS Estimate CASCADE;
+DROP TABLE IF EXISTS Order_item CASCADE;
+DROP TABLE IF EXISTS MaterialValue CASCADE;
+DROP TABLE IF EXISTS Material_Order CASCADE;
+DROP TABLE IF EXISTS Material_Request CASCADE;
+DROP TABLE IF EXISTS Site_Request CASCADE;
 DROP TABLE IF EXISTS User_Profile CASCADE;
 DROP TABLE IF EXISTS User_Category CASCADE;
-DROP TABLE IF EXISTS Site_Request CASCADE;
-DROP TABLE IF EXISTS Material_Request CASCADE;
-DROP TABLE IF EXISTS Stock CASCADE;
-DROP TABLE IF EXISTS Material_Order CASCADE;
-DROP TABLE IF EXISTS Order_Item CASCADE;
-DROP TABLE IF EXISTS Notification CASCADE;
-DROP TABLE IF EXISTS project CASCADE;
 DROP TABLE IF EXISTS project_section CASCADE;
-DROP TABLE IF EXISTS brands CASCADE;
-DROP TABLE IF EXISTS vehicles CASCADE;
-DROP TABLE IF EXISTS supplies CASCADE;
-DROP TABLE IF EXISTS supply_items CASCADE;
-DROP TABLE IF EXISTS Estimate CASCADE;
-DROP TABLE IF EXISTS MaterialValue CASCADE;
-DROP TABLE IF EXISTS Est_Mat CASCADE;
-DROP TABLE IF EXISTS Material_Order CASCADE;
-DROP TABLE IF EXISTS Order_items CASCADE;
-DROP TABLE IF EXISTS Machine_Request CASCADE;
-DROP TABLE IF EXISTS Machine CASCADE;
 DROP TABLE IF EXISTS Req_Mac CASCADE;
+DROP TABLE IF EXISTS Machine CASCADE;
+DROP TABLE IF EXISTS Machine_Request CASCADE;
+DROP TABLE IF EXISTS project CASCADE;
+DROP TABLE IF EXISTS supply_items CASCADE;
+DROP TABLE IF EXISTS supplies CASCADE;
+DROP TABLE IF EXISTS vehicles CASCADE;
+DROP TABLE IF EXISTS brands CASCADE;
+DROP TABLE IF EXISTS Notification CASCADE;
+DROP TABLE IF EXISTS Stock CASCADE;
 
 
 DROP DOMAIN IF EXISTS UUID4 CASCADE;
@@ -167,9 +165,9 @@ CREATE TABLE Material_Order(
     project_id int not null,
     shop_name varchar(255) not null,
     order_date date,
-    received_date date,
-    order_state varchar(255) not null,
     ordered boolean,
+    order_state varchar(255) not null,
+    received_date date,
     primary key(order_id),
     FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -349,9 +347,10 @@ INSERT INTO project(project_name,start_date) VALUES ('First project','2021-01-01
 INSERT INTO project(project_name,start_date) VALUES ('Second project','2021-01-05');
 INSERT INTO project(project_name,start_date) VALUES ('Third project','2021-01-15');
 
-
+INSERT INTO project_section(section_name,project_id) VALUES ('Floor',1);
 INSERT INTO project_section(section_name,project_id) VALUES ('Roof',1);
-
+INSERT INTO project_section(section_name,project_id) VALUES ('Floor',2);
+INSERT INTO project_section(section_name,project_id) VALUES ('Roof',2);
 
 INSERT INTO estimate(project_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-02','1','2021-01-05');
 INSERT INTO estimate(project_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-06','1','2021-01-09');
@@ -376,66 +375,11 @@ INSERT INTO est_mat(e_id,m_id,quantity) VALUES (4,1,6);
 --------------------------------------------------------
 
 
+
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Cement',100,'pct');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Sand',100,'cube');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Plate',100,'pcs');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Nuts and balts',100,'pcs');
-
-INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha1 constructions','2020-10-12','2020-11-12','not complete');
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Sand','cube',10);
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Plate','pcs',5);
-
-INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('lakshan1 constructions','2020-10-12','2020-11-12','not complete');
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Cement','pct',10);
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Nuts and balts','pcs',5);
-
-INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha2 constructions','2020-10-12','2020-11-12','not complete');
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Sand','cube',10);
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Plate','pcs',5);
-
-INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha3 constructions','2020-10-12','2020-11-12','not complete');
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Sand','cube',10);
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Plate','pcs',5);
-
-INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha4 constructions','2020-10-12','2020-11-12','not complete');
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Sand','cube',10);
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Plate','pcs',5);
-
-INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha5 constructions','2020-10-12','2020-11-12','not complete');
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Sand','cube',10);
-INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Plate','pcs',5);
-
------------------------
-
-
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Sand','pct',10);
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Plate','pcs',5);
-
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Sand','pct',10);
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Plate','pcs',5);
-
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Sand','pct',10);
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Plate','pcs',5);
-
-
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Cement','pcs',100);
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Nuts and balts','pcs',10);
-
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Cement','pcs',100);
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Nuts and balts','pcs',10);
-
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Cement','pcs',100);
-INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Nuts and balts','pcs',10);
-
-
------------------------------------------_______-------------
-
 
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor1','storekeeper','unread','expeditor1','2020-12-20');
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor2','expeditor','unread','expeditor2','2020-12-20');
@@ -443,28 +387,83 @@ INSERT INTO Notification(message,to_designation,state,from_designation,date) VAL
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor4','storekeeper','unread','expeditor4','2020-12-20');
 
 
+------------------------error------------------------------------
+------------------------------------------------------------
+
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha1 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Plate','pcs',5);
+
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('lakshan1 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Cement','pct',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Nuts and balts','pcs',5);
+
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha2 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Plate','pcs',5);
+
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha3 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Plate','pcs',5);
+
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha4 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Plate','pcs',5);
+
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha5 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Plate','pcs',5);
+
+-----------------------
+
+
+-- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Sand','pct',10);
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Plate','pcs',5);
+
+-- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Sand','pct',10);
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Plate','pcs',5);
+
+-- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Sand','pct',10);
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Plate','pcs',5);
+
+
+-- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Cement','pcs',100);
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Nuts and balts','pcs',10);
+
+-- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Cement','pcs',100);
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Nuts and balts','pcs',10);
+
+-- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Cement','pcs',100);
+-- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Nuts and balts','pcs',10);
+
+
+
+
 ------------------Priviledges----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;
+GRANT ALL ON TABLE public.project to db_app;
+GRANT ALL ON TABLE public.project_section to db_app;
+GRANT ALL ON TABLE public.Estimate to db_app;
+GRANT ALL ON TABLE public.Est_Mat to db_app;
+GRANT ALL ON TABLE public.MaterialValue to db_app;
 GRANT ALL ON TABLE public.Site_Request to db_app;
 GRANT ALL ON TABLE public.Material_Request to db_app;
 GRANT ALL ON TABLE public.Stock to db_app;
 GRANT ALL ON TABLE public.Material_Order to db_app;
 GRANT ALL ON TABLE public.Order_Item to db_app;
 GRANT ALL ON TABLE public.Notification to db_app;
-GRANT ALL ON TABLE public.project to db_app;
-GRANT ALL ON TABLE public.project_section to db_app;
 GRANT ALL ON TABLE public.brands to db_app;
 GRANT ALL ON TABLE public.vehicles to db_app;
 GRANT ALL ON TABLE public.supplies to db_app;
 GRANT ALL ON TABLE public.supply_items to db_app;
-
-GRANT ALL ON TABLE public.Project to db_app;
-GRANT ALL ON TABLE public.Estimate to db_app;
-GRANT ALL ON TABLE public.MaterialValue to db_app;
-GRANT ALL ON TABLE public.Est_Mat to db_app;
 GRANT ALL ON TABLE public.Material_Order to db_app;
-GRANT ALL ON TABLE public.Order_items to db_app;
 GRANT ALL ON TABLE public.Machine_Request to db_app;
 GRANT ALL ON TABLE public.Machine to db_app;
 GRANT ALL ON TABLE public.Req_Mac to db_app;
