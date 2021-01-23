@@ -243,21 +243,6 @@ INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VA
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Nuts and balts','pcs',10);
 
 
-INSERT INTO project (project_id, project_name)
-VALUES (1, 'Panadura Hotel'),(2, 'Colombo Office'),(3, 'Kalutara House');
-
-
-INSERT INTO project_section (section_id,section_name,project_id)
-VALUES (1, 'Foundation1',1),(2, 'first floor1',1),(3, 'roof1',1),(4, 'Foundation2',2),(5, 'roof2',2),(6, 'first floor3',3),(7, 'Window',3);
-
-
-
-INSERT INTO stock (stock_id,material_name,material_quantity,unit)
-VALUES (1, 'Sand',5,'Tipper'),(2, 'Cement',10,'Packet'),(3, 'Briks',6,'Tipper'),(4, 'Stone',5,'Tipper'),(5, 'Wood',10,'Honder'),(6, 'Tile',6,'10Packet'),(7, 'Steel',10,'Rods');
-
-
-
-
 -----------------------------------------------------
 
 
