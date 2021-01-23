@@ -17,9 +17,9 @@ router.use('/supervisor', auth.checkSupervisor, (req, res, next)=>{
     res.set("Content-Security-Policy", "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'");
     next();
 }, require('./supervisor'));
-
-router.use('/store', require('./store'));
-
+router.use('/store', auth.checkStorekeeper, require('./store'));
+router.use('/expeditor', auth.checkExpeditor, require('./expeditor'));
+router.use('/qs', auth.checkQS, require('./quantity_s'));
 router.get('/405', errors.error405);
 
 router.use(errors.error404);

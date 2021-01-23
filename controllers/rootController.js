@@ -1,7 +1,6 @@
 const userService = require('../services/UserServices')
 const storekeeperModel = require('../models/storekeeperModel')
 
-
 var passNotification = []
 var notificationView = ''
 
