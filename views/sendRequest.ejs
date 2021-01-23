@@ -106,7 +106,102 @@
       </nav>
       <!-- /.navbar -->
  
-          <%- include('_sidebar') %>
+          <!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+        
+    <a href="/" class="brand-link">
+      <img src="../../dist/img/AdminLTELogo.png" alt="Company Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">ABC Company</span>
+    </a>
+
+    
+    <div class="sidebar">
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar-new">
+<!-- Sidebar user panel (optional) -->
+<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+  <div class="image">
+    <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+  </div>
+  <div class="info">
+    <a class="d-block">Hello <%= name %></a>
+  </div>
+</div>
+
+<!-- SidebarSearch Form -->
+<div class="form-inline">
+  <div class="input-group" data-widget="sidebar-search">
+    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+    <div class="input-group-append">
+      <button class="btn btn-sidebar">
+        <i class="fas fa-search fa-fw"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+
+<nav class="mt-2">
+  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <!-- Add icons to the links using the .nav-icon class
+         with font-awesome or any other icon font library -->
+    <li class="nav-item menu-open">
+      <a href="#" class="nav-link active">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Tasks
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>Send Request</p>
+          </a>
+
+        </li>
+        <li class="nav-item">
+          <a href="order" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>Order</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="usedMaterial" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>Get Report</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item">
+        <a href="../users/logout" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+          <p>
+            Log out
+          </p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="../users/faq" class="nav-link">
+            <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <p>
+            FAQ
+          </p>
+        </a>
+      </li>
+      
+  </ul>
+</nav>
+<!-- /.sidebar-menu -->
+</div>
+    </div>
+<!-- /.sidebar -->
+</aside>
       
     
       <!-- Content Wrapper. Contains page content -->
@@ -117,90 +212,30 @@
             <div class="row mb-2">
               <div class="col-sm-12">
                 <!-- <h1>Icons</h1> -->
-                <%- include('_card') %>
+                <!-- <%- include('_card') %> -->
               </div>
             </div>
           </div><!-- /.container-fluid -->
         </section>
     
         <!-- Main content -->
-
-
-        <% if (cat_id == 2) { %>
-          <section class="content">
-            <div class="container-fluid">
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h3 class="card-title">Quantity Surveyor</h3>
-                </div> <!-- /.card-body -->
-                <div class="card-body">
-                  <div>
-                    <a id="nav_t_1" href="qs/estimation"> Create Estimation </a><br>
-                    <a id="nav_t_2" href="qs/estimationView">View Estimation</a><br>
-                    <a id="nav_t_3" href="qs/createProject">Create Project</a><br>
-
-                  </div>
-                </div><!-- /.card-body -->
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
-
-        <% }  else if (cat_id == 3) { %>
         <section class="content">
           <div class="container-fluid">
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h3 class="card-title">Expeditor</h3>
+                <h3 class="card-title">Tasks</h3>
               </div> <!-- /.card-body -->
               <div class="card-body">
+                <p>Add your tasks buttons/ report summary or anything here</p>
+                <strong>and link to side nav bar</strong>
                 <div>
-                  <a href="expeditor/sendRequest">Send Request</a><br>
-                  <a href="expeditor/order">Order</a><br>
-                  <a href="expeditor/usedMaterial">Get Report</a><br>
-
+                  <a href="#">Task1</a><br>
+                  <a href="#">Task2</a><br>
                 </div>
               </div><!-- /.card-body -->
             </div>
           </div><!-- /.container-fluid -->
         </section>
-
-
-        <% } else if (cat_id == 4) { %>
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h3 class="card-title">On Site Supervisor</h3>
-              </div> <!-- /.card-body -->
-              <div class="card-body">
-                <div>
-                  <a href="/supervisor/create-new-reqP">Create a material Request</a><br>
-                  <a href="/supervisor/consum-repo">Get Consumption Report</a><br>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-          </div><!-- /.container-fluid -->
-        </section>
-
-        <% } else if (cat_id == 6) { %>
-          <section class="content">
-            <div class="container-fluid">
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h3 class="card-title">On Site Supervisor</h3>
-                </div> <!-- /.card-body -->
-                <div class="card-body">
-                  <div>
-                    <a href="/fleet-management/brands">Vehicle Brands</a><br>
-                    <a href="/fleet-management/vehicles">Vehicles</a><br>
-                    <a href="/fleet-management/supplies">Supplies</a><br>
-                  </div>
-                </div><!-- /.card-body -->
-              </div>
-            </div><!-- /.container-fluid -->
-          </section>
-        <% } %>
-
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
