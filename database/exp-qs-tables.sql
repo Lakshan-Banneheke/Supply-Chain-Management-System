@@ -141,9 +141,9 @@ END;
 $$;
 
 -------------------test insert-------------------
-INSERT INTO project(name,start_date,duration) VALUES ('First project','2021-01-01','3 months');
-INSERT INTO project(name,start_date,duration) VALUES ('Second project','2021-01-05','5 months');
-INSERT INTO project(name,start_date,duration) VALUES ('Third project','2021-01-15','6 months');
+INSERT INTO project(project_name,start_date) VALUES ('First project','2021-01-01');
+INSERT INTO project(project_name,start_date) VALUES ('Second project','2021-01-05');
+INSERT INTO project(project_name,start_date) VALUES ('Third project','2021-01-15');
 
 INSERT INTO estimate(p_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-02','1','2021-01-05');
 INSERT INTO estimate(p_id,create_date,submit_status,submit_date) VALUES (1,'2021-01-06','1','2021-01-09');
