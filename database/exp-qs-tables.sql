@@ -158,3 +158,13 @@ INSERT INTO est_mat(e_id,m_id,quantity) VALUES (2,4,8);
 INSERT INTO est_mat(e_id,m_id,quantity) VALUES (3,1,4);
 INSERT INTO est_mat(e_id,m_id,quantity) VALUES (3,2,6);
 INSERT INTO est_mat(e_id,m_id,quantity) VALUES (4,1,6);
+
+GRANT ALL ON TABLE public.Project to db_app;
+GRANT ALL ON TABLE public.Estimate to db_app;
+GRANT ALL ON TABLE public.MaterialValue to db_app;
+GRANT ALL ON TABLE public.Est_Mat to db_app;
+GRANT ALL ON TABLE public.Material_Order to db_app;
+GRANT ALL ON TABLE public.Order_items to db_app;
+GRANT ALL ON TABLE public.Machine_Request to db_app;
+GRANT ALL ON TABLE public.Machine to db_app;
+GRANT ALL ON TABLE public.Req_Mac to db_app;
