@@ -3,7 +3,7 @@ const db = require('../config/db');
 class expeditor {
     static async getAllprojects() {
         console.log("getallprojects");
-        const query=`SELECT project_name FROM project`;
+        const query=`SELECT * FROM project`;
         const out = await db.query(query);
         return out.rows;
     }
@@ -87,8 +87,23 @@ class expeditor {
         const out = await db.query(query,[e_id]);
         return out.rows;
     }
-    
-    
+    static async getOneProjectName(projectID) {
+        const query  = `SELECT project_name FROM project WHERE project_id = $1`;
+        const out = await db.query(query,[projectID]);
+        console.log(out.rows[0]);
+        return out.rows[0];
+    }
+    static async getAllsections(projectID) {
+        const query  = `SELECT section_id, section_name FROM project_section WHERE project_id = $1`;
+        const out = await db.query(query,[projectID]);
+        return out.rows;
+    }
+    static async getConsumptionReport(projectID,sectionID) {
+        const query  = `SELECT material_name, unit, SUM(received_quantity) FROM site_request JOIN material_request USING (request_id) JOIN stock USING(material_name) WHERE project_id =$1 AND section_id =$2 GROUP BY material_name, unit`;
+        const out = await db.query(query,[projectID,sectionID]);
+        return out.rows;
+        
+    }
 }
 
 module.exports = expeditor;

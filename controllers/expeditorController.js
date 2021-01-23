@@ -2,7 +2,7 @@ const userValidator = require('./validators/userValidator');
 const expeditorServices = require('../services/expeditorServices');
 const bcrypt = require('bcrypt');
 
-
+var project_id = 0 
 const viewSendRequest = async (req, res) => {
     res.render('sendRequest', {name: req.user.name});
 }
@@ -13,9 +13,9 @@ const viewOrder = async (req, res) => {
   
     res.render('order', {name: req.user.name, projects, materials});
 }
-const viewUsedMaterial = async (req, res) => {
-    res.render('usedMaterial', {name: req.user.name});
-}
+// const viewUsedMaterial = async (req, res) => {
+//     res.render('usedMaterial', {name: req.user.name});
+// }
 
 const addNewOrder = async (req, res) => {
     try{
@@ -82,17 +82,54 @@ const deleteOrder = async (req, res) => {
     }
     
 }
+//-----------------Get Report----------------
 
+const renderReqReport = async (req,res)=>{
+    var allprojects = await expeditorServices.getProjects();// projects
+    res.render('usedMaterial', {
+        projects: allprojects,
+
+    })
+}
+
+const renderReport = async (req,res)=>{
+    var proj_id = parseInt(req.body.projectSelect);
+    // console.log(proj_id);
+    var Details = [];
+    var project_name = await expeditorServices.getOneProjectName(proj_id);
+    var sections_set = await expeditorServices.getAllsections(proj_id);
+
+    for (var i = 0; i < sections_set.length; i++) {
+        var section = []
+        var section_name = sections_set[i].section_name;
+        var sect_id = sections_set[i].section_id;
+        section.push(section_name);
+        var projectConsump = await expeditorServices.getConsumptionReport(proj_id,sect_id);
+        section.push(projectConsump);
+        Details.push(section);
+    }
+    console.log(Details);
+
+    res.render('report_show',{
+        projectName: project_name.project_name,
+        report: Details,
+
+    })
+}
+
+
+//----------------------------------------
 
 module.exports = {
     viewSendRequest,
     viewOrder,
-    viewUsedMaterial,
     addNewOrder,
     sendOrder,
     getOrdersAndEstimations,
     showCompleteOrder,
     deleteOrder,
-    showCompleteEstimate
+    showCompleteEstimate,
+    renderReqReport,
+    renderReport
    
 }
