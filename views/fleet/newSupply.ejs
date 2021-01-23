@@ -1,0 +1,239 @@
+<!-- header-section start -->
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
+<!-- header-section end -->
+<!-- daterange picker -->
+<link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+<!-- Jquery ui-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <form action="/fleet-management/supplies/<%= (supply !== false )? 'editSupplySubmit' :'addNew' %>" method="post">
+          <% if(supply !== false) { %>
+            <input type="hidden" name="supply" value="<%= supply.id %>">
+            <script>
+              var items = JSON.parse('<%- JSON.stringify(items) %>');
+            </script>
+          <% } else { %>
+            <script>
+              var items = false;
+            </script>
+          <% } %>
+          <div class="col-12">
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3 mt-3">
+              <!-- title row -->
+              <div class="row">
+                <div class="col-12">
+                  <h4>
+                    <i class="fas fa-globe"></i> ABC Company
+                    <small class="float-right">Date: <%= date %></small>
+                  </h4>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- info row -->
+              <div class="invoice-info">
+                  <!-- form start -->
+                  <div class="form-horizontal row">
+                    <div class="col-4">
+                      <div class="form-group row">
+                        <label for="reference" class="col-sm-3 col-form-label">Reference</label>
+                        <div class="col-sm-9 input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-pager"></i></span>
+                          </div>
+                          <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference" value="<%= (supply !== false )? supply.reference :'' %>">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="created" class="col-sm-3 col-form-label">Created</label>
+                        <div class="col-sm-9 input-group date" id="reservationdate" data-target-input="nearest">
+                          <div class="input-group-prepend" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                          </div>
+                          <input type="text" class="form-control datetimepicker-input" name="created" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask  data-target="#reservationdate"  value="<%= (supply !== false )? dateformat(supply.created, 'dd/mm/yyyy') :'' %>">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group row">
+                        <label for="reservation" class="col-sm-3 col-form-label">Period</label>
+                        <div class="col-sm-9 input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control float-right" name="period" id="reservation"  value="<%= (supply !== false )? dateformat(supply.from_date, 'dd/mm/yyyy') +' - '+dateformat(supply.to_date, 'dd/mm/yyyy') :'' %>">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="remarks" class="col-sm-3 col-form-label">Remarks</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks"  value="<%= (supply !== false )? supply.remarks :'' %>">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9 input-group">
+                          <textarea class="form-control" rows="3" placeholder="Address" style="margin-top: 0px; margin-bottom: 0px; height: 81px;" name="address"><%= (supply !== false )? supply.address :'' %></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <!-- /.row -->
+
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Vehicle</th>
+                        <th>Qty</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody  id="body">
+                      
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="input" placeholder="Vehicle name">
+                          </div>
+                        </td>
+                        <td colspan="4"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <div class="row">
+                
+              </div>
+
+              <!-- this row will not appear when printing -->
+              <div class="row no-print">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Submit</button>
+                  <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                    Payment
+                  </button>
+                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Generate PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+        </form>
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+  <%- include('../_bottom') %>
+
+  <!-- jQuery -->
+  <script src="/plugins/jquery/jquery.min.js"></script>
+
+  <!-- DataTables  & Plugins -->
+  <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="/plugins/jszip/jszip.min.js"></script>
+  <script src="/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+  <!-- InputMask -->
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+
+<!-- Jquery ui-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+      $(function () {
+        $("#example1").DataTable({
+          "responsive": true, "lengthChange": false, "autoWidth": false,
+          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('[data-mask]').inputmask();
+        /*$('#reservationdate').datetimepicker({
+            format: 'L'
+        });*/
+        $('#reservation').daterangepicker({
+          locale: {
+            format: 'DD/MM/YYYY'
+          }
+        });
+        
+        var vehicles = JSON.parse('<%- JSON.stringify(vehicles) %>');
+        vehicles.forEach( vehicle => {
+          vehicle.value = vehicle.id;
+          vehicle.label = vehicle.title;
+        });
+
+        if (items){
+          items.forEach( item => {
+            add_item ( item );
+          })
+        }
+
+        $( "#input" ).autocomplete({
+          minLength: 0,
+          source: vehicles,
+          focus: function( event, ui ) {
+            $( "#input" ).val( ui.item.label );
+            return false;
+          },
+          select: function( event, ui ) {
+            add_item(ui.item);
+          }
+        })
+        .autocomplete( "instance" )._renderItem = function( ul, item ) {
+          return $( "<li>" )
+            .append( "<div>" + item.label + " - " + item.brand + "</div>" )
+            .appendTo( ul );
+        };
+        function add_item ( item ){
+          $( "#body" ).append( 
+            `
+              <tr>
+                <td></td>
+                <td>${item.label}<input type="hidden" name="vehicle[]" value="${item.id}"></td>
+                <td><input type="text" class="form-control" placeholder="Qty" name="qty[]" value="${(typeof item.qty !== 'undefined')?item.qty:''}"></td>
+                <td><input type="text" class="form-control" placeholder="Description" name="description[]" value="${(typeof item.description !== 'undefined')?item.description:''}"></td>
+                <td><input type="number" class="form-control" placeholder="Amount" name="amount[]" value="${(typeof item.amount !== 'undefined')?item.amount:''}"></td>
+                <td><i class="fas fa-trash-alt del-item" onclick="{$(this).parents('tr').remove()}"></i></td>
+              </tr>
+              `
+            );
+            $( "#input" ).val( '' );
+            return false;
+        }
+      });
+  </script>

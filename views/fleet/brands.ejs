@@ -1,0 +1,127 @@
+<!-- header-section start -->
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
+<!-- header-section end -->
+
+<div class="card">
+    <div class="card-header">
+      <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Brand</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var count = 1; %>
+          <% result.forEach( row => { %>
+            <tr data-id="<%= row.id %>">
+              <td><%= count++ %></td>
+              <td><%= row.title %></td>
+              <td>
+                <a href="/fleet-management/" class="edit-pop"><i class="fas fa-edit"></i></button>
+                <a href="/fleet-management/brands/del/<%= row.id %>"><i class="fas fa-trash-alt"></i></button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>#</th>
+          <th>Brand</th>
+          <th>Action</th>
+        </tr>
+        </tfoot>
+      </table>
+      <form method="post" action="/fleet-management/brands/new">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">New Brand</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Brand Name" name="brandname">
+          <div class="input-group-append col-5">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-id="0">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Brand</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Brand Title</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Brand Name" name="brandname">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary save-btn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../_bottom') %>
+
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/plugins/jszip/jszip.min.js"></script>
+<script src="/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+
+      $('.edit-pop').unbind('click').click( e => {
+        e.preventDefault();
+        var ele = e.target;
+        var id = $(ele).parents('tr').attr('data-id');
+        $('#exampleModalCenter').attr({'data-id': id});
+        $('#exampleModalCenter input[name=brandname').val($(ele).parents('td').prev().html());
+        $('#exampleModalCenter').modal('show');
+      } );
+    });
+
+    $('#exampleModalCenter .save-btn').unbind('click').click( _ => {
+      location = `/fleet-management/brands/edit/${ $('#exampleModalCenter').attr('data-id') }/${ $('#exampleModalCenter input[name=brandname').val() }`;
+    })
+  </script>

@@ -1,6 +1,11 @@
-DROP TABLE IF EXISTS test CASCADE;
 DROP TABLE IF EXISTS User_Profile CASCADE;
 DROP TABLE IF EXISTS User_Category CASCADE;
+DROP TABLE IF EXISTS Site_Request CASCADE;
+DROP TABLE IF EXISTS Material_Request CASCADE;
+DROP TABLE IF EXISTS Stock CASCADE;
+DROP TABLE IF EXISTS Material_Order CASCADE;
+DROP TABLE IF EXISTS Order_Item CASCADE;
+DROP TABLE IF EXISTS Notification CASCADE;
 
 
 DROP DOMAIN IF EXISTS UUID4 CASCADE;
@@ -47,18 +52,6 @@ CREATE TABLE User_Category (
   PRIMARY KEY (cat_id)
 );
 
-CREATE TABLE User_Profile (
-  user_id UUID4 DEFAULT generate_uuid4(),
-  name varchar(70) NOT NULL,
-  password varchar(70) NOT NULL,
-  email varchar(70) NOT NULL,
-  cat_id int NOT NULL,
-  contact_num varchar(20),
-  gender gender_enum,
-  date_joined date,
-  PRIMARY KEY (user_id),
-  FOREIGN KEY (cat_id) REFERENCES User_Category(cat_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 CREATE TABLE Site_Request(
     request_id SERIAL NOT NULL,
@@ -125,6 +118,19 @@ CREATE TABLE Notification(
     date date
 );
 
+CREATE TABLE User_Profile (
+  user_id UUID4 DEFAULT generate_uuid4(),
+  name varchar(70) NOT NULL,
+  password varchar(70) NOT NULL,
+  email varchar(70) NOT NULL,
+  cat_id int NOT NULL,
+  contact_num varchar(20),
+  gender gender_enum,
+  date_joined date,
+  verified bool DEFAULT false,
+  PRIMARY KEY (user_id),
+  FOREIGN KEY (cat_id) REFERENCES User_Category(cat_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
 
@@ -155,6 +161,7 @@ $$;
 
 
 ----------------Insert statements------------------
+
 INSERT INTO user_category(cat_name) VALUES ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
 
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Cement',100,'pct');
@@ -225,6 +232,10 @@ INSERT INTO Notification(message,to_designation,state,from_designation,date) VAL
 
 
 
+INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
+INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
+
+
 ------------------Priviledges----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;
@@ -234,8 +245,4 @@ GRANT ALL ON TABLE public.Stock to db_app;
 GRANT ALL ON TABLE public.Material_Order to db_app;
 GRANT ALL ON TABLE public.Order_Item to db_app;
 GRANT ALL ON TABLE public.Notification to db_app;
-
-
-
-
-
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;
