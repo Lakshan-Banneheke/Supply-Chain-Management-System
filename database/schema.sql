@@ -105,6 +105,38 @@ CREATE TABLE Stock(
     primary key(stock_id)
 );
 
+---------------------------new material order tables--------------
+CREATE TABLE MaterialValue (
+  M_id SERIAL,
+  m_name varchar(30) NOT NULL,
+  m_amount varchar(20) NOT NULL,
+  m_cost DECIMAL NOT NULL,
+  PRIMARY KEY (M_id)
+);
+
+
+CREATE TABLE Material_Order(
+    order_id SERIAL not null,
+    project_id int not null,
+    shop_name varchar(255) not null,
+    order_date date,
+    received_date date,
+    order_state varchar(255) not null,
+    ordered boolean,
+    primary key(order_id),
+    FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Order_item(
+  order_id int NOT NULL,
+  M_id int NOT NULL,
+  ordered_quantity int NOT NULL,
+  received_quantity int,
+  PRIMARY KEY (order_id,M_id),
+  FOREIGN KEY (order_id) REFERENCES Material_Order(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+------------------------------------------------------------------
 
 CREATE TABLE Material_Order(
     order_id SERIAL not null,
