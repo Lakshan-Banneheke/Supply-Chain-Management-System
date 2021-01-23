@@ -44,7 +44,7 @@
               </a>
               <div class="dropdown-divider" ></div>
 
-              <form action="/markasread" method="POST" >
+              <form action="/store/markasread" method="POST" >
 
                 <% if(notifications.length>0){ %>
                   <button  class="btn" type="submit">Mark As Read</button>
@@ -99,19 +99,19 @@
             </div>
           </div><!-- /.container-fluid -->
         </section>
-    <% } else { %>
+    <% } else if (cat_id == 5){ %>
 
         <section class="content">
           <div class="container-fluid">
             <div class="card card-primary card-outline">
               <div class="card-header">
-                <h3 class="card-title">Tasks</h3>
+                <h3 class="card-title">Store Keeper</h3>
               </div> <!-- /.card-body -->
               <div class="card-body">
                 <div>
-                  <a href="/stock">View Stock</a><br>
-                  <a href="/materialrequests">Material Requests</a><br>
-                  <a href="materialorders">Material Orders</a><br>
+                  <a href="/store/stock">View Stock</a><br>
+                  <a href="/store/materialrequests">Material Requests</a><br>
+                  <a href="/store/materialorders">Material Orders</a><br>
                 </div>
               </div><!-- /.card-body -->
             </div>

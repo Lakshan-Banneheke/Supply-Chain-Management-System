@@ -18,6 +18,8 @@ router.use('/supervisor', auth.checkSupervisor, (req, res, next)=>{
     next();
 }, require('./supervisor'));
 
+router.use('/store', require('./store'));
+
 router.get('/405', errors.error405);
 
 router.use(errors.error404);

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const RootController = require('../controllers/rootController');
+const rootController = require('../controllers/rootController');
 const auth = require('../config/auth');
 
 
@@ -10,7 +10,7 @@ const checkAdmin = (req, res, next) => {
     res.redirect("/admin");
 }
 
-router.get('/', auth.checkNotAuthenticated, checkAdmin ,RootController.root);
+router.get('/', auth.checkNotAuthenticated, checkAdmin, rootController.renderDashboard);
 
 
 

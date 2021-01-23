@@ -39,7 +39,7 @@ const renderStock = async(req,res)=>{
     let notifications = await storekeeperModel.getNotification();
     let not_dates =  await convertTime(notifications);
     passNotification = notifications;
-    notificationView = "/stock"
+    notificationView = "/store/stock"
     res.render('stock',{
             name:loggedUser,
             notifications:notifications,
@@ -62,7 +62,7 @@ const renderMaterialRequests = async (req,res) =>{
 
     let notifications = await storekeeperModel.getNotification();
     passNotification = notifications;
-    notificationView = "/materialrequests";
+    notificationView = "/store/materialrequests";
     let not_dates =  await convertTime(notifications);
 
     let material_req = await  storekeeperModel.getMaterialRequests();
@@ -195,7 +195,7 @@ const issueMaterial = async(req,res)=>{
     //notify onsite supervisor
     await storekeeperModel.newNotification('Request Fulfilled','on-site supervisor');
 
-    res.redirect('/materialrequests');
+    res.redirect('/store/materialrequests');
 }
 
 const revisionHandle = async (req,res)=>{
@@ -216,7 +216,7 @@ const revisionHandle = async (req,res)=>{
     //notify onsite supervisor
     await storekeeperModel.newNotification('Request Fulfilled(Quantities updated)','on-site supervisor');
 
-    res.redirect('/materialrequests');
+    res.redirect('/store/materialrequests');
 
 }
 
@@ -227,7 +227,7 @@ const renderMaterialOrders = async (req,res) =>{
 
     let notifications = await storekeeperModel.getNotification();
     passNotification = notifications;
-    notificationView = "/materialorders";
+    notificationView = "/store/materialorders";
     let not_dates =  await convertTime(notifications);
 
     let orders = await  storekeeperModel.getOrders();
@@ -314,7 +314,7 @@ const updateStocksNoChange = async (req,res)=>{
     await storekeeperModel.updateStocksAdd(req_id);
     //notify expeditor
     await storekeeperModel.newNotification('Request Fulfilled','expeditor');
-    res.redirect('/materialorders');
+    res.redirect('/store/materialorders');
 }
 
 
@@ -339,7 +339,7 @@ const updateStocksWithChange = async (req,res) =>{
     console.log("stock updated");
     //notify expeditor
     await storekeeperModel.newNotification('Request Fulfilled(Quantites Changed)','expeditor');
-    res.redirect('/materialorders');
+    res.redirect('/store/materialorders');
 
 }
 
