@@ -5,10 +5,13 @@ DROP TABLE IF EXISTS Material_Request CASCADE;
 DROP TABLE IF EXISTS Stock CASCADE;
 DROP TABLE IF EXISTS Material_Order CASCADE;
 DROP TABLE IF EXISTS Order_Item CASCADE;
+DROP TABLE IF EXISTS Notification CASCADE;
 DROP TABLE IF EXISTS project CASCADE;
 DROP TABLE IF EXISTS project_section CASCADE;
-
-
+DROP TABLE IF EXISTS brands CASCADE;
+DROP TABLE IF EXISTS vehicles CASCADE;
+DROP TABLE IF EXISTS supplies CASCADE;
+DROP TABLE IF EXISTS supply_items CASCADE;
 
 
 DROP DOMAIN IF EXISTS UUID4 CASCADE;
@@ -153,6 +156,50 @@ CREATE TABLE User_Profile (
 );
 
 
+-----------Fleet Manager------
+CREATE TABLE brands (
+	id SERIAL ,
+	title varchar(50) not null,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE vehicles (
+	id SERIAL,
+	title varchar(50),
+	brand int,
+	plate_number varchar(10) not null,
+	registrations varchar(100),
+	remarks text,
+	PRIMARY KEY (id),
+	FOREIGN KEY (brand) REFERENCES brands(id) ON DELETE CASCADE
+);
+
+CREATE TABLE supplies (
+	id SERIAL,
+	reference varchar(50),
+	created date,
+	from_date date,
+	to_date date,
+	to_address varchar(200),
+	remarks text,
+	address varchar(100),
+	status int,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE supply_items (
+	id SERIAL,
+	supply int,
+	vehicle int,
+	qty int,
+	amount DOUBLE PRECISION,
+	description varchar(50),
+	status int,
+	PRIMARY KEY (id),
+	FOREIGN KEY (vehicle) REFERENCES vehicles(id) ON DELETE CASCADE,
+	FOREIGN KEY (supply) REFERENCES supplies(id) ON DELETE CASCADE
+);
+
 
 --------------------------Procedures------------------------
 CREATE OR REPLACE PROCEDURE registerUser(
@@ -177,7 +224,6 @@ BEGIN
     END IF;
 END;
 $$;
-
 
 
 
@@ -217,33 +263,33 @@ INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'
 -----------------------
 
 
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'pasanmadushan','not completed','2020-12-12');
+INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Sand','pct',10);
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Plate','pcs',5);
 
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'pasanmadushan1','not completed','2020-12-12');
+INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Sand','pct',10);
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Plate','pcs',5);
 
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'pasanmadushan2','not completed','2020-12-12');
+INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Sand','pct',10);
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Plate','pcs',5);
 
 
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'danushka','not completed','2020-12-12');
+INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Cement','pcs',100);
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Nuts and balts','pcs',10);
 
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'danushka1','not completed','2020-12-12');
+INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Cement','pcs',100);
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Nuts and balts','pcs',10);
 
-INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'danushka2','not completed','2020-12-12');
+INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Cement','pcs',100);
 INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Nuts and balts','pcs',10);
 
 
------------------------------------------------------
+-----------------------------------------_______-------------
 
 
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor1','storekeeper','unread','expeditor1','2020-12-20');
@@ -268,4 +314,8 @@ GRANT ALL ON TABLE public.Order_Item to db_app;
 GRANT ALL ON TABLE public.Notification to db_app;
 GRANT ALL ON TABLE public.project to db_app;
 GRANT ALL ON TABLE public.project_section to db_app;
+GRANT ALL ON TABLE public.brands to db_app;
+GRANT ALL ON TABLE public.vehicles to db_app;
+GRANT ALL ON TABLE public.supplies to db_app;
+GRANT ALL ON TABLE public.supply_items to db_app;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;
