@@ -29,14 +29,6 @@ CREATE TABLE Estimate (
   FOREIGN KEY (P_id) REFERENCES Project(P_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE MaterialValue (
-  M_id SERIAL,
-  m_name varchar(30) NOT NULL,
-  m_amount varchar(20) NOT NULL,
-  m_cost DECIMAL NOT NULL,
-  PRIMARY KEY (M_id)
-);
-
 CREATE TABLE Est_Mat (
   E_id int NOT NULL,
   M_id int NOT NULL,
@@ -46,25 +38,40 @@ CREATE TABLE Est_Mat (
   FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE Material_Order (
-  O_id SERIAL,
-  P_id int NOT NULL,
-  shop_name varchar(30) NOT NULL,
-  order_date date,
-  ordered boolean,
-  received boolean,
-  PRIMARY KEY (O_id),
-  FOREIGN KEY (P_id) REFERENCES Project(P_id) ON DELETE CASCADE ON UPDATE CASCADE
+
+-- new Material tables
+CREATE TABLE MaterialValue (
+  M_id SERIAL,
+  m_name varchar(30) NOT NULL,
+  m_amount varchar(20) NOT NULL,
+  m_cost DECIMAL NOT NULL,
+  PRIMARY KEY (M_id)
 );
 
-CREATE TABLE Order_items (
-  O_id int NOT NULL,
+
+CREATE TABLE Material_Order(
+    order_id SERIAL not null,
+    project_id int not null,
+    shop_name varchar(255) not null,
+    order_date date,
+    received_date date,
+    order_state varchar(255) not null,
+    ordered boolean,
+    primary key(order_id),
+    FOREIGN KEY (project_id) REFERENCES Project(project_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Order_item(
+  order_id int NOT NULL,
   M_id int NOT NULL,
-  quantity int NOT NULL,
-  PRIMARY KEY (O_id,M_id),
-  FOREIGN KEY (O_id) REFERENCES Material_Order(O_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  ordered_quantity int NOT NULL,
+  received_quantity int,
+  PRIMARY KEY (order_id,M_id),
+  FOREIGN KEY (order_id) REFERENCES Material_Order(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (M_id) REFERENCES MaterialValue(M_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+------------------------------------------------------------------------------------------------------
+
 
 CREATE TABLE Machine_Request (
   R_id int NOT NULL,
