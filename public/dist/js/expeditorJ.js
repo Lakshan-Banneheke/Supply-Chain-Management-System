@@ -48,7 +48,7 @@
                                     table += `
                                     <tr>
                                         <td>${num + 1}</td>
-                                        <td>${order.o_id}</td>
+                                        <td>${order.order_id}</td>
                                         <td>${order.shop_name}</td>`;
                                         if(order.order_date!==null){
                                             table += `<td>${order.order_date.substring(0, 8)}${order.order_date.substring(8, 10)*1 + 1}</td>`;
@@ -171,7 +171,7 @@
                                     <td>${num + 1}</td>
                                     <td>${order_item.m_name}</td>
                                     <td>${order_item.m_amount}</td>
-                                    <td>${order_item.quantity}</td>
+                                    <td>${order_item.ordered_quantity}</td>
                                   
                                 </tr>
                                 `;
@@ -413,7 +413,7 @@
                             $('#showOrder_err_msg').attr("class", 'alert alert-success text-center');
                             $('#showOrder_err_msg').attr("role", 'alert');
                             $('#order_details_table').html('');
-                            $('#sendDelete').html("");
+                            $('#sendDelete').attr("style", 'display:none');
                         }
 
                     },
@@ -446,7 +446,7 @@
                             $(msg_id).text('Order Successfully Send');
                             $(msg_id).attr("class", 'alert alert-success text-center');
                             $(msg_id).attr("role", 'alert');
-
+                            $('#sendDelete').attr("style", 'display:none');
                         }
 
                     },

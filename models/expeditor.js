@@ -3,7 +3,7 @@ const db = require('../config/db');
 class expeditor {
     static async getAllprojects() {
         console.log("getallprojects");
-        const query=`SELECT name FROM project`;
+        const query=`SELECT project_name FROM project`;
         const out = await db.query(query);
         return out.rows;
     }
@@ -17,7 +17,7 @@ class expeditor {
     
     static async getProjectId(p_name) {
         console.log("getProjectId");
-        const query=`SELECT p_id FROM project WHERE name = $1`;
+        const query=`SELECT project_id FROM project WHERE project_name = $1`;
         const out = await db.query(query,[p_name]);
         // console.log(out.rows);
         return out.rows[0];
@@ -25,10 +25,10 @@ class expeditor {
     
     static async addToMaterialOrder(project_id, shop_name) {
         console.log("addToMaterialOrder");
-        const query=`INSERT INTO Material_Order (P_id, shop_name, ordered, received)
+        const query=`INSERT INTO Material_Order (project_id, shop_name, order_state, ordered)
                      VALUES($1,$2,$3,$4)
-                     RETURNING O_id;`;
-        const out = await db.query(query,[project_id, shop_name, 'no', 'no']);
+                     RETURNING order_id;`;
+        const out = await db.query(query,[project_id, shop_name, 'not completed', 'no']);
         return out.rows[0];
     }
     
@@ -42,42 +42,42 @@ class expeditor {
    
     static async  changeOrderState(o_id,today) {
         console.log("changeOrderState");
-        const query=`UPDATE Material_Order SET ordered= 'yes',order_date=$1 WHERE O_id = $2`;
+        const query=`UPDATE Material_Order SET ordered= 'yes',order_date=$1 WHERE order_id = $2`;
         const out = await db.query(query,[today,o_id]);
         return out.rows;
     }
 
     static async ordersOfProject(p_id) {
         console.log("ordersOfProject");
-        const query=`SELECT * FROM material_order where p_id = $1`;
+        const query=`SELECT * FROM material_order where project_id = $1`;
         const out = await db.query(query,[p_id]);
         return out.rows;
     }
 
     static async estimationsOfProject(p_id) {
         console.log("estimationsOfProject");
-        const query=`SELECT * FROM Estimate where p_id = $1 and submit_status= true`;
+        const query=`SELECT * FROM Estimate where project_id = $1 and submit_status= true`;
         const out = await db.query(query,[p_id]);
         return out.rows;
     }
     
     static async getOrderItems(o_id) {
         console.log("getOrderItems");
-        const query=`SELECT * FROM order_items join materialvalue USING(m_id) WHERE o_id = $1`;
+        const query=`SELECT * FROM order_item join materialvalue USING(m_id) WHERE order_id = $1`;
         const out = await db.query(query,[o_id]);
         return out.rows;
     }
 
     static async getOrderState(o_id) {
         console.log("getOrderState");
-        const query=`SELECT ordered FROM material_order where o_id = $1`;
+        const query=`SELECT ordered FROM material_order where order_id = $1`;
         const out = await db.query(query,[o_id]);
         return out.rows;
     }
 
     static async deleteOrder(o_id) {
         console.log("deleteOrder");
-        const query=`DELETE FROM material_order where o_id = $1`;
+        const query=`DELETE FROM material_order where order_id = $1`;
         const out = await db.query(query,[o_id]);
         return out.rows;
     }
