@@ -1,7 +1,7 @@
-const db = require('./dbconnect')
+const db = require('../config/db')
 
 
-class superviosrModel {
+class supervisorModel {
 
     static async getAllprojects() {
         const query  = "SELECT * FROM project";
@@ -81,4 +81,4 @@ class superviosrModel {
 
 }
 
-module.exports = superviosrModel
+module.exports = supervisorModel

@@ -5,20 +5,18 @@ const auth = require('../config/auth');
 //--------------SUPERVISOR---------------
 const supervisorController = require('../controllers/supervisorController')
 
-router.get('/', RootController.root);
-
 //----------- Supervisor Routes-------------
 
-route.get("/supervisor-dashboard", supervisorController.renderCreateNewReqP)
+router.get("/supervisor-dashboard", supervisorController.renderCreateNewReqP)
 
-route.get("/create-new-reqP", supervisorController.renderCreateNewReqP)
-route.post("/create-new-reqS", supervisorController.renderCreateNewReqS)
-route.post("/material-req-form", supervisorController.renderReqForm)
-route.get("/material-req-form", supervisorController.renderReqForm)
-route.post("/send-to-expeditorl", supervisorController.sendToExpeditor)
-route.post("/collect-form-data",supervisorController.collectSumbitData)
-route.get("/consum-repot", supervisorController.renderReqReport)
-route.post("/consum-repot", supervisorController.renderReport)
+router.get("/create-new-reqP", supervisorController.renderCreateNewReqP)
+router.post("/create-new-reqS", supervisorController.renderCreateNewReqS)
+router.post("/material-req-form", supervisorController.renderReqForm)
+router.get("/material-req-form", supervisorController.renderReqForm)
+router.post("/send-to-expeditorl", supervisorController.sendToExpeditor)
+router.post("/collect-form-data",supervisorController.collectSumbitData)
+router.get("/consum-repot", supervisorController.renderReqReport)
+router.post("/consum-repot", supervisorController.renderReport)
 
 
 //-----------end supervisor-------------

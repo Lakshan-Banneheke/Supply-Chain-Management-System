@@ -1,4 +1,4 @@
-const supervisorModel = require('../model/supervisorModel')
+const supervisorModel = require('../models/supervisorModel')
 
 
 var designation = 'on-site-supervisor'
