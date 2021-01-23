@@ -34,6 +34,7 @@ const viewAdminEditInfo = async (req, res) => {
         existing_name:req.user.name,
         existing_email:req.user.email,
         existing_contactNum:req.user.contact_num
+        
     });
 
     // });
@@ -44,8 +45,8 @@ const editInfo = async (req, res) => {
         let {value, error} = await userValidator.editInfo.validate(req.body);
         if (error) throw (error);
         value.id=req.user.user_id;
-        console.log(typeof value);
-        console.log(value);
+        //console.log(typeof value);
+        //console.log(value);
         await adminService.editInfo(value);
         //return res.status(200).send({result: 'redirect', url: '/admin'});
         
@@ -79,11 +80,14 @@ const changePassword = async (req,res) => {
 
 
     } catch (err){
-        return res.status(200).send({
-            result: 'redirect',
-            url:`/admin/changePassword/?changePasswordError=${err}`
+        // return res.status(200).send({
+        //     result: 'redirect',
+        //     url:`/admin/changePassword/?changePasswordError=${err}`
 
-        });
+        //});
+        return res.redirect(
+            `/admin/editInfo/?changePasswordError=${err}`
+        );
     }
     
 
