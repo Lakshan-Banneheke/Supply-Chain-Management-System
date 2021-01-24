@@ -31,12 +31,6 @@ import the schema. Here give the full path to the schema
 \q
 ```
 
-An sql file with insert statements for some dummy data is provided. Kindly note that this does not have insert statements to fill all the tables in the database. If you wish to import this, follow the same procedure as importing the schema.
-
-```sql
-\i 'C:/Users/.../database/insertStatements.sql'
-\q
-```
 
 Now the database is set up.
 Check if the database exists through the terminal or by logging into to pgAdmin.

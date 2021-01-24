@@ -1,4 +1,4 @@
-<%- include('_header',{title:"Dashboard"}) %>
+<%- include('_header',{title:"Material Requests"}) %>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
@@ -55,7 +55,7 @@
                                 <tr>
                                     <th scope="row"> <%= i+1 %> </th>
                                     <td> <%= materials[i].material_name %> </td>
-                                    <td> <input type="text" disabled class="form-control" style="border: none" placeholder="<%= materials[i].requested_quntity %>" name="receieved_quantity" >   </td>
+                                    <td> <input type="text" disabled class="form-control" style="border: none" placeholder="<%= materials[i].requested_quantity %>" name="receieved_quantity" >   </td>
                                     <td> <%= materials[i].unit %> </td>
                                     <!--                                    <td> <button type="button" class="btn btn-danger btn-sm rounded-2">Change</button> </td>-->
                                 </tr>

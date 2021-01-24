@@ -69,15 +69,15 @@ const editInfo = async (req, res) => {
 
 const changePassword = async (req,res) => {
     try{
-        console.log("Change password testing 2");
+        //console.log("Change password testing 2");
         let {value, error} = await userValidator.changePassword.validate(req.body);
         if (error) throw (error);
-        console.log(value);
+        //console.log(value);
         // const hashed_old_password = await bcrypt.hash(value.old_password, 10);
         value.id=req.user.user_id;
         // value.old_hashed_password=hashed_old_password;
         value.original_hashed_password=req.user.password;
-        console.log(value);
+        //console.log(value);
         await adminService.changePassword(value);
         
         res.redirect('/admin');

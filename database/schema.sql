@@ -342,12 +342,15 @@ INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('E
 
 INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
 
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Cement',100,'pct');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Steel',100,'pct');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Sand',100,'cube');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Plate',100,'pcs');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Nuts and balts',100,'pcs');
 
 
 
-
-
-------------------Priviledges----------------------
+------------------Priviledges (for dev only)----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;
 GRANT ALL ON TABLE public.project to db_app;
