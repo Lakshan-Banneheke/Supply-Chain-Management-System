@@ -11,7 +11,7 @@ class expeditorService {
     static async addNewOrder({final_materials,final_quantiies, optionProject, shop_name}){
         const project_id = await expeditor.getProjectId(optionProject);
        
-        const o_id =(await expeditor.addToMaterialOrder(project_id.p_id, shop_name)).o_id;
+        const o_id =(await expeditor.addToMaterialOrder(project_id.project_id, shop_name)).order_id;
         //  console.log(final_materials);
         //  console.log(final_quantiies);
         //  console.log(o_id);
@@ -32,12 +32,13 @@ class expeditorService {
         return expeditor.deleteOrder(o_id);
     }
     static async getOrdersAndEstimations({Project_name}){
+        // console.log(Project_name);
         const project_id = await expeditor.getProjectId(Project_name);
-       
-        const estimations = await expeditor.estimationsOfProject(project_id.p_id);
+     
+        const estimations = await expeditor.estimationsOfProject(project_id.project_id);
         //  console.log(estimations[0]);
-        const orders = await expeditor.ordersOfProject(project_id.p_id);
-        // console.log(orders);
+        const orders = await expeditor.ordersOfProject(project_id.project_id);
+       
         return [orders, estimations];
     }
     static async showCompleteOrder({o_id}){

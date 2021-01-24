@@ -386,6 +386,10 @@ INSERT INTO site_request(project_id,section_id,user_id,request_state,request_dat
 
 
 
+
+
+
+
 ------------------Priviledges----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;
@@ -410,51 +414,3 @@ GRANT ALL ON TABLE public.Machine to db_app;
 GRANT ALL ON TABLE public.Req_Mac to db_app;
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;
-
-
-
-
-
-
-
-
-----------------Insert statements for personal use------------------
-
----------------------
-
-
--- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Sand','pct',10);
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (1,'Plate','pcs',5);
---
--- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Sand','pct',10);
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (2,'Plate','pcs',5);
---
--- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (1,2,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Sand','pct',10);
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (3,'Plate','pcs',5);
---
---
--- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Cement','pcs',100);
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (4,'Nuts and balts','pcs',10);
---
--- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Cement','pcs',100);
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (5,'Nuts and balts','pcs',10);
---
--- INSERT INTO Site_Request(project_id,section_id,user_id,request_state,request_date) VALUES (2,4,'2d913d0a-4aa2-499d-a15b-962b280e299d','not completed','2020-12-12');
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Cement','pcs',100);
--- INSERT INTO Material_Request(request_id,material_name,unit,requested_quntity) VALUES (6,'Nuts and balts','pcs',10);
---
---
--- -----------------------------------------_______-------------
---
---
--- INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor1','storekeeper','unread','expeditor1','2020-12-20');
--- INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor2','expeditor','unread','expeditor2','2020-12-20');
--- INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor3','storekeeper','unread','expeditor3','2020-12-20');
--- INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor4','storekeeper','unread','expeditor4','2020-12-20');
---
--

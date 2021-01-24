@@ -1,5 +1,5 @@
 
-const Admin= require('../models/Admin');
+const Admin= require('../models/admin');
 const Errors = require('../helpers/error');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');

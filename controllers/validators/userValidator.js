@@ -8,7 +8,6 @@ const register = Joi.object(
     password2: Joi.string().valid(Joi.ref('password')).required().label('Password Confirmation'),
     category: Joi.string().valid('2','3','4','5', '6'),
     gender: Joi.string().required().valid('Male', 'Female', 'Other').label('Gender'),
-    doj: Joi.string().required(),
     contactNo : Joi.string().required().label('Contact Number')
 });
 

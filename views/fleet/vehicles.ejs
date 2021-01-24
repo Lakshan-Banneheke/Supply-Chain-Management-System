@@ -1,5 +1,5 @@
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Vehicles', child: 'Vehicles'} }) %>
 <!-- header-section end -->
 
 <div class="card">
@@ -12,13 +12,13 @@
       <table id="example1" class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>#</th>
+            <th style="width: 40px">#</th>
             <th>Title</th>
             <th>Plate Number</th>
             <th>Brand</th>
             <th>Registrations</th>
             <th>Remarks</th>
-            <th>Action</th>
+            <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -28,12 +28,12 @@
               <td><%= count++ %></td>
               <td><%= row.title %></td>
               <td><%= row.plate_number %></td>
-              <td><%= row.title %></td>
+              <td><%= row.brand %></td>
               <td><%= row.registrations %></td>
               <td><%= row.remarks %></td>
-              <td>
-                <a href="/fleet-management/vehicles/edit/<%= row.id %>"><i class="fas fa-edit"></i></button>
-                <a href="/fleet-management/vehicles/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></button>
+              <td class="text-center">
+                <a href="/fleet-management/vehicles/edit/<%= row.id %>"><i class="fas fa-edit"></i></a>
+                <a href="/fleet-management/vehicles/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           <% }) %>
@@ -46,7 +46,7 @@
             <th>Brand</th>
             <th>Registrations</th>
             <th>Remarks</th>
-            <th>Action</th>
+            <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </tfoot>
       </table>

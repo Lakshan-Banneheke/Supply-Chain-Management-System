@@ -10,7 +10,6 @@
             let password2 =$("#password2").val();
             let category = $('#category').val();
             let gender =$("#gender").val();
-            let doj = $('#doj').val();
             let contactNo =$("#contactNo").val();
 
             let genderList=['Male','Female','Other'];
@@ -54,7 +53,6 @@
                         'password2' :password2,
                         'category' : category,
                         'gender' :gender,
-                        'doj' : doj,
                         'contactNo' :contactNo,
                     },
                     contentType: "application/x-www-form-urlencoded; charset=UTF-8",

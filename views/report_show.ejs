@@ -117,38 +117,40 @@
                 <h2>Project Consumption Report</h2>
 
                     <h3>Project Name : <%= projectName %></h3>
-                    <table class="table" id ="matTable" name = "allMat">
-                        <thead>
-                        <tr>
-                            <th colspan="1" scope="col">Section Name</th>
-                            <th colspan="3" scope="col">Material Details</th>
-                        </tr>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Material Name</th>
-                            <th scope="col">Total Quantity</th>
-                        </tr>
-                        </thead>
-                        <tbody>     
+                <table class="table table-bordered" >
+                    <thead style="background-color:#B0B0B0">
+                    <tr>
+                        <th class="tg-0lax" rowspan="2" style="text-align: center;">Section</th>
+                        <th class="tg-0lax" colspan="3" style="text-align: center;">Material Details</th>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax">Material Name</td>
+                        <td class="tg-0lax">Total Quantity</td>
+                        <td class="tg-0lax">Unit</td>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        <% for (var i = 0; i < report.length; i++) { %>                      
+
+                    <% for (var i = 0; i < report.length; i++) { %>
+
+                        <tr>
+                            <td class="tg-0lax" rowspan="<%= report[i][1].length == 0 ? 1 : report[i][1].length %>"> <%= report[i][0] %></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                        </tr>
+                        <% for (var j = 0; j < report[i][1].length; j++) { %>
                             <tr>
-                                <td> <%= report[i][0] %></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <% for (var j = 0; j < report[i][1].length; j++) { %>
-                                <% console.log(report[i][1][j])%>
-                                <tr>
-                                    <td></td> 
-                                    <td><%= report[i][1][j].material_name %></td>
-                                    <td><%= report[i][1][j].sum %></td>
-                                </tr>
-                                <% } %> 
-                            </tr> 
-                        <% } %> 
-                        </tbody>
-                    </table>
+                                <td class="tg-0lax"><%= report[i][1][j].material_name %></td>
+                                <td class="tg-0lax"><%= report[i][1][j].sum %></td>
+                                <td class="tg-0lax"><%= report[i][1][j].unit %></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+
+                    </tbody>
+                </table>
             </div><!-- /.container-fluid -->
         </section>
     

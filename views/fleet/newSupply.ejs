@@ -1,10 +1,23 @@
+<%
+  // This page is common for both fleet manager's supply part and expedictor's request part
+  if(! req ){     //check for if this page for expeditor's request page or fleet manager's supply page
+    var current_menu = {parent: 'Supplies', child: 'New Supply'};         //configuration for fleet manager
+    var pageTitle= 'Fleet Supply';
+    var status = '1';
+  } else {                                                          // configuration for expeditor - request
+    var current_menu = {parent: 'Fleet Requests', child: 'Request'};
+    var pageTitle= 'Request Fleet';
+    var status = '0';
+  }
+%>
+
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management"}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu }) %>
 <!-- header-section end -->
 <!-- daterange picker -->
-<link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
 <!-- Jquery ui-->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <section class="content">
     <div class="container-fluid">
@@ -20,6 +33,7 @@
               var items = false;
             </script>
           <% } %>
+          <input type="hidden" name="status" value="<%= status %>">
           <div class="col-12">
             <!-- Main content -->
             <div class="invoice p-3 mb-3 mt-3">
