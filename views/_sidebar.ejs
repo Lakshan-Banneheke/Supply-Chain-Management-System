@@ -182,12 +182,12 @@
                         </p>
                         </a>
                         <ul class="nav nav-treeview">
-                        <li class="nav-item">  
+                        <!-- <li class="nav-item">  
                             <a href="/expeditor/sendRequest" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Send Request</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -228,7 +228,14 @@
                     <script>
                         $(function () {
                             $('a.newSupply').attr('href', '/expeditor/sendRequest');
-                            $('form.newSupplyForm').attr('action', '/expeditor/submitRequest');
+                            $('form.newSupplyForm.new').attr('action', '/expeditor/submitRequest');
+                            $('form.newSupplyForm.edit').attr('action', '/expeditor/editSupplySubmit');
+                            $('a.editSupply').each(function() {
+                                $(this).attr('href', '/expeditor/editSupply/'+$(this).attr('data-id'));
+                            });
+                            $('a.delSupply').each(function(){
+                                $(this).attr('href', '/expeditor/delSupply/'+$(this).attr('data-id'));
+                            });
                         });
                     </script>
                     <% } else if(cat_id==4) { %>

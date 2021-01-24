@@ -1,25 +1,10 @@
-<%
-  // This page is common for both fleet manager's supply part and expedictor's request part
-  if(! req ){     //check for if this page for expeditor's request page or fleet manager's supply page
-    var current_menu = {parent: 'Supplies', child: 'View'};         //configuration for fleet manager
-    var pageTitle= 'Supplies';
-    var button= 'Add New Supply';
-    var href= '/fleet-management/supplies/new';
-  } else {                                                          // configuration for expeditor - request
-    var current_menu = {parent: 'Fleet Requests', child: 'View'};
-    var pageTitle= 'Fleet Requests';
-    var button= 'Request Fleet';
-    var href= '/fleet-management/supplies/new/req';
-  }
-%>
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Requests', child: ''} }) %>
 <!-- header-section end -->
 
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title"><%= pageTitle %></h3>
-      <a class="btn btn-primary float-right newSupply" href="<%= href %>"><%= button %></a>
+      <h3 class="card-title">Supply Requests</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -47,9 +32,15 @@
               <td><%= dateformat(row.to_date, 'dd/mm/yyyy') %></td>
               <td><%= row.remarks %></td>
               <td><%= row.address %></td>
-              <td class="text-center">
-                <a href="/fleet-management/supplies/edit/<%= row.id %>" class="editSupply" data-id="<%= row.id %>"><i class="fas fa-edit"></i></a>
-                <a href="/fleet-management/supplies/delete/<%= row.id %>" class="delSupply" data-id="<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
+              <td class="text-center d-flex">
+                <form method="post" action="/fleet-management/requests/">
+                  <input type="hidden" name="action" value="approve">
+                  <button type="submit" class="btn btn-success mr-3" name="id" value="<%= row.id %>">Approve</button>
+                </form>
+                <form method="post" action="/fleet-management/requests/">
+                  <input type="hidden" name="action" value="reject">
+                  <button type="submit" class="btn btn-danger" name="id" value="<%= row.id %>">Reject</button>
+                </form>
               </td>
             </tr>
           <% }) %>

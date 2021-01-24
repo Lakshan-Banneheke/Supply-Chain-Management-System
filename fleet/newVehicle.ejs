@@ -1,0 +1,61 @@
+<!-- header-section start -->
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Vehicles', child: 'Add Vehicles'} }) %>
+<!-- header-section end -->
+
+<div class="card card-primary m-3">
+    <div class="card-header">
+        <h3 class="card-title"><%= title %></h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form method="post" action="/fleet-management/vehicles/<%= (data === false ) ? 'new' : 'editSubmit' %>">
+    <div class="card-body">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="<%= data !== false ? data.title : '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="platenumber">Plate Number</label>
+            <input type="text" class="form-control" id="platenumber" name="plate_number" placeholder="Enter Palate Number" value="<%= data !== false ? data.plate_number : '' %>">
+        </div>
+        <div class="form-group">
+            <label for="registrations">Registrations</label>
+            <input type="text" class="form-control" id="registrations" name="registrations" placeholder="Registrations" value="<%= data !== false ? data.registrations : '' %>">
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <select class="form-control" id="brand" name="brand" required>
+                <% brands.forEach( brand => { %>
+                    <option value="<%= brand.id %>" <%= (data!==false && data.brand===brand.id)?'selected':'' %>><%= brand.title %></option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <textarea class="form-control" id="remarks" name="remarks" placeholder="Enter shot info"><%= data !== false ? data.remarks : '' %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Image</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <% if(data!==false){ %>
+            <input type="hidden" name="id" value="<%= data.id %>">
+        <% } %>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+</div>
+<!-- /.card -->
+
+<%- include('../_bottom') %>

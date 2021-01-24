@@ -1,25 +1,11 @@
-<%
-  // This page is common for both fleet manager's supply part and expedictor's request part
-  if(! req ){     //check for if this page for expeditor's request page or fleet manager's supply page
-    var current_menu = {parent: 'Supplies', child: 'View'};         //configuration for fleet manager
-    var pageTitle= 'Supplies';
-    var button= 'Add New Supply';
-    var href= '/fleet-management/supplies/new';
-  } else {                                                          // configuration for expeditor - request
-    var current_menu = {parent: 'Fleet Requests', child: 'View'};
-    var pageTitle= 'Fleet Requests';
-    var button= 'Request Fleet';
-    var href= '/fleet-management/supplies/new/req';
-  }
-%>
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu : {parent: 'Vehicles', child: 'Vehicles'} }) %>
 <!-- header-section end -->
 
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title"><%= pageTitle %></h3>
-      <a class="btn btn-primary float-right newSupply" href="<%= href %>"><%= button %></a>
+      <h3 class="card-title">Vehicles</h3>
+      <a class="btn btn-primary float-right" href="/fleet-management/vehicles/new">Add new vehicle</a>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -27,12 +13,11 @@
         <thead>
           <tr>
             <th style="width: 40px">#</th>
-            <th>Reference</th>
-            <th>Created</th>
-            <th>From</th>
-            <th>To</th>
+            <th>Title</th>
+            <th>Plate Number</th>
+            <th>Brand</th>
+            <th>Registrations</th>
             <th>Remarks</th>
-            <th>Address</th>
             <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </thead>
@@ -41,15 +26,14 @@
           <% result.forEach( row => { %>
             <tr data-id="<%= row.id %>">
               <td><%= count++ %></td>
-              <td><%= row.reference %></td>
-              <td><%= dateformat(row.created, 'dd/mm/yyyy') %></td>
-              <td><%= dateformat(row.from_date, 'dd/mm/yyyy') %></td>
-              <td><%= dateformat(row.to_date, 'dd/mm/yyyy') %></td>
+              <td><%= row.title %></td>
+              <td><%= row.plate_number %></td>
+              <td><%= row.brand %></td>
+              <td><%= row.registrations %></td>
               <td><%= row.remarks %></td>
-              <td><%= row.address %></td>
               <td class="text-center">
-                <a href="/fleet-management/supplies/edit/<%= row.id %>" class="editSupply" data-id="<%= row.id %>"><i class="fas fa-edit"></i></a>
-                <a href="/fleet-management/supplies/delete/<%= row.id %>" class="delSupply" data-id="<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
+                <a href="/fleet-management/vehicles/edit/<%= row.id %>"><i class="fas fa-edit"></i></a>
+                <a href="/fleet-management/vehicles/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           <% }) %>
@@ -57,12 +41,11 @@
         <tfoot>
           <tr>
             <th>#</th>
-            <th>Reference</th>
-            <th>Created</th>
-            <th>From</th>
-            <th>To</th>
+            <th>Title</th>
+            <th>Plate Number</th>
+            <th>Brand</th>
+            <th>Registrations</th>
             <th>Remarks</th>
-            <th>Address</th>
             <th style="width: 120px" class="text-center">Action</th>
           </tr>
         </tfoot>
@@ -95,4 +78,4 @@
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
-</script>
+  </script>

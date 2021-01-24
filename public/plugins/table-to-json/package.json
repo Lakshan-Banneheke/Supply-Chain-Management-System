@@ -1,0 +1,64 @@
+{
+  "_from": "table-to-json",
+  "_id": "table-to-json@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-I5OL0VRIaWoMLX0Sbnl5htdt9lzMumA+jGlXQTg2H0sZvrk68OAdJyzTIuUygOfI3sa4VLXMwhAJe+oAOb43DQ==",
+  "_location": "/table-to-json",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "table-to-json",
+    "name": "table-to-json",
+    "escapedName": "table-to-json",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/table-to-json/-/table-to-json-1.0.0.tgz",
+  "_shasum": "5651fce67428bf3b55587789ad970c443827bb9a",
+  "_spec": "table-to-json",
+  "_where": "E:\\SE Project Latest\\Supply-Chain-Management-System",
+  "author": {
+    "name": "Daniel White"
+  },
+  "bugs": {
+    "url": "https://github.com/lightswitch05/table-to-json/issues"
+  },
+  "bundleDependencies": false,
+  "demo": "https://lightswitch05.github.io/table-to-json/",
+  "deprecated": false,
+  "description": "jQuery plugin that reads an HTML table and returns a javascript object representing the values and columns of the table",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-contrib-qunit": "~0.7.0",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-watch": "~0.6.1"
+  },
+  "homepage": "https://github.com/lightswitch05/table-to-json",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/lightswitch05/table-to-json/blob/master/MIT-LICENSE"
+    }
+  ],
+  "main": "lib/jquery.tabletojson.js",
+  "name": "table-to-json",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lightswitch05/table-to-json.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "version": "1.0.0"
+}
