@@ -79,9 +79,6 @@
         <div class="sidebar" id="sidebar-new">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                </div>
                 <div class="info">
                     <a class="d-block">Hello <%= name %></a>
                 </div>
@@ -175,7 +172,7 @@
                     <% } else if(cat_id==3) { %>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
-                        <i></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Expeditor
                             <i class="right fas fa-angle-left"></i>
@@ -188,15 +185,6 @@
                             <p>Send Request</p>
                             </a>
                         </li> -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-envelope-open-text"></i>
-                                <p>
-                                    Fleet Request
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">  
                                     <a href="/expeditor/requests" class="nav-link">
                                     <i class="nav-icon fas fa-edit"></i>
@@ -228,7 +216,14 @@
                     <script>
                         $(function () {
                             $('a.newSupply').attr('href', '/expeditor/sendRequest');
-                            $('form.newSupplyForm').attr('action', '/expeditor/submitRequest');
+                            $('form.newSupplyForm.new').attr('action', '/expeditor/submitRequest');
+                            $('form.newSupplyForm.edit').attr('action', '/expeditor/editSupplySubmit');
+                            $('a.editSupply').each(function() {
+                                $(this).attr('href', '/expeditor/editSupply/'+$(this).attr('data-id'));
+                            });
+                            $('a.delSupply').each(function(){
+                                $(this).attr('href', '/expeditor/delSupply/'+$(this).attr('data-id'));
+                            });
                         });
                     </script>
                     <% } else if(cat_id==4) { %>
@@ -256,7 +251,10 @@
                         </ul>
                     </li>
                     <% } else if(cat_id==6) { %>
+
+
                         <% menus.forEach( menu => { %>
+
                             <li class="nav-item <%= (menu.title===current_menu.parent)?'menu-open':'' %>">
                                 <a href="<%= menu.href %>" class="nav-link <%= (menu.title===current_menu.parent)?'active':'' %>">
                                     <i class="nav-icon <%= menu.icon %>"></i>
@@ -327,12 +325,8 @@
                     <% } %>
 
                     <li class="nav-item">
-                        <% if (url == '/') {%>
-                        <a href="users/logout" class="nav-link">
-                            <% }else { %>
-                            <a href="../users/logout" class="nav-link">
-                                <%}%>
-                            <i class="fas fa-sign-out-alt"></i>
+                        <a href="/users/logout" class="nav-link">
+                           <i class="fas fa-sign-out-alt"></i>
                             <p>
                                 Log out
                             </p>
@@ -347,7 +341,7 @@
               </p>
             </a>
           </li>
-
+            </nav>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
