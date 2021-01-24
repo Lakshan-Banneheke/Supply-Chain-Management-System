@@ -22,7 +22,7 @@
 <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <form action="/fleet-management/supplies/<%= (supply !== false )? 'editSupplySubmit' :'addNew' %>" method="post">
+        <form action="/fleet-management/supplies/<%= (supply !== false )? 'editSupplySubmit' :'addNew' %>" method="post" class="newSupplyForm">
           <% if(supply !== false) { %>
             <input type="hidden" name="supply" value="<%= supply.id %>">
             <script>

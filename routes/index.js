@@ -3,7 +3,10 @@ const auth = require('../config/auth');
 const router = express.Router();
 const errors = require('../controllers/errorController');
 
-
+router.use('/', (req, res, next)=>{
+    res.set("Content-Security-Policy", "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'");
+    next();
+});
 
 router.use('/', require('./root'));
 router.use('/users', require('./users'));
