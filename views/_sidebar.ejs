@@ -153,19 +153,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a id="nav_t_1" href="qs/estimation" class="nav-link">
+                            <a id="nav_t_1" href="/qs/estimation" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Create Estimation</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a id="nav_t_2" href="qs/estimationView" class="nav-link">
+                            <a id="nav_t_2" href="/qs/estimationView" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>View Estimation</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a id="nav_t_3" href="qs/createProject" class="nav-link">
+                            <a id="nav_t_3" href="/qs/createProject" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Create Project</p>
                             </a>
@@ -182,26 +182,55 @@
                         </p>
                         </a>
                         <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="expeditor/sendRequest" class="nav-link">
+                        <!-- <li class="nav-item">  
+                            <a href="/expeditor/sendRequest" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Send Request</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
-                            <a href="expeditor/order" class="nav-link">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Fleet Request
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">  
+                                    <a href="/expeditor/requests" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>View</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">  
+                                    <a href="/expeditor/sendRequest" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>Request</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">  
+                            <a href="/expeditor/order" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Order</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="expeditor/usedMaterial" class="nav-link">
+                        <li class="nav-item">  
+                            <a href="/expeditor/usedMaterial" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>Get Report</p>
                             </a>
                         </li>
                         </ul>
                     </li>
+                    <script>
+                        $(function () {
+                            $('a.newSupply').attr('href', '/expeditor/sendRequest');
+                            $('form.newSupplyForm').attr('action', '/expeditor/submitRequest');
+                        });
+                    </script>
                     <% } else if(cat_id==4) { %>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
