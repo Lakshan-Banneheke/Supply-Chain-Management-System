@@ -1,4 +1,4 @@
-<%- include('_header',{title:"Dashboard"}) %>
+<%- include('_header',{title:"Material Requests"}) %>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
@@ -74,6 +74,15 @@
             <section class="row">
                 <div class="col-8 p-0 m-1 ml-3">
 
+                    <% if(materialRequests.length==0){ %>
+                        <div class="card" style="background-color: #6C757D; color: white">
+                            <div class="row card-body" >
+                                No material requests
+                            </div>
+                        </div>
+
+                    <% } else{  %>
+
             <% for (var i = 0; i < materialRequests.length; i++) { %>
 
                 <div class="card">
@@ -88,7 +97,7 @@
 
                     </div>
                 </div>
-
+                <% } %>
 
             <% } %>
                 </div>

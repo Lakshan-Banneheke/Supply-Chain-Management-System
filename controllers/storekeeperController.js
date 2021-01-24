@@ -287,8 +287,12 @@ const renderChangeMaterialOrderView = async(req,res) =>{
     let req_id = req.params.id;
 
     let req_materials = await storekeeperModel.getOrderedMaterials(req_id);
-
+    console.log("requested materials");
+    console.log(req_materials);
     let req_det = await storekeeperModel.getOrderByID(req_id);
+    console.log("order details");
+    console.log(req_det);
+
     res.render('materialorderchangeview',
         {
             name:req.user.name,
