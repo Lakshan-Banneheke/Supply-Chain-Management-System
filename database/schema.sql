@@ -330,7 +330,7 @@ DECLARE
 BEGIN
     for  i in 1..arraylength
     loop
-      INSERT INTO Order_items (O_id, M_id, quantity) VALUES(o_id, materials[i], quantiies[i]);
+      INSERT INTO Order_items (order_id, m_id, ordered_quantity) VALUES(o_id, materials[i], quantiies[i]);
     end loop;
 
 END;
