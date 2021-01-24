@@ -78,7 +78,6 @@
                                     <th scope="col">E-mail</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Contact Number</th>
-                                    <th scope="col">Date of registration</th>
                                     <th>Approve</th>
                                     <th>Disapprove</th>
                                 </tr>
@@ -93,10 +92,8 @@
                                         let email = user.email;
                                         let category = user.cat_name;
                                         let contact = user.contact_num;
-                                        let dateJoined = user.date_joined.toDateString();
-
                                 %>
-                                <tr><td><%=name %></td><td><%=email%></td><td><%=category%></td><td><%=contact%></td><td><%=dateJoined%></td>
+                                <tr><td><%=name %></td><td><%=email%></td><td><%=category%></td><td><%=contact%></td>
                                     <td><form action='/admin/approveUser' method=post><button type='submit' class='btn btn-success' name='verify-button'>Approve</button><input type='hidden' name='user_id' value=<%=user_id%>></form></td>
                                     <td><form action='/admin/disapproveUser' method=post><button type='submit' class='btn btn-danger' name='disapprove-button'>Disapprove</button><input type='hidden' name='user_id' value=<%=user_id%>></form></td></tr>
 
