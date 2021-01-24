@@ -7,10 +7,10 @@ class User {
     //     console.log
     //     return out.rows;
     // }
-    static async registerUser(name, email, hashedPassword, category, gender, doj, contactNo) {
+    static async registerUser(name, email, hashedPassword, category, gender, contactNo) {
         try {
-            const query = `CALL registerUser ($1, $2, $3, $4, $5, $6, $7)`;
-            const out = await db.query(query, [name, hashedPassword, email, category, contactNo, gender, doj]);
+            const query = `CALL registerUser ($1, $2, $3, $4, $5, $6)`;
+            const out = await db.query(query, [name, hashedPassword, email, category, contactNo, gender]);
             return out.rows;
         } catch (e) {
             throw (`Email ${e} already registered`);
