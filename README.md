@@ -84,3 +84,10 @@ node index.js # otherwise
 ```
 
 Now visit <http://localhost:3000/> and confirm that site is running.
+
+
+An entry for the admin will be inserted in the database by default. After users registers themselves, the admin can log in to the system using the following credentials and approve or disapprove the users.
+Email: admin@gmail.com
+Password: admin123
+
+Note: Email and password can be changed by the admin after logging in as above 
