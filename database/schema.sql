@@ -76,7 +76,6 @@ CREATE TABLE User_Profile (
   cat_id int NOT NULL,
   contact_num varchar(20),
   gender gender_enum,
-  date_joined date,
   verified bool DEFAULT false,
   PRIMARY KEY (user_id),
   FOREIGN KEY (cat_id) REFERENCES User_Category(cat_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -271,6 +270,29 @@ CREATE TABLE Req_Mac (
 
 
 --------------------------Procedures------------------------
+CREATE OR REPLACE PROCEDURE registerUser(
+    val_name VARCHAR(70),
+    val_password VARCHAR(70),
+    val_email VARCHAR(70),
+    val_cat_id integer,
+    val_contact_num VARCHAR(20),
+    val_gender gender_enum
+)
+
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    existing_email VARCHAR(70) := (SELECT email from user_profile WHERE email = val_email);
+BEGIN
+    IF (existing_email is null) THEN
+        INSERT INTO user_profile(name, password, email, cat_id, contact_num, gender) VALUES (val_name, val_password, val_email, val_cat_id, val_contact_num, val_gender);
+    ELSE
+        RAISE EXCEPTION 'Email % is already registered', val_email;
+    END IF;
+END;
+$$;
+
+
 CREATE OR REPLACE PROCEDURE addMaterialValue(
     val_mname VARCHAR(30),
     val_mamount VARCHAR(20),
@@ -314,35 +336,11 @@ BEGIN
 END;
 $$;
 
+
 -------------Essential Insert Statements-------------------
 INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
 
 INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
-
-
---------------------------Procedures------------------------
-CREATE OR REPLACE PROCEDURE registerUser(
-    val_name VARCHAR(70),
-    val_password VARCHAR(70),
-    val_email VARCHAR(70),
-    val_cat_id integer,
-    val_contact_num VARCHAR(20),
-    val_gender gender_enum,
-    val_date_joined date
-)
-
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    existing_email VARCHAR(70) := (SELECT email from user_profile WHERE email = val_email);
-BEGIN
-    IF (existing_email is null) THEN
-        INSERT INTO user_profile(name, password, email, cat_id, contact_num, gender, date_joined) VALUES (val_name, val_password, val_email, val_cat_id, val_contact_num, val_gender, val_date_joined);
-    ELSE
-        RAISE EXCEPTION 'Email % is already registered', val_email;
-    END IF;
-END;
-$$;
 
 
 

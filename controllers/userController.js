@@ -10,7 +10,6 @@ const viewRegister = async (req, res) => {
         category: req.query.category,
         gender: req.query.gender,
         contactNo : req.query.contactNo,
-        doj : req.query.doj
     });
 }
 
@@ -38,7 +37,7 @@ const register = async (req, res) => {
     } catch (err){
         return res.status(200).send({
             result: 'redirect',
-            url:`register/?registrationError=${err}&name=${req.body.name}&email=${req.body.email}&category=${req.body.category}&doj=${req.body.doj}&gender=${req.body.gender}&contactNo=${req.body.contactNo}`
+            url:`register/?registrationError=${err}&name=${req.body.name}&email=${req.body.email}&category=${req.body.category}&gender=${req.body.gender}&contactNo=${req.body.contactNo}`
 
     });
     }
