@@ -188,15 +188,6 @@
                             <p>Send Request</p>
                             </a>
                         </li> -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Fleet Request
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">  
                                     <a href="/expeditor/requests" class="nav-link">
                                     <i class="nav-icon fas fa-edit"></i>
@@ -256,7 +247,10 @@
                         </ul>
                     </li>
                     <% } else if(cat_id==6) { %>
+
+
                         <% menus.forEach( menu => { %>
+
                             <li class="nav-item <%= (menu.title===current_menu.parent)?'menu-open':'' %>">
                                 <a href="<%= menu.href %>" class="nav-link <%= (menu.title===current_menu.parent)?'active':'' %>">
                                     <i class="nav-icon <%= menu.icon %>"></i>
@@ -327,12 +321,8 @@
                     <% } %>
 
                     <li class="nav-item">
-                        <% if (url == '/') {%>
-                        <a href="users/logout" class="nav-link">
-                            <% }else { %>
-                            <a href="../users/logout" class="nav-link">
-                                <%}%>
-                            <i class="fas fa-sign-out-alt"></i>
+                        <a href="/users/logout" class="nav-link">
+                           <i class="fas fa-sign-out-alt"></i>
                             <p>
                                 Log out
                             </p>
@@ -347,7 +337,7 @@
               </p>
             </a>
           </li>
-
+            </nav>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

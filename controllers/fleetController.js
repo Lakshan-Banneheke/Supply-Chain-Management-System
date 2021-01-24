@@ -107,7 +107,7 @@ const supplies = (req, res) => {
     db.query( 'SELECT * FROM supplies where status=$1 order by id desc',[dbstatus], (error, result) => {
         if( error ) console.log('Sql error', error);
         else {
-            res.render('./fleet/supplies', {result: result.rows, dateformat, req: req.req});
+            res.render('./fleet/supplies', {result: result.rows, dateformat, req: req.req, name:req.user.name});
         }
     });
 }
