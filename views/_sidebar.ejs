@@ -216,7 +216,14 @@
                     <script>
                         $(function () {
                             $('a.newSupply').attr('href', '/expeditor/sendRequest');
-                            $('form.newSupplyForm').attr('action', '/expeditor/submitRequest');
+                            $('form.newSupplyForm.new').attr('action', '/expeditor/submitRequest');
+                            $('form.newSupplyForm.edit').attr('action', '/expeditor/editSupplySubmit');
+                            $('a.editSupply').each(function() {
+                                $(this).attr('href', '/expeditor/editSupply/'+$(this).attr('data-id'));
+                            });
+                            $('a.delSupply').each(function(){
+                                $(this).attr('href', '/expeditor/delSupply/'+$(this).attr('data-id'));
+                            });
                         });
                     </script>
                     <% } else if(cat_id==4) { %>
