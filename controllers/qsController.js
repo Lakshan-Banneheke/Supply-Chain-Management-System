@@ -58,13 +58,13 @@ const getProjectEstimations = async (req, res) => {
 }
 
 const viewCreateProject = async (req, res) => {
-    res.render('createProject', {name: req.user.name});
+    const allprojects = await qsService.showAllProjects();
+    res.render('createProject', {name: req.user.name,allprojects});
 }
 
 const viewProject = async (req, res) => {
     try{
         const viewProjects = await qsService.ViewProjects(req.body);
-        console.log(viewProjects);
         return res.status(200).send({viewProjects:viewProjects, err: ''});
     } 
     catch(err){
@@ -98,6 +98,7 @@ const addNewestimateMaterial = async (req, res) => {
         return res.status(200).send({err: `${err}`});
     }
 }
+
 const deleteNewestimateMaterial = async (req, res) => {
     try{
         estimate_materials.pop();
@@ -111,7 +112,6 @@ const deleteNewestimateMaterial = async (req, res) => {
 const saveNewEstimate = async (req, res) => {
     try{
         const project_name = req.body.p_name;
-        // console.log(estimate_materials);
         await qsService.saveNewEstimate(project_name,estimate_materials);
         estimate_materials = []
         return res.status(200).send({result: 'redirect', url: 'estimation', err: ''});
@@ -120,9 +120,23 @@ const saveNewEstimate = async (req, res) => {
             return res.status(200).send({err: `${err}`});
         }
 }
+
 const saveNewProject = async (req, res) => {
     try{
-        const aa = await qsService.saveNewProject(req.body);
+        await qsService.saveNewProject(req.body);
+        return res.status(200).send({result: 'redirect', url: 'createProject', err: ''});
+        }
+        catch(err){
+            return res.status(200).send({err: `${err}`});
+        }
+}
+
+const saveNewProjectSection = async (req, res) => {
+    try{
+        const project_name = req.body.project_name;
+        const section_name = req.body.section_name;
+        const project_id = await qsService.getProjectIdFromName(project_name);
+        await qsService.saveNewProjectSection(section_name,project_id);
         return res.status(200).send({result: 'redirect', url: 'createProject', err: ''});
         }
         catch(err){
@@ -144,5 +158,6 @@ module.exports = {
     sendEstimation,
     deleteEstimate,
     getProjectEstimations,
-    viewProject
+    viewProject,
+    saveNewProjectSection
 }

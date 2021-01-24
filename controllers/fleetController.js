@@ -138,9 +138,9 @@ const addNewSupply = async (req, res) => {
     const query2 = `INSERT INTO supply_items (supply, vehicle, qty, amount, description, status) values ${q}`;
     if( vehicle.length > 0 ){
         db.query(query2).then( _ => {
-            res.redirect('/fleet-management/supplies');
+            res.redirect( req.exp ? '/expeditor/requests' : '/fleet-management/supplies');
         }).catch(console.log);
-    }else res.redirect('/fleet-management/supplies');
+    }else res.redirect( req.exp ? '/expeditor/requests' : '/fleet-management/supplies');
 }
 
 const editSupply = async (req, res) => {

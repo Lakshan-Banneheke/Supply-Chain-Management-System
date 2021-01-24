@@ -303,12 +303,12 @@ CREATE OR REPLACE PROCEDURE addMaterialValue(
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    existing_materials VARCHAR(30) := (SELECT m_name from MaterialValue WHERE m_name = val_mname AND m_amount = val_mamount);
+    existing_materials VARCHAR(30) := (SELECT m_name from MaterialValue WHERE m_name = val_mname);
 BEGIN
     IF (existing_materials is null) THEN
         INSERT INTO MaterialValue(m_name, m_amount, m_cost) VALUES (val_mname,val_mamount, val_mcost);
     ELSE
-        RAISE EXCEPTION '% % is already exit', val_mname,val_mamount;
+        RAISE EXCEPTION '%  is already exit', val_mname;
     END IF;
 END;
 $$;
@@ -330,7 +330,7 @@ DECLARE
 BEGIN
     for  i in 1..arraylength
     loop
-      INSERT INTO Order_items (O_id, M_id, quantity) VALUES(o_id, materials[i], quantiies[i]);
+      INSERT INTO Order_item (order_id, M_id, ordered_quantity) VALUES(o_id, materials[i], quantiies[i]);
     end loop;
 
 END;

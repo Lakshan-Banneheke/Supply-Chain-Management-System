@@ -58,8 +58,16 @@ class expeditorService {
     // static async showEstimate(){
     //     return QS.getEstimate();
     // }
-    
-
+   
+    static async getOneProjectName(proj_id){
+        return expeditor.getOneProjectName(proj_id);
+    }
+    static async getAllsections(proj_id){
+        return expeditor.getAllsections(proj_id);
+    }
+    static async getConsumptionReport(proj_id,sect_id){
+        return expeditor.getConsumptionReport(proj_id,sect_id);
+    }
 }
 
 module.exports = expeditorService;
