@@ -8,6 +8,9 @@ const auth = require('../config/auth');
 router.get('/requests',auth.checkNotAuthenticated, (req, res, next) => {req.req=true;req.exp=true;next()}, FleetController.supplies);
 router.get('/sendRequest',auth.checkNotAuthenticated, (req, res, next) => {req.req=true;req.exp=true;next()}, FleetController.newSupply);
 router.post('/submitRequest', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;req.exp=true;next()}, FleetController.addNewSupply);
+router.get('/editSupply/:id', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;req.exp=true;next()}, FleetController.editSupply);
+router.get('/delSupply/:id', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;req.exp=true;next()}, FleetController.deleteSupply);
+router.post('/editSupplySubmit', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;req.exp=true;next()}, FleetController.editSupplySubmit);
 
 router.get('/order',auth.checkNotAuthenticated, ExpeditorController.viewOrder);
 router.get('/usedMaterial',auth.checkNotAuthenticated, ExpeditorController.renderReqReport);
