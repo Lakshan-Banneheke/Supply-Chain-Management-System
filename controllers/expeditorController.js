@@ -1,6 +1,7 @@
 const userValidator = require('./validators/userValidator');
 const expeditorServices = require('../services/expeditorServices');
 const bcrypt = require('bcrypt');
+const db = require('../config/db');
 
 var project_id = 0 
 const viewSendRequest = async (req, res) => {
@@ -117,7 +118,6 @@ const renderReport = async (req,res)=>{
     })
 }
 
-
 //----------------------------------------
 
 module.exports = {
@@ -131,5 +131,6 @@ module.exports = {
     showCompleteEstimate,
     renderReqReport,
     renderReport
+    
    
 }
