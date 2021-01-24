@@ -13,13 +13,13 @@
   }
 %>
 <!-- header-section start -->
-<%- include('../_top', {title:"Fleet Management", current_menu}) %>
+<%- include('../_top', {title:"Fleet Management", name:"Fleet Management", current_menu}) %>
 <!-- header-section end -->
 
 <div class="card">
     <div class="card-header">
       <h3 class="card-title"><%= pageTitle %></h3>
-      <a class="btn btn-primary float-right" href="<%= href %>"><%= button %></a>
+      <a class="btn btn-primary float-right newSupply" href="<%= href %>"><%= button %></a>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -48,8 +48,8 @@
               <td><%= row.remarks %></td>
               <td><%= row.address %></td>
               <td class="text-center">
-                <a href="/fleet-management/supplies/edit/<%= row.id %>"><i class="fas fa-edit"></i></a>
-                <a href="/fleet-management/supplies/delete/<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
+                <a href="/fleet-management/supplies/edit/<%= row.id %>" class="editSupply" data-id="<%= row.id %>"><i class="fas fa-edit"></i></a>
+                <a href="/fleet-management/supplies/delete/<%= row.id %>" class="delSupply" data-id="<%= row.id %>"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           <% }) %>
