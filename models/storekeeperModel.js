@@ -15,8 +15,9 @@ class StoreKeeper {
     }
 
     static async getMaterialRequests(){
-        const query = "SELECT * FROM Site_Request natural join user_profile where request_state='not completed'";
+        const query = "SELECT * FROM Site_Request natural join user_profile where request_state='not-complete'";
         const out = await db.query(query);
+        console.log(out.rows);
         return out.rows;
     }
 

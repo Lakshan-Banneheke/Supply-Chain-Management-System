@@ -39,7 +39,7 @@ class supervisorModel {
     }
 
     static async getRequestID(projectID,sectionID) {
-        const query  = `SELECT request_id FROM site_request WHERE project_id = $1 AND section_id = $2 ORDER BY request_date DESC `;
+        const query  = `SELECT request_id FROM site_request WHERE project_id = $1 AND section_id = $2 ORDER BY request_id DESC `;
         const out = await db.query(query, [projectID,sectionID]);
         return out.rows[0];
     }

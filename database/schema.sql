@@ -346,7 +346,7 @@ INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Cement',100,'pc
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Steel',100,'pct');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Sand',100,'cube');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Plate',100,'pcs');
-INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Nuts and balts',100,'pcs');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Bolts',100,'pcs');
 
 
 
