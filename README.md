@@ -24,17 +24,19 @@ psql -U db_app supply_chain_db
 ```
 
 Download `database` directory from this repo and then in the shell,
-import the current DDL and DML schema. Here give the full path to the schema
+import the schema. Here give the full path to the schema
 
 ```sql
 \i 'C:/Users/.../database/schema.sql'
 \q
 ```
 
-Login to pgAdmin (Search on start) using the username and password used in the installation process of postgres.
+An sql file with insert statements for some dummy data is provided. Kindly note that this does not have insert statements to fill all the tables in the database. If you wish to import this, follow the same procedure as importing the schema.
+
+Now the database is set up.
+Check if the database exists through the terminal or by logging into to pgAdmin.
 
 
-Then rclick Server>postgres>Databases and check for `supply_chain_db`. 
 ### Node.js setup
 
 First clone this project directory.
