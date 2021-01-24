@@ -8,7 +8,7 @@
 
 // module.exports = UserService;
 
-const User = require('../models/User');
+const User = require('../models/user');
 const Errors = require('../helpers/error');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
