@@ -175,7 +175,7 @@
                     <% } else if(cat_id==3) { %>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i></i>
                         <p>
                             Expeditor
                             <i class="right fas fa-angle-left"></i>
@@ -190,7 +190,7 @@
                         </li> -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-envelope-open-text"></i>
                                 <p>
                                     Fleet Request
                                     <i class="right fas fa-angle-left"></i>
@@ -228,14 +228,7 @@
                     <script>
                         $(function () {
                             $('a.newSupply').attr('href', '/expeditor/sendRequest');
-                            $('form.newSupplyForm.new').attr('action', '/expeditor/submitRequest');
-                            $('form.newSupplyForm.edit').attr('action', '/expeditor/editSupplySubmit');
-                            $('a.editSupply').each(function() {
-                                $(this).attr('href', '/expeditor/editSupply/'+$(this).attr('data-id'));
-                            });
-                            $('a.delSupply').each(function(){
-                                $(this).attr('href', '/expeditor/delSupply/'+$(this).attr('data-id'));
-                            });
+                            $('form.newSupplyForm').attr('action', '/expeditor/submitRequest');
                         });
                     </script>
                     <% } else if(cat_id==4) { %>
