@@ -346,7 +346,6 @@ INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin
 
 
 
-
 ------------------Priviledges----------------------
 GRANT ALL ON TABLE public.User_Profile to db_app;
 GRANT ALL ON TABLE public.User_Category to db_app;

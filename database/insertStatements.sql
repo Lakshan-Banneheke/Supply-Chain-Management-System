@@ -34,7 +34,9 @@ INSERT INTO est_mat(e_id,m_id,quantity) VALUES (4,1,6);
 
 
 
+
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Cement',100,'pct');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Steel',100,'pct');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Sand',100,'cube');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Plate',100,'pcs');
 INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Nuts and balts',100,'pcs');
@@ -43,6 +45,39 @@ INSERT INTO Notification(message,to_designation,state,from_designation,date) VAL
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor2','expeditor','unread','expeditor2','2020-12-20');
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor3','storekeeper','unread','expeditor3','2020-12-20');
 INSERT INTO Notification(message,to_designation,state,from_designation,date) VALUES ('Request received from expeditor4','storekeeper','unread','expeditor4','2020-12-20');
+
+
+INSERT INTO Project(project_name,start_date) VALUES ('first proj','2020-12-12');
+INSERT INTO Project(project_name,start_date) VALUES ('second proj','2021-01-12');
+
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Concrete',100,'Cubic yard');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Steel',100,'7ft x 80in');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Pine1',100,'2in x 4in - 12ft');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Pine2',100,'2in x 4in - 16ft');
+INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Latex Paint',100,'Gallon 2 coats');
+
+
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Concrete','Cubic yard',10000);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Steel','7ft x 80in',40000);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine1','2in x 4in - 12ft',600);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine2','2in x 4in - 16ft',800);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Latex Paint','Gallon 2 coats',3000);
+INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine3','2in x 4in - 16ft',800);
+
+
+INSERT INTO Material_Order(project_id,shop_name,order_date,order_state,ordered) VALUES (1,'ABC Suppliers','2020-12-12','not completed',true);
+INSERT INTO Material_Order(project_id,shop_name,order_date,order_state,ordered) VALUES (2,'ABC Suppliers1','2020-12-12','not completed',true);
+
+INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (1,1,100);
+INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (1,2,100);
+
+INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (2,3,200);
+INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (2,4,200);
+INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (2,6,200);
+
+
+INSERT INTO site_request(project_id,section_id,user_id,request_state,request_date) VALUES(1,1,a1eca4a3-dbde-4989-9af0-b2766f0496c1,'not completed','2020-12-20');
+INSERT INTO material_request(request_id,material_name,requested_quantity) VALUES(1,'Pine',100);
 
 
 ------------------------error------------------------------------
