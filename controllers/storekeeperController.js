@@ -17,20 +17,20 @@ function convertTime(list) {
     return newList;
 }
 
-const renderDashboard = async(req,res)=> {
-
-    let notifications = await storekeeperModel.getNotification();
-    let not_dates =  await convertTime(notifications);
-    // console.log(notifications);
-    passNotification = notifications;
-    notificationView = "/"
-    res.render('dashboard', {
-            name:req.user.name,
-            notifications:notifications,
-            not_dates:not_dates
-        });
-
-}
+// const renderDashboard = async(req,res)=> {
+//
+//     let notifications = await storekeeperModel.getNotification();
+//     let not_dates =  await convertTime(notifications);
+//     // console.log(notifications);
+//     passNotification = notifications;
+//     notificationView = "/"
+//     res.render('dashboard', {
+//             name:req.user.name,
+//             notifications:notifications,
+//             not_dates:not_dates
+//         });
+//
+// }
 
 const renderStock = async(req,res)=>{
     let notifications = await storekeeperModel.getNotification();
@@ -354,7 +354,7 @@ const markAsRead = async(req,res) => {
 
 
 module.exports = {
-    renderDashboard,
+    // renderDashboard,
     renderStock,
     renderStockUpdate,
     renderMaterialRequests,

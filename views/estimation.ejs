@@ -153,7 +153,7 @@
                   <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                      Tasks
+                      Quantity Surveyor
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
@@ -314,7 +314,7 @@
                             <option value="" disabled selected>select a project</option>
                             <% if (allprojects.length > 0){ %>
                               <% allprojects.forEach(project => { %>
-                                <option><%= project.name %></option>
+                                <option><%= project.project_name %></option>
                                 <% }) %>
                             <% } else { %>
                               <p>no projects</p>
@@ -424,4 +424,3 @@
     </div>
   </body>
   <%- include('_footer') %>
-</div>

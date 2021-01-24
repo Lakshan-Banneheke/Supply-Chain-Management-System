@@ -46,7 +46,7 @@
                                     <tr>
                                         <td>${num + 1}</td>
                                         <td>${projectestimation.e_id}</td>
-                                        <td>${(projectestimation.create_date).substring(0, 10)}</td>`;
+                                        <td>${projectestimation.to_char}</td>`;
                                         if(projectestimation.submit_status==true){
                                             table += `<td>YES</td>`;
                                         } else {
@@ -77,7 +77,6 @@
             e.preventDefault();
             var r = confirm("send!");
             if (r) {
-                // let e_id = $('#span_edit_estimate').val();
                 $.ajax({
                     type: 'POST',
                     url: '/qs/estimationView/sendEstimate',
@@ -177,8 +176,6 @@
         
         $(document).on('click', '#btn-add', function (e) {
             e.preventDefault();
-            var r = confirm("check again!");
-            if (r) {
                 // let project_select = $('#project_select').val();
                 let material_select = $('#material_select').val();
                 let material_quantity = $('#quantity_enter').val();
@@ -209,19 +206,13 @@
                     error: function (res) {
                     }
                 });
-            
-            }
-
         });
 
         $(document).on('click', '#btn-remove', function (e) {
             e.preventDefault();
             var r = confirm("delete!");
             if (r) {
-                // let project_select = $('#project_select').val();
-                // let material_select = $('#material_select').val();
-                // let material_quantity = $('#quantity_enter').val();
-                
+
                 $.ajax({
                     type: 'DELETE',
                     url: '/qs/estimation/deleteNewestimateMaterial',
@@ -251,7 +242,7 @@
 
         $(document).on('submit', '#estimate_form', function (e) {
             e.preventDefault();
-            var r = confirm("check the material again!");
+            var r = confirm("submit!");
             if (r) {
                 let p_name = $('#project_select').val();
                 // let m_amount = $('#m_amount').val();
@@ -282,7 +273,6 @@
                     }
                 });
             }
-
         });
 
 
@@ -321,8 +311,8 @@
                             $.each(viewProjects, function (num,viewProject) {
                                 table += `
                                 <tr>
-                                    <td>${viewProject.p_id}</td>
-                                    <td>${viewProject.name}</td>
+                                    <td>${viewProject.project_id}</td>
+                                    <td>${viewProject.project_name}</td>
                                     <td>${viewProject.to_char}</td>
                                 </tr>
                                 `;
@@ -347,26 +337,52 @@
             if (r) {
                 let p_name = $('#p_name').val();
                 let p_startDate = $('#p_startDate').val();
-                let p_duration = $('#p_duration').val();
-                // var d = new Date();
-                // var today = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
-                // // alert(today);
-                // // alert(p_startDate);
-                // if (Date.parse(p_startDate)<=Date.parse(today)){
-                //     $('#create_p_err_msg').html(`<div class="alert alert-danger" role="alert">Date should be future date</div>`) ;
-                //    return;
-                // }
                 $.ajax({
                     type: 'POST',
                     url: '/qs/createProject/saveNewProject',
                     data: {
                         'p_name': p_name,
                         'p_startDate' :p_startDate,
-                        'p_duration' : p_duration,
                     },
                     success: function (response) {
                         if(response.err!==""){
                         $('#create_p_err_msg').html(`<div class="alert alert-danger" role="alert">${response.err}</div>`) 
+                        // alert(response.err);
+                        return
+                        }
+                        // console.log(response);
+                        if (response.result === 'redirect') {
+                            //redirecting
+                            let baseurl = window.location.origin;
+                            console.log(baseurl);
+                            baseurl = baseurl + '/qs/';
+                            let url = baseurl + response.url;
+                            window.location.replace(url);
+                        }
+                    },
+                    error: function (res) {
+                    }
+                });
+            }
+
+        });
+        
+        $(document).on('submit', '#create_project_section_form', function (e) {
+            e.preventDefault();
+            var r = confirm("create project section!");
+            if (r) {
+                optionProject4 = $("#project_select4 option:selected").text();
+                let section_name = $('#section_name').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/qs/createProject/saveNewProjectSection',
+                    data: {
+                        'project_name': optionProject4,
+                        'section_name' :section_name,
+                    },
+                    success: function (response) {
+                        if(response.err!==""){
+                        $('#err_msg6').html(`<div class="alert alert-danger" role="alert">${response.err}</div>`) 
                         // alert(response.err);
                         return
                         }
