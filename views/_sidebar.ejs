@@ -188,6 +188,29 @@
                             <p>Send Request</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Fleet Request
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">  
+                                    <a href="/expeditor/requests" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>View</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">  
+                                    <a href="/expeditor/sendRequest" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>Request</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">  
                             <a href="/expeditor/order" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
@@ -202,6 +225,12 @@
                         </li>
                         </ul>
                     </li>
+                    <script>
+                        $(function () {
+                            $('a.newSupply').attr('href', '/expeditor/sendRequest');
+                            $('form.newSupplyForm').attr('action', '/expeditor/submitRequest');
+                        });
+                    </script>
                     <% } else if(cat_id==4) { %>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
