@@ -37,16 +37,16 @@ class qsService {
         return QS.getAllProjects();
     }
     
-    static async getProjectIdFromName(name){
-        return QS.getProjectIdFromName(name);
+    static async getProjectIdFromName(project_name){
+        return QS.getProjectIdFromName(project_name);
     }
 
-    static async getProjectEstimations(p_id){
-        return QS.getProjectEstimations(p_id);
+    static async getProjectEstimations(project_id){
+        return QS.getProjectEstimations(project_id);
     }
     
-    static async saveNewProject({p_name,p_startDate, p_duration}){
-        return QS.saveNewProjectTodb(p_name,p_startDate, p_duration);
+    static async saveNewProject({p_name,p_startDate}){
+        return QS.saveNewProjectTodb(p_name,p_startDate);
     }
     
     static async ViewProjects({from_date,to_date}){

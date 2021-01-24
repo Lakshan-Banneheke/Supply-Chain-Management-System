@@ -12,7 +12,6 @@ router.post('/estimationView',auth.checkNotAuthenticated, QSController.viewEstim
 router.post('/estimationView/getProjectEstimations',auth.checkNotAuthenticated, QSController.getProjectEstimations);
 router.post('/estimationView/sendEstimate',auth.checkNotAuthenticated, QSController.sendEstimation);
 router.delete('/estimationView/deleteEstimate',QSController.deleteEstimate);
-// router.post('/estimationView/edit',auth.checkNotAuthenticated, QSController.editEstimation);
 
 router.post('/estimation/addNewM', QSController.addNewMaterial);
 router.post('/estimation/addNewestimateMaterial',QSController.addNewestimateMaterial);

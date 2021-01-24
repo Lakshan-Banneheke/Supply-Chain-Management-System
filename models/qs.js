@@ -25,7 +25,7 @@ class QS {
         console.log("saveNewEstimateTodb");
         const query1=`select project_id from project where project_name=$1;`;
         const out1 = await db.query(query1,[project_name]);
-        const p_id = out1.rows[0].p_id;
+        const p_id = out1.rows[0].project_id;
         const out2 = await db.query(`select to_char(current_date :: DATE, 'yyyy-mm-dd');`);
         const today = out2.rows[0].to_char;
         const query3=`INSERT INTO estimate(project_id, create_date,submit_status) VALUES($1,$2,$3) RETURNING e_id;`;
@@ -89,21 +89,21 @@ class QS {
         return out.rows;
     }
 
-    static async getProjectIdFromName(name) {
+    static async getProjectIdFromName(project_name) {
         console.log("getProjectId");
         const query=`SELECT project_id FROM project WHERE project_name = $1`;
-        const out = await db.query(query,[name]);
-        return out.rows[0].p_id;
+        const out = await db.query(query,[project_name]);
+        return out.rows[0].project_id;
     }
 
-    static async getProjectEstimations(p_id) {
+    static async getProjectEstimations(project_id) {
         console.log("estimationsOfProject");
-        const query=`SELECT * FROM Estimate where project_id = $1;`;
-        const out = await db.query(query,[p_id]);
+        const query=`SELECT e_id,TO_CHAR(create_date :: DATE,'yyyy-mm-dd'),submit_status FROM Estimate where project_id = $1;`;
+        const out = await db.query(query,[project_id]);
         return out.rows;
     }
 
-    static async saveNewProjectTodb(project_name,project_startDate, project_duration) {
+    static async saveNewProjectTodb(project_name,project_startDate) {
         console.log("saveNewProjectTodb");
         const allprojects =await this.getAllProjects();
        var similarProject="";

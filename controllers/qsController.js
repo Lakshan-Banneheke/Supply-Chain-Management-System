@@ -64,7 +64,6 @@ const viewCreateProject = async (req, res) => {
 const viewProject = async (req, res) => {
     try{
         const viewProjects = await qsService.ViewProjects(req.body);
-        console.log(viewProjects);
         return res.status(200).send({viewProjects:viewProjects, err: ''});
     } 
     catch(err){
@@ -98,6 +97,7 @@ const addNewestimateMaterial = async (req, res) => {
         return res.status(200).send({err: `${err}`});
     }
 }
+
 const deleteNewestimateMaterial = async (req, res) => {
     try{
         estimate_materials.pop();
@@ -111,7 +111,6 @@ const deleteNewestimateMaterial = async (req, res) => {
 const saveNewEstimate = async (req, res) => {
     try{
         const project_name = req.body.p_name;
-        // console.log(estimate_materials);
         await qsService.saveNewEstimate(project_name,estimate_materials);
         estimate_materials = []
         return res.status(200).send({result: 'redirect', url: 'estimation', err: ''});
@@ -122,7 +121,7 @@ const saveNewEstimate = async (req, res) => {
 }
 const saveNewProject = async (req, res) => {
     try{
-        const aa = await qsService.saveNewProject(req.body);
+        await qsService.saveNewProject(req.body);
         return res.status(200).send({result: 'redirect', url: 'createProject', err: ''});
         }
         catch(err){
