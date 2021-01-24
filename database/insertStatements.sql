@@ -48,29 +48,29 @@ INSERT INTO Notification(message,to_designation,state,from_designation,date) VAL
 ------------------------error------------------------------------
 ------------------------------------------------------------
 
- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha1 constructions','2020-10-12','2020-11-12','not complete');
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Sand','cube',10);
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Plate','pcs',5);
-
- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('lakshan1 constructions','2020-10-12','2020-11-12','not complete');
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Cement','pct',10);
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Nuts and balts','pcs',5);
-
- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha2 constructions','2020-10-12','2020-11-12','not complete');
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Sand','cube',10);
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Plate','pcs',5);
-
- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha3 constructions','2020-10-12','2020-11-12','not complete');
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Sand','cube',10);
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Plate','pcs',5);
-
- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha4 constructions','2020-10-12','2020-11-12','not complete');
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Sand','cube',10);
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Plate','pcs',5);
-
- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha5 constructions','2020-10-12','2020-11-12','not complete');
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Sand','cube',10);
- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Plate','pcs',5);
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha1 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (1,'Plate','pcs',5);
+--
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('lakshan1 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Cement','pct',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (2,'Nuts and balts','pcs',5);
+--
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha2 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (3,'Plate','pcs',5);
+--
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha3 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (4,'Plate','pcs',5);
+--
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha4 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (5,'Plate','pcs',5);
+--
+-- INSERT INTO Material_Order(shop_name,order_date,received_date,order_state) VALUES ('uditha5 constructions','2020-10-12','2020-11-12','not complete');
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Sand','cube',10);
+-- INSERT INTO Order_Item(order_id,material_name,unit,ordered_quantity) VALUES (6,'Plate','pcs',5);
 
 -----------------------
 
