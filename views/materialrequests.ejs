@@ -92,8 +92,8 @@
                     </div>
 
                     <div class="row card-body">
-                        <div class="col-9"> user <%= materialRequests[i].user_id %>  </div>
-                        <div class="col-3"> <a href="store/materialrequests/issue/<%= materialRequests[i].request_id %>" class="btn btn-primary" >Issue Materials</a>  </div>
+                        <div class="col-9">  <%= materialRequests[i].name %>  </div>
+                        <div class="col-3"> <a href="/store/materialrequests/issue/<%= materialRequests[i].request_id %>" class="btn btn-primary" >Issue Materials</a>  </div>
 
                     </div>
                 </div>

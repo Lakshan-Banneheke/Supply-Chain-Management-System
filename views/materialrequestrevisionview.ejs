@@ -46,7 +46,6 @@
                                 <th scope="col">Materials</th>
                                 <th scope="col">Material Name</th>
                                 <th scope="col">Qty</th>
-                                <th scope="col">Unit</th>
                             </tr>
                             </thead>
 
@@ -55,8 +54,8 @@
                                 <tr>
                                     <th scope="row"> <%= i+1 %> </th>
                                     <td> <%= materials[i].material_name %> </td>
-                                    <td> <input type="number" min="0" max="<%= available_materials[i] %>" id="<%= materials[i].material_name %>" required value="<%= materials[i].requested_quntity %>" class="form-control" style="border: none" placeholder="<%= materials[i].requested_quntity %>" name="receieved_quantity" >   </td>
-                                    <td> <%= materials[i].unit %> </td>
+                                    <td> <input type="number" min="0" max="<%= available_materials[i] %>" id="<%= materials[i].material_name %>" required value="<%= materials[i].requested_quantity %>" class="form-control" style="border: none" placeholder="<%= materials[i].requested_quantity %>" name="receieved_quantity" >   </td>
+
                                     <!--                                    <td> <button type="button" class="btn btn-danger btn-sm rounded-2">Change</button> </td>-->
                                 </tr>
                             <% } %>

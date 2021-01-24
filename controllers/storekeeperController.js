@@ -109,11 +109,14 @@ function convertMat(list,req_date) {
 
 
 const renderMaterialRequestView  = async (req,res) =>{
+    console.log("ok");
     let req_id = req.params.id;
 
     let req_materials = await storekeeperModel.getRequestedMaterials(req_id);
 
     let req_det = await storekeeperModel.getMaterialRequestByID(req_id);
+    console.log(req_materials);
+    console.log(req_det);
 
     res.render('materialrequestview',{
         name:req.user.name,
@@ -170,8 +173,12 @@ const checkAvailability =  async function (req_materials){
     let not_aval = [];
     for(var i=0; i<req_materials.length;i++ ){
         var mat_name=String(req_materials[i].material_name);
+        console.log(mat_name);
         var aval_qty = await storekeeperModel.getQuantityByName(mat_name);
-        if (req_materials[i].requested_quntity>aval_qty[0].material_quantity){
+        console.log("aval qty");
+        console.log(aval_qty);
+        console.log(req_materials[i].requested_quntity);
+        if (req_materials[i].requested_quantity>aval_qty[0].material_quantity){
             not_aval.push(mat_name);
         }
     } return not_aval;

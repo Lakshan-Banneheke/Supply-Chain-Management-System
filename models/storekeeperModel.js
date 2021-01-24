@@ -15,7 +15,7 @@ class StoreKeeper {
     }
 
     static async getMaterialRequests(){
-        const query = "SELECT * FROM Site_Request where request_state='not completed'";
+        const query = "SELECT * FROM Site_Request natural join user_profile where request_state='not completed'";
         const out = await db.query(query);
         return out.rows;
     }
@@ -39,7 +39,7 @@ class StoreKeeper {
     }
 
     static async getMaterialRequestByID(id){
-        const query = 'SELECT * FROM Site_Request where request_id='+id;
+        const query = 'SELECT * FROM Site_Request natural join user_profile where request_id='+id;
         const out = await db.query(query);
         return out.rows;
     }
@@ -69,7 +69,7 @@ class StoreKeeper {
         for(let i=0; i<mat.length; i++){
             var material = mat[i].material_name;
 
-            var qty =  mat[i].requested_quntity;
+            var qty =  mat[i].requested_quantity;
 
             await db.query(query,[qty,material,req_id]);
         }
@@ -101,7 +101,7 @@ class StoreKeeper {
 
         for(var i=0;i<req_mat.length;i++){
             if(rec_mat[i]==''){
-                var rec_qty = req_mat[i].requested_quntity;
+                var rec_qty = req_mat[i].requested_quantity;
                 var mat_name = req_mat[i].material_name;
                 await db.query(query,[rec_qty,mat_name,req_id]);
 

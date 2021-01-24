@@ -342,50 +342,6 @@ INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('E
 
 INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('admin', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'admin@gmail.com', 1, true);
 
-INSERT INTO user_profile(name, password, email, cat_id, verified) VALUES ('storekeeper', '$2a$10$C7B15U6UIoB2H5E2EvxSVecVXhv9lu.dS9IK8B/2ybNUa1.cyPgm2', 'stk@gmail.com', 5, true);
-
------ added by pasanmadushan
-
-INSERT INTO Project(project_name,start_date) VALUES ('first proj','2020-12-12');
-INSERT INTO Project(project_name,start_date) VALUES ('second proj','2021-01-12');
-
-INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Concrete',100,'Cubic yard');
-INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Steel',100,'7ft x 80in');
-INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Pine1',100,'2in x 4in - 12ft');
-INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Pine2',100,'2in x 4in - 16ft');
-INSERT INTO Stock(material_name,material_quantity,unit) VALUES ('Latex Paint',100,'Gallon 2 coats');
-
-
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Concrete','Cubic yard',10000);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Steel','7ft x 80in',40000);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine1','2in x 4in - 12ft',600);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine2','2in x 4in - 16ft',800);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Latex Paint','Gallon 2 coats',3000);
-INSERT INTO MaterialValue(m_name,m_amount,m_cost) VALUES ('Pine3','2in x 4in - 16ft',800);
-
-
-INSERT INTO Material_Order(project_id,shop_name,order_date,order_state,ordered) VALUES (1,'ABC Suppliers','2020-12-12','not completed',true);
-INSERT INTO Material_Order(project_id,shop_name,order_date,order_state,ordered) VALUES (2,'ABC Suppliers1','2020-12-12','not completed',true);
-
-INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (1,1,100);
-INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (1,2,100);
-
-INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (2,3,200);
-INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (2,4,200);
-INSERT INTO Order_item(order_id,M_id,ordered_quantity) VALUES (2,6,200);
-
-
-----
-
-INSERT INTO site_request(project_id,section_id,user_id,request_state,request_date) VALUES(1,1,);
-
-
-
-
-
-
-
-
 
 
 
