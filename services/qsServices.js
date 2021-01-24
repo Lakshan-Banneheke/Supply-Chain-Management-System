@@ -53,6 +53,10 @@ class qsService {
         return QS.ViewProjects(from_date,to_date);
     }
     
+    static async saveNewProjectSection(section_name,project_id){
+        return QS.saveNewProjectSectionTodb(section_name,project_id);
+    }
+
 }
 
 module.exports = qsService;

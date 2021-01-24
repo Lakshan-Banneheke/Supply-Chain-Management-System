@@ -84,7 +84,7 @@ class QS {
 
     static async ViewProjects(from_date,to_date) {
         console.log("viewProject");
-        const query=`select project_id,project_name,TO_CHAR(start_date :: DATE,'yyyy-mm-dd'),duration from project where start_date between $1 and $2;`;
+        const query=`select project_id,project_name,TO_CHAR(start_date :: DATE,'yyyy-mm-dd') from project where start_date between $1 and $2;`;
         const out = await db.query(query,[from_date,to_date]);
         return out.rows;
     }
@@ -108,7 +108,6 @@ class QS {
         const allprojects =await this.getAllProjects();
        var similarProject="";
         allprojects.forEach(async project => {
-            console.log(project);
             if(project_name==project.name){
                 similarProject=1;
             }
@@ -122,7 +121,25 @@ class QS {
         }
     }
 
-
+    static async saveNewProjectSectionTodb(section_name,project_id) {
+        console.log("saveNewProjectSectionTodb");
+        const query=`select section_name,project_id from project_section;`;
+        const out = await db.query(query);
+        const allsections = out.rows;
+        var similarSection="";
+        allsections.forEach(async section => {
+            if(section_name==section.section_name && project_id==section.project_id){
+                similarSection=1;
+            }
+        })
+        if(similarSection != ""){
+            throw ('This project Section is alrredy there.');
+        }else{
+        const query1=`INSERT INTO project_section(section_name, project_id) VALUES($1,$2)`;
+        const out1 = await db.query(query1,[section_name,project_id]);
+        return out1.rows;
+        }
+    }
 }
 
 

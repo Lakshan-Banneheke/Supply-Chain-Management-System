@@ -235,6 +235,11 @@
                                     href="#custom-tabs-three-profile" role="tab"
                                     aria-controls="custom-tabs-three-profile" aria-selected="false">View Project</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-three-profile-tab2" data-toggle="pill"
+                                    href="#custom-tabs-three-profile2" role="tab"
+                                    aria-controls="custom-tabs-three-profile2" aria-selected="false">Create Project Sections</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -300,8 +305,45 @@
                                         
                                     </div>
                                 </div>
-
                             </div>
+
+                            <div class="tab-pane fade" id="custom-tabs-three-profile2" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab2">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Create Project Sections</h3>
+                                    </div>
+                                
+                                    <form  id="create_project_section_form" >
+                                        <div class="card-body">
+                                            <div id="err_msg6">
+                                                <!-- for error msg -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="project">Select Project</label>
+                                                <select class="form-control" id='project_select4' required>
+                                                  <option value="" disabled selected>select a project</option>
+                                                  <% if (allprojects.length > 0){ %>
+                                                    <% allprojects.forEach(project => { %>
+                                                      <option><%= project.project_name %></option>
+                                                      <% }) %>
+                                                  <% } else { %>
+                                                    <p>no projects</p>
+                                                  <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="">Project Section Name</label>
+                                            <input type="text" class="form-control" id="section_name" name="section_name" placeholder="Enter project section name" required>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" style="width: 100px; " class="btn btn-primary">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
 
                         </div>
                     </div>

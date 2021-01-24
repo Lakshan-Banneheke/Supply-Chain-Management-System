@@ -366,6 +366,42 @@
             }
 
         });
+        
+        $(document).on('submit', '#create_project_section_form', function (e) {
+            e.preventDefault();
+            var r = confirm("create project section!");
+            if (r) {
+                optionProject4 = $("#project_select4 option:selected").text();
+                let section_name = $('#section_name').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/qs/createProject/saveNewProjectSection',
+                    data: {
+                        'project_name': optionProject4,
+                        'section_name' :section_name,
+                    },
+                    success: function (response) {
+                        if(response.err!==""){
+                        $('#err_msg6').html(`<div class="alert alert-danger" role="alert">${response.err}</div>`) 
+                        // alert(response.err);
+                        return
+                        }
+                        // console.log(response);
+                        if (response.result === 'redirect') {
+                            //redirecting
+                            let baseurl = window.location.origin;
+                            console.log(baseurl);
+                            baseurl = baseurl + '/qs/';
+                            let url = baseurl + response.url;
+                            window.location.replace(url);
+                        }
+                    },
+                    error: function (res) {
+                    }
+                });
+            }
+
+        });
 
 
 

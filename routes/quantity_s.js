@@ -19,5 +19,6 @@ router.delete('/estimation/deleteNewestimateMaterial',QSController.deleteNewesti
 router.post('/estimation/saveNewEstimate',QSController.saveNewEstimate);
 router.post('/createProject/saveNewProject', QSController.saveNewProject);
 router.post('/createProject/viewProject',QSController.viewProject);
+router.post('/createProject/saveNewProjectSection', QSController.saveNewProjectSection);
 
 module.exports = router;
