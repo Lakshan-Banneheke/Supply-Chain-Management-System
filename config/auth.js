@@ -12,6 +12,14 @@ const checkNotAuthenticated = (req, res, next) => {
     res.redirect("/users/login")
 }
 
+
+const checkAdmin = (req, res, next) => {
+    if (req.user.cat_id !== 1){
+        return next();
+    }
+    res.redirect("/admin");
+}
+
 const checkQS = (req, res, next) => {
     if (req.isAuthenticated()){
         if (req.user.cat_id === 2){
@@ -80,5 +88,6 @@ module.exports = {
     checkExpeditor,
     checkSupervisor,
     checkStorekeeper,
-    checkFleetManager
+    checkFleetManager,
+    checkAdmin
 }

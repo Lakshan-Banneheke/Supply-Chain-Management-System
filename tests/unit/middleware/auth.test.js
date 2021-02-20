@@ -195,4 +195,22 @@ describe('check user category', () => {
             expect(res.redirect).toHaveBeenCalledWith('../405');
         });
     });
+
+    describe('checkAdmin', ()=>{
+        it('should allow access', ()=>{
+            const res = { redirect : jest.fn() };
+            const next = jest.fn();
+            req.user.cat_id = 1;
+            auth.checkAdmin(req, res, next);
+            expect(res.redirect).toHaveBeenCalledWith('/admin');
+        });
+
+        it('should not allow access', ()=>{
+            const res = { redirect : jest.fn() };
+            const next = jest.fn();
+            req.user.cat_id = 2;
+            auth.checkAdmin(req, res, next);
+            expect(next).toHaveBeenCalled();
+        });
+    });
 })
