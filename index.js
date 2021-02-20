@@ -5,7 +5,7 @@ const passport = require("passport");
 const flash = require("express-flash");
 const session = require('express-session');
 const helmet = require('helmet');
-const pgConnect = require('connect-pg-simple');
+// const pgConnect = require('connect-pg-simple');
 const initializePassport = require("./config/passport");
 
 // const { defaultLogger} = require('./config/logger');
@@ -68,8 +68,11 @@ app.use(require('./routes'));
 // });
 
 /* Listen on the port for requests */
-app.listen(process.env.PORT || 3000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
     console.log('Express server listening on port %d in %s mode', process.env.PORT, app.settings.env);
 });
 
-module.exports = app;
+module.exports = {
+    app,
+    server
+};
