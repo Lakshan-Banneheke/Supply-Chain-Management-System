@@ -16,19 +16,8 @@ const viewRegister = async (req, res) => {
 const viewLogin = async (req, res) => {
     res.render('login');
 }
-
 const register = async (req, res) => {
     try{
-        if (req.body.category === "Category"){
-            const errMsg = 'Select a Category';
-            throw (errMsg);
-        }
-        if (req.body.gender === "Gender"){
-            const errMsg = "Select a Gender";
-            throw (errMsg);
-        }
-
-
         const {value, error} = await userValidator.register.validate(req.body);
         if (error) throw (error);
         await userService.register(value);
