@@ -19,7 +19,8 @@ class Admin {
         return out.rows[0];
     }
     static async editInfo(new_name, new_email,new_contact_num,id) {
-        const query = `UPDATE user_profile SET name= $1,email=$2,contact_num=$3 WHERE user_id = $4`;
+        //const query = `UPDATE user_profile SET name= $1,email=$2,contact_num=$3 WHERE user_id = $4`;
+        const query=`CALL editProfile($1,$2,$3,$4)`;
         const out = await db.query(query, [new_name, new_email,new_contact_num,id]);
         return out.rows[0];
     }

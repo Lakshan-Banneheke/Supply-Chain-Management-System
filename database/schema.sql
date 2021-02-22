@@ -336,6 +336,23 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE PROCEDURE public.editProfile(
+	val_name character varying,
+	val_email character varying,
+	val_contact_num character varying,
+	val_user_id character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+DECLARE
+    existing_email VARCHAR(70) := (SELECT email from user_profile WHERE email = val_email and user_id not in(val_user_id));
+BEGIN
+    IF (existing_email is null) THEN
+        UPDATE user_profile SET name=val_name, email=val_email, contact_num=val_contact_num,verified='true' WHERE user_id = val_user_id;
+    ELSE
+        RAISE EXCEPTION 'Email % is already registered', val_email;
+    END IF;
+END;
+$BODY$;
 
 -------------Essential Insert Statements-------------------
 INSERT INTO user_category(cat_name) VALUES ('Admin'), ('Quantity Surveyor'), ('Expeditor'), ('On-Site Supervisor'), ('Storekeeper'), ('Fleet Manager');
@@ -372,5 +389,9 @@ GRANT ALL ON TABLE public.Material_Order to db_app;
 GRANT ALL ON TABLE public.Machine_Request to db_app;
 GRANT ALL ON TABLE public.Machine to db_app;
 GRANT ALL ON TABLE public.Req_Mac to db_app;
+GRANT EXECUTE ON PROCEDURE public.editProfile(val_name character varying,
+	val_email character varying,
+	val_contact_num character varying,
+	val_user_id character varying) TO db_app;
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO db_app;
