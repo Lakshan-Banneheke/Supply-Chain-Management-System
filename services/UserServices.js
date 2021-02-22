@@ -42,7 +42,6 @@ class UserService {
     }
    
     // eslint-disable-next-line no-empty-function
-    static async logout() {}
 }
 
 module.exports = UserService;

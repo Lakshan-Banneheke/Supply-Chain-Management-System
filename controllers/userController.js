@@ -44,19 +44,26 @@ const login = async (email, password, done) => {
                     message: "Email has not been approved yet"
                 });
             } else {
+                const isMatch = await bcrypt.compare(password, user.password);
 
+                if (isMatch) {
+                    return done(null, user);
+                } else {
+                    //password is incorrect
+                    return done(null, false, {message: "Password is incorrect"});
+                }
 
-                bcrypt.compare(password, user.password, (err, isMatch) => {
-                    if (err) {
-                        throw err;
-                    }
-                    if (isMatch) {
-                        return done(null, user);
-                    } else {
-                        //password is incorrect
-                        return done(null, false, {message: "Password is incorrect"});
-                    }
-                });
+                // bcrypt.compare(password, user.password, (err, isMatch) => {
+                //     if (err) {
+                //         throw err;
+                //     }
+                //     if (isMatch) {
+                //         return done(null, user);
+                //     } else {
+                //         //password is incorrect
+                //         return done(null, false, {message: "Password is incorrect"});
+                //     }
+                // });
             }
         } else {
             // No user

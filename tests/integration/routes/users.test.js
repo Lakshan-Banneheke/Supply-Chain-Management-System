@@ -7,7 +7,8 @@ describe('/users', ()=>{
     afterEach(async () => {
         server.close();
     });
-   describe('GET /register', () => {
+
+   describe('POST /register', () => {
        it('should register successfully', async ()=>{
            const res = await request(server).post('/users/register')
                             .send({
@@ -24,5 +25,21 @@ describe('/users', ()=>{
            expect(res.status).toBe(200);
            await db.query(`DELETE FROM user_profile WHERE email = 'clarke@gmail.com'`)
        })
-})
+    })
+
+
+    describe('GET /register', () => {
+        it('should render register page', async ()=>{
+            const res = await request(server).get('/users/register');
+            expect(res.status).toBe(200);
+        })
+    })
+
+    describe('GET /login', () => {
+        it('should render login page', async ()=>{
+            const res = await request(server).get('/users/login');
+            expect(res.status).toBe(200);
+        })
+    })
+
 })
