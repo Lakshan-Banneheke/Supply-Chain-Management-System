@@ -58,7 +58,7 @@ const editInfo = async (req, res) => {
     } catch (err){
         return res.status(200).send({
             result: 'redirect',
-            url:`/admin/editInfo/?editInfoError=${err}&existing_name=${req.body.new_name}&existing_email=${req.body.new_email}&existing_contactNum=${req.body.new_contact_num}`
+            url:`admin/editInfo/?editInfoError=${err}&existing_name=${req.body.new_name}&existing_email=${req.body.new_email}&existing_contactNum=${req.body.new_contact_num}`
 
     });
     }

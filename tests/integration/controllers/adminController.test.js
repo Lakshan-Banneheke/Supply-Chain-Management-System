@@ -7,13 +7,13 @@ let server;
 describe('edit info', () => {
     let res;
     let req;
-    beforeEach(async () => {
+    beforeEach(() => {
         server = require('../../../index');
         req = {
             body: {
                 id:'2fd685ed-979a-4a2e-8c6c-3370eb025228',
                 name: 'Shashini',
-                email: 'shashini@gmail.com',
+                email: 'shashininew@gmail.com',
                 contact_num: '07123232323'
             }
         }
@@ -27,7 +27,7 @@ describe('edit info', () => {
         }
     });
 
-    afterEach(async () => {
+    afterEach(() => {
         server.close();
     });
 
