@@ -37,7 +37,7 @@ describe('edit info', () => {
         const out = `SELECT name,email,contact_num FROM user_profile WHERE user_id ='2fd685ed-979a-4a2e-8c6c-3370eb025228'`;
         expect(out.rows[0]).toEqual({name: 'Shashini',email: 'shashini@gmail.com',contact_num: '07123232323'});
         expect(res.redirect).toHaveBeenCalledWith(expected);
-        await db.query(`DELETE FROM user_profile WHERE email = 'shashini@gmail.com'`)
+        //await db.query(`DELETE FROM user_profile WHERE email = 'shashini@gmail.com'`)
     });
     // it('should give email already registered error', async ()=>{
     //     req.body.email = 'sarah123@gmail.com';
