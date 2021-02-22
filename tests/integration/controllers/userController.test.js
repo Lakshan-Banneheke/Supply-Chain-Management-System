@@ -1,10 +1,14 @@
+const request = require('supertest');
 const userController = require('../../../controllers/userController');
 const db = require('../../../config/db');
+
+let server;
 
 describe('register', () => {
     let res;
     let req;
     beforeEach(async () => {
+        server = require('../../../index');
         req = {
             body: {
                 name: 'Sarah Hyland',
@@ -25,9 +29,15 @@ describe('register', () => {
         }
     });
 
+    afterEach(async () => {
+        server.close();
+    });
+
     it('should successfully register', async ()=>{
         await userController.register(req, res);
         const expected = {result: 'redirect', url: 'login'}
+        const out = await db.query(`SELECT email FROM user_profile WHERE email = 'sarah@gmail.com'`)
+        expect(out.rows[0]).toEqual({"email": "sarah@gmail.com"});
         expect(res.send).toHaveBeenCalledWith(expected);
         await db.query(`DELETE FROM user_profile WHERE email = 'sarah@gmail.com'`)
     })
