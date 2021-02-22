@@ -1,6 +1,7 @@
-const request = require('supertest');
+// const request = require('supertest');
 const adminController = require('../../../controllers/adminController');
 const db = require('../../../config/db');
+const { getMaxListeners } = require('../../../config/db');
 
 let server;
 
@@ -10,47 +11,52 @@ describe('edit info', () => {
     beforeEach(() => {
         server = require('../../../index');
         req = {
-            body: {
-                id:'2fd685ed-979a-4a2e-8c6c-3370eb025228',
-                name: 'Shashini',
-                email: 'shashininew@gmail.com',
-                contact_num: '07123232323'
+            user:{
+                name:'Shashini',
+                email:'shashw@gmail.com',
+                user_id:'2fd685ed-979a-4a2e-8c6c-3370eb025228',
+            },
+
+            body:{
+                new_name: 'Mary',
+                new_email: 'mary@gmail.com',
+                new_contact_num : '07182266663'
             }
         }
 
         res = {
-            redirect: jest.fn(),
-            send : jest.fn(),
-            status : function () {
-                return this;
-            }
+            redirect: jest.fn()
         }
     });
 
     afterEach(() => {
         server.close();
     });
-
+        //passed
     it('should successfully edit information', async ()=>{
+        let expected_result={
+            name: 'Mary',
+            email: 'mary@gmail.com',
+            contact_num : '07182266663'
+        };
         await adminController.editInfo(req, res);
-        const expected = '/admin';
-        const out = `SELECT name,email,contact_num FROM user_profile WHERE user_id ='2fd685ed-979a-4a2e-8c6c-3370eb025228'`;
-        expect(out.rows[0]).toEqual({name: 'Shashini',email: 'shashini@gmail.com',contact_num: '07123232323'});
-        expect(res.redirect).toHaveBeenCalledWith(expected);
-        //await db.query(`DELETE FROM user_profile WHERE email = 'shashini@gmail.com'`)
+        const expected_url = '/admin';
+        const out = await db.query(`SELECT name,email,contact_num FROM user_profile WHERE user_id ='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+        expect(out.rows[0]).toEqual(expected_result);
+        expect(res.redirect).toHaveBeenCalledWith(expected_url);
+        await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
     });
-    // it('should give email already registered error', async ()=>{
-    //     req.body.email = 'sarah123@gmail.com';
-    //     const query = `CALL registerUser ($1, $2, $3, $4, $5, $6)`;
-    //     await db.query(query, [req.body.name, req.body.password, req.body.email, req.body.category, req.body.contactNo, req.body.gender]);
-    //     await userController.register(req, res);
-    //     const expected = {
-    //         result: 'redirect',
-    //         url:  "register/?registrationError=Email error: Email sarah123@gmail.com is already registered already registered&name=Sarah Hyland&email=sarah123@gmail.com&category=2&gender=Female&contactNo=07123232323"
-    //     }
-    //     expect(res.send).toHaveBeenCalledWith(expected);
-    //     await db.query(`DELETE FROM user_profile WHERE email = 'sarah123@gmail.com'`)
-    // })
+
+        //have to fix bug-parse error 
+    it('should give email already taken error', async ()=>{
+        req.body.new_email = 'john@gmail.com';
+        const query = `CALL editProfile ($1, $2, $3, $4)`;
+        await db.query(query, [req.body.new_name, req.body.new_email, req.body.new_contact_num, req.user.user_id]);
+        await adminController.editInfo(req, res);
+        const expected = "/admin/editInfo/?editInfoError=Email error: Email john@gmail.com is already registered&existing_name=Shashini&existing_email=shashw@gmail.com&existing_contactNum=07182266663";
+        expect(res.redirect).toHaveBeenCalledWith(expected);
+        await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+    });
 
 //     // it('should give password mismatch error', async ()=>{
 //     //     req.body.password2 = '567890'
