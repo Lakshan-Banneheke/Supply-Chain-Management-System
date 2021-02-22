@@ -7,6 +7,7 @@ const session = require('express-session');
 const helmet = require('helmet');
 // const pgConnect = require('connect-pg-simple');
 const initializePassport = require("./config/passport");
+const setSession = require('./middleware/setSession');
 
 // const { defaultLogger} = require('./config/logger');
 
@@ -44,16 +45,7 @@ app.use(passport.session());
 app.use(flash());
 
 
-app.use(function(req, res, next) {
-    if ((req.isAuthenticated())){
-        res.locals.cat_id = req.user.cat_id;
-        res.locals.name = req.user.name;
-        res.locals.url = req.originalUrl;
-        next();
-    } else {
-        next();
-    }
-});
+app.use(setSession);
 
 // setup routes
 app.use(require('./routes'));
