@@ -1,5 +1,5 @@
-const userController = require('../../controllers/userController');
-const db = require('../../config/db');
+const userController = require('../../../controllers/userController');
+const db = require('../../../config/db');
 
 describe('register', () => {
     let res;
