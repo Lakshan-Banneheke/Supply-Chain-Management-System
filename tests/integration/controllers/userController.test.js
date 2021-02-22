@@ -1,4 +1,3 @@
-const request = require('supertest');
 const userController = require('../../../controllers/userController');
 const db = require('../../../config/db');
 
@@ -76,7 +75,7 @@ describe('register', () => {
     });
 });
 
-describe('views', ()=>{
+describe('user views', ()=>{
     let res;
     req = {
         query:{}
@@ -134,7 +133,7 @@ describe('login', () => {
     let email;
     let password;
     beforeEach( () => {
-        email = 'claire@gmail.com';;
+        email = 'claire@gmail.com';
         password = '12345';
         server = require('../../../index');
         done = jest.fn();
