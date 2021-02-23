@@ -59,3 +59,58 @@ describe('edit info', () => {
     });
 
 });
+
+
+describe('Change Password', () => {
+    let res;
+    let req;
+    beforeEach(() => {
+        server = require('../../../index');
+        req = {
+            user:{
+                name:'Shashini',
+                email:'shashw@gmail.com',
+                user_id:'2fd685ed-979a-4a2e-8c6c-3370eb025228',
+                password:'$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy'
+            },
+
+            body:{
+                new_password: 'qwerty',
+                confirm_new_password: 'qwerty',
+                old_password : 'password'
+            }
+        }
+
+        res = {
+            redirect: jest.fn()
+        }
+    });
+
+    afterEach(async() => {
+        await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com',contact_num='07182266663',password='$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+        server.close();
+    });
+        
+    it('should successfully change password', async ()=>{
+        await adminController.changePassword(req, res);
+        const expected_url = '/admin';
+
+        expect(res.redirect).toHaveBeenCalledWith(expected_url);
+    });
+
+    it('should give new password mismatch error', async ()=>{
+        req.body.new_password = 'qwerty1';
+        await adminController.changePassword(req, res);
+        const expected ='/admin/editInfo/?changePasswordError=New password does not match retype new password';
+        expect(res.redirect).toHaveBeenCalledWith(expected);
+    });
+
+    it('should give old password verification error', async ()=>{
+        req.body.old_password = 'password1';
+        await adminController.changePassword(req, res);
+        const expected ='/admin/editInfo/?changePasswordError=password verification error';
+        expect(res.redirect).toHaveBeenCalledWith(expected);
+    });
+
+});
+
