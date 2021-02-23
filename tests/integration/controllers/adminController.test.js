@@ -15,6 +15,7 @@ describe('edit info', () => {
                 name:'Shashini',
                 email:'shashw@gmail.com',
                 user_id:'2fd685ed-979a-4a2e-8c6c-3370eb025228',
+                contact_num:'07182266663'
             },
 
             body:{
@@ -29,10 +30,11 @@ describe('edit info', () => {
         }
     });
 
-    afterEach(() => {
+    afterEach(async() => {
+        await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com',contact_num='07182266663' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
         server.close();
     });
-        //passed
+        
     it('should successfully edit information', async ()=>{
         let expected_result={
             name: 'Mary',
@@ -47,34 +49,13 @@ describe('edit info', () => {
         await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
     });
 
-        //have to fix bug-parse error 
+        
     it('should give email already taken error', async ()=>{
-        req.body.new_email = 'john@gmail.com';
-        const query = `CALL editProfile ($1, $2, $3, $4)`;
-        await db.query(query, [req.body.new_name, req.body.new_email, req.body.new_contact_num, req.user.user_id]);
+        req.body.new_email = 'Marieh@gmail.com';
         await adminController.editInfo(req, res);
-        const expected = "/admin/editInfo/?editInfoError=Email error: Email john@gmail.com is already registered&existing_name=Shashini&existing_email=shashw@gmail.com&existing_contactNum=07182266663";
+        const expected = '/admin/editInfo/?editInfoError=Email error: Email Marieh@gmail.com is already registered&existing_name=Shashini&existing_email=shashw@gmail.com&existing_contactNum=07182266663';
         expect(res.redirect).toHaveBeenCalledWith(expected);
         await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
     });
 
-//     // it('should give password mismatch error', async ()=>{
-//     //     req.body.password2 = '567890'
-//     //     await userController.register(req, res);
-//     //     const expected = {
-//     //         result: 'redirect',
-//     //         url:  "register/?registrationError=Password does not match retype password&name=Sarah Hyland&email=sarah@gmail.com&category=2&gender=Female&contactNo=07123232323"
-//     //     }
-//     //     expect(res.send).toHaveBeenCalledWith(expected);
-//     // })
-
-//     // it('should give validation error', async ()=>{
-//     //     req.body.category = '8';
-//     //     await userController.register(req, res);
-//     //     const expected = {
-//     //         result: 'redirect',
-//     //         url :  "register/?registrationError=ValidationError: \"category\" must be one of [2, 3, 4, 5, 6]&name=Sarah Hyland&email=sarah@gmail.com&category=8&gender=Female&contactNo=07123232323"
-//     //     }
-//     //     expect(res.send).toHaveBeenCalledWith(expected);
-//     // })
 });
