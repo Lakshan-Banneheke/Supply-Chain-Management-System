@@ -114,3 +114,28 @@ describe('Change Password', () => {
 
 });
 
+describe('Redirect Admin Dashboard', () => {
+    let res;
+    let req;
+    beforeEach(() => {
+        server = require('../../../index');
+        let req = {
+            user:{
+                name: "admin",
+                cat_id: 1,
+            }
+        };
+        res ={redirect: jest.fn()};
+    });
+
+    afterEach(async() => {
+        server.close();
+    });
+    it('should redirect successfully', async () => {
+        await adminController.redirectAdminDashboard(req,res);
+        const expected='/admin';
+        expect(res.redirect).toHaveBeenCalledWith(expected);
+    });
+    
+    
+});
