@@ -130,9 +130,7 @@ class StoreKeeper {
 
 
     static async getOrders(){
-        console.log("done");
         const query = "SELECT * FROM Material_Order where order_state='not completed'  and ordered=true";
-        console.log("done2");
         const out = await db.query(query);
         console.log(out.rows);
         return out.rows;
@@ -222,16 +220,18 @@ class StoreKeeper {
 
     static async updateStocksAdd(req_id){
         let mat = await this.getOrderedMaterials(req_id);
+        // console.log("ordered materials::::")
         // console.log(mat);
         let query1 = 'SELECT material_quantity from Stock where material_name=$1';
         let query2 = 'UPDATE Stock SET material_quantity=$1 WHERE material_name=$2';
         let query3 = 'INSERT INTO STOCK(material_name,material_quantity,unit) VALUES ($1,$2,$3)';
         for(let i=0;i<mat.length;i++){
             let material = mat[i].m_name;
+            // console.log("material:::")
             // console.log(material);
             let qty = await db.query(query1,[material]);
             qty = qty.rows;
-            console.log(qty);
+            // console.log(qty);
             if(qty.length==0){
                 var mat_name= mat[i].m_name;
                 var mat_qty= mat[i].received_quantity;
@@ -246,7 +246,7 @@ class StoreKeeper {
             await db.query(query2,[qty1,material]);
             }
         }
-        console.log("stocks added successfully");
+        // console.log("stocks added successfully");
     }
 
 
@@ -273,10 +273,10 @@ class StoreKeeper {
 
     //update notification state
 
-    static async markAsRead(not_id){
-        let query = "UPDATE Notification SET state='read' WHERE notifi_id=$1";
-        await db.query(query,[not_id]);
-    }
+    // static async markAsRead(not_id){
+    //     let query = "UPDATE Notification SET state='read' WHERE notifi_id=$1";
+    //     await db.query(query,[not_id]);
+    // }
 
     static async newNotification(msg,to_des){
         let query = "INSERT INTO Notification(message,to_designation,state,from_Designation,date) VALUES($1,$2,'unread','storekeeper',current_date)";
