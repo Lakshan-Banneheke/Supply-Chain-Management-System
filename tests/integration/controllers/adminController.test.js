@@ -8,7 +8,13 @@ let server;
 describe('edit info', () => {
     let res;
     let req;
-    beforeEach(() => {
+    beforeEach(async () => {
+        await db.query(` DELETE FROM user_profile WHERE user_id='2fd685ed-979a-4a2e-8c6c-3370eb025211'`);
+        await db.query(`INSERT INTO user_profile(user_id, name,password,email,cat_id,contact_num,gender,verified)
+        VALUES ('2fd685ed-979a-4a2e-8c6c-3370eb025211', 'Marieh','$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy','Marieh@gmail.com',1,'07182266666','Female','true')`);
+        await db.query(`DELETE FROM user_profile WHERE user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+        await db.query(`INSERT INTO user_profile(user_id, name,password,email,cat_id,contact_num,gender,verified)
+        VALUES ('2fd685ed-979a-4a2e-8c6c-3370eb025228', 'Shashini','$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy','shashw@gmail.com',1,'07182266663','Female','true')`);
         server = require('../../../index');
         req = {
             user:{
@@ -21,7 +27,7 @@ describe('edit info', () => {
             body:{
                 new_name: 'Mary',
                 new_email: 'mary@gmail.com',
-                new_contact_num : '07182266663'
+                new_contact_num : '07182266666'
             }
         }
 
@@ -31,7 +37,7 @@ describe('edit info', () => {
     });
 
     afterEach(async() => {
-        await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com',contact_num='07182266663' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+        //await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com',contact_num='07182266663' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
         server.close();
     });
         
@@ -39,7 +45,7 @@ describe('edit info', () => {
         let expected_result={
             name: 'Mary',
             email: 'mary@gmail.com',
-            contact_num : '07182266663'
+            contact_num : '07182266666'
         };
         await adminController.editInfo(req, res);
         const expected_url = '/admin';
@@ -64,8 +70,11 @@ describe('edit info', () => {
 describe('Change Password', () => {
     let res;
     let req;
-    beforeEach(() => {
+    beforeEach(async() => {
         server = require('../../../index');
+        await db.query(`DELETE FROM user_profile WHERE user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+        await db.query(`INSERT INTO user_profile(user_id, name,password,email,cat_id,contact_num,gender,verified)
+        VALUES ('2fd685ed-979a-4a2e-8c6c-3370eb025228', 'Shashini','$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy','shashw@gmail.com',1,'07182266663','Female','true')`);
         req = {
             user:{
                 name:'Shashini',
@@ -87,7 +96,7 @@ describe('Change Password', () => {
     });
 
     afterEach(async() => {
-        await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com',contact_num='07182266663',password='$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
+        //await db.query(`UPDATE user_profile SET name='Shashini',email ='shashw@gmail.com',contact_num='07182266663',password='$2b$10$2T4uSKF2A0KCwKUFOG74wum.v3xButqprjYP5b2eucUELK0HDbfpy' where user_id='2fd685ed-979a-4a2e-8c6c-3370eb025228'`);
         server.close();
     });
         
