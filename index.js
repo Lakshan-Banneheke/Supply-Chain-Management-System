@@ -7,7 +7,7 @@ const session = require('express-session');
 const helmet = require('helmet');
 // const pgConnect = require('connect-pg-simple');
 const initializePassport = require("./config/passport");
-const setSession = require('./middleware/setSession');
+const setLocals = require('./middleware/setLocals');
 
 // const { defaultLogger} = require('./config/logger');
 
@@ -45,7 +45,7 @@ app.use(passport.session());
 app.use(flash());
 
 
-app.use(setSession);
+app.use(setLocals);
 
 // setup routes
 app.use(require('./routes'));

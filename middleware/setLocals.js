@@ -1,4 +1,4 @@
-const setSession = function(req, res, next) {
+const setLocals = function(req, res, next) {
     if ((req.isAuthenticated())){
         res.locals.cat_id = req.user.cat_id;
         res.locals.name = req.user.name;
@@ -9,4 +9,4 @@ const setSession = function(req, res, next) {
     }
 }
 
-module.exports = setSession;
+module.exports = setLocals;
