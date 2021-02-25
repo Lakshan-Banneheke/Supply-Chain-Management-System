@@ -132,6 +132,14 @@ describe('login', () => {
     let done;
     let email;
     let password;
+    beforeAll(() => {
+        db.query(`CALL registerUser ('Claire', '$2b$10$gaX.bjt0TXxDDpjuIg3DJO7AHiHKgy1zd7f5fvjdxDBeppRHKawfC', 'claire@gmail.com', 5, '07122323232', 'Female')`);
+        db.query(`UPDATE user_profile SET verified='true' WHERE email='claire@gmail.com'`);
+    })
+
+    afterAll(() => {
+        db.query(`DELETE FROM user_profile WHERE email='claire@gmail.com'`);
+    })
     beforeEach( () => {
         email = 'claire@gmail.com';
         password = '12345';

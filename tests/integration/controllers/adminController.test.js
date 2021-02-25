@@ -12,30 +12,32 @@ describe('view admin dashboard', ()=>{
     let res = { render : jest.fn() }
 
     it('should view the dashboard', async ()=>{
-        let expectedResult =  [
-            {
-                cat_id: 2,
-                user_id: 'ef29a7ce-1317-48b2-a5ef-b4bc635d18f6',
-                name: 'Mark',
-                password: '12345',
-                email: 'mark@gmail.com',
-                contact_num: '0000000000',
-                gender: 'Male',
-                verified: false,
-                cat_name: 'Quantity Surveyor'
-            },
-            {
-                cat_id: 2,
-                user_id: 'dea36877-965b-4fd7-8d14-341610e593e6',
-                name: 'Mary',
-                password: '12345',
-                email: 'mary@gmail.com',
-                contact_num: '0000000000',
-                gender: 'Female',
-                verified: false,
-                cat_name: 'Quantity Surveyor'
-            }
-        ]
+        const out = await db.query(`SELECT * FROM user_profile NATURAL JOIN user_category WHERE verified=false`);
+        let expectedResult = out.rows;
+        // let expectedResult =  [
+        //     {
+        //         cat_id: 2,
+        //         user_id: 'ef29a7ce-1317-48b2-a5ef-b4bc635d18f6',
+        //         name: 'Mark',
+        //         password: '12345',
+        //         email: 'mark@gmail.com',
+        //         contact_num: '0000000000',
+        //         gender: 'Male',
+        //         verified: false,
+        //         cat_name: 'Quantity Surveyor'
+        //     },
+        //     {
+        //         cat_id: 2,
+        //         user_id: 'dea36877-965b-4fd7-8d14-341610e593e6',
+        //         name: 'Mary',
+        //         password: '12345',
+        //         email: 'mary@gmail.com',
+        //         contact_num: '0000000000',
+        //         gender: 'Female',
+        //         verified: false,
+        //         cat_name: 'Quantity Surveyor'
+        //     }
+        // ]
 
         await adminController.viewAdminDashboard(req, res);
 
