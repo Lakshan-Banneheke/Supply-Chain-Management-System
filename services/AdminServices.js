@@ -15,7 +15,8 @@ class AdminService{
         //console.log("admin service");
         if (new_password.length!==confirm_new_password.length || !crypto.timingSafeEqual(Buffer.from(new_password), Buffer.from(confirm_new_password))) {
             //console.log('New password does not match retype new password');
-            throw new Errors.BadRequest('New password does not match retype new password');
+            //throw new Errors.BadRequest('New password does not match retype new password');
+            throw ('New password does not match retype new password');
         }
 
         //console.log('verification testing');
@@ -23,7 +24,7 @@ class AdminService{
         //console.log(verification);
         if (!verification) {
             //console.log('password verification error');
-            throw new Errors.BadRequest('password verification error');
+            throw ('password verification error');
         }
 
         const hashed_new_password=await bcrypt.hash(new_password, 10);
