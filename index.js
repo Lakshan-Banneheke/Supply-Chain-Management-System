@@ -7,6 +7,7 @@ const session = require('express-session');
 const helmet = require('helmet');
 // const pgConnect = require('connect-pg-simple');
 const initializePassport = require("./config/passport");
+const setLocals = require('./middleware/setLocals');
 
 // const { defaultLogger} = require('./config/logger');
 
@@ -44,16 +45,7 @@ app.use(passport.session());
 app.use(flash());
 
 
-app.use(function(req, res, next) {
-    if ((req.isAuthenticated())){
-        res.locals.cat_id = req.user.cat_id;
-        res.locals.name = req.user.name;
-        res.locals.url = req.originalUrl;
-        next();
-    } else {
-        next();
-    }
-});
+app.use(setLocals);
 
 // setup routes
 app.use(require('./routes'));
@@ -72,4 +64,6 @@ const server = app.listen(process.env.PORT || 3000, () => {
     console.log('Express server listening on port %d in %s mode', process.env.PORT, app.settings.env);
 });
 
+
 module.exports = server;
+

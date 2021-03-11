@@ -13,34 +13,21 @@ function convertTime(list) {
         var newdate = [date.getFullYear(), mnth, day].join("-");
         newList.push(newdate);
     }
-
     return newList;
 }
 
-// const renderDashboard = async(req,res)=> {
-//
-//     let notifications = await storekeeperModel.getNotification();
-//     let not_dates =  await convertTime(notifications);
-//     // console.log(notifications);
-//     passNotification = notifications;
-//     notificationView = "/"
-//     res.render('dashboard', {
-//             name:req.user.name,
-//             notifications:notifications,
-//             not_dates:not_dates
-//         });
-//
-// }
-
+//test-done
 const renderStock = async(req,res)=>{
     let notifications = await storekeeperModel.getNotification();
     let not_dates =  await convertTime(notifications);
     passNotification = notifications;
     notificationView = "/store/stock"
+    stocks = await storekeeperModel.getStock()
+
     res.render('stock',{
             name:req.user.name,
             notifications:notifications,
-            stocks: await storekeeperModel.getStock(),
+            stocks: stocks,
             not_dates:not_dates
         },
 
@@ -48,13 +35,15 @@ const renderStock = async(req,res)=>{
 }
 
 const renderStockUpdate = async(req,res) =>{
+    const materialOrders = await storekeeperModel.getStockUpdateRequests()
     res.render('stockupdates',{
         name:req.user.name,
-        materialOrders: await storekeeperModel.getStockUpdateRequests()
+        materialOrders: materialOrders
     });
 }
 
 
+//test-done
 const renderMaterialRequests = async (req,res) =>{
 
     let notifications = await storekeeperModel.getNotification();
@@ -74,9 +63,9 @@ const renderMaterialRequests = async (req,res) =>{
 
     req_dates = [];
 
-    if (material_req.length>0){
+    // if (material_req.length>0){
         req_dates = await convertMat(material_req);
-    }
+    // }
 
     res.render('materialrequests',{
         name:req.user.name,
@@ -107,17 +96,15 @@ function convertMat(list,req_date) {
 }
 
 
-
+//test-done
 const renderMaterialRequestView  = async (req,res) =>{
-    console.log("ok");
+    
     let req_id = req.params.id;
 
     let req_materials = await storekeeperModel.getRequestedMaterials(req_id);
 
     let req_det = await storekeeperModel.getMaterialRequestByID(req_id);
-    console.log(req_materials);
-    console.log(req_det);
-
+    
     res.render('materialrequestview',{
         name:req.user.name,
         materials: req_materials,
@@ -173,11 +160,11 @@ const checkAvailability =  async function (req_materials){
     let not_aval = [];
     for(var i=0; i<req_materials.length;i++ ){
         var mat_name=String(req_materials[i].material_name);
-        console.log(mat_name);
+        // console.log(mat_name);
         var aval_qty = await storekeeperModel.getQuantityByName(mat_name);
-        console.log("aval qty");
-        console.log(aval_qty);
-        console.log(req_materials[i].requested_quntity);
+        // console.log("aval qty");
+        // console.log(aval_qty);
+        // console.log(req_materials[i].requested_quntity);
         if (req_materials[i].requested_quantity>aval_qty[0].material_quantity){
             not_aval.push(mat_name);
         }
@@ -206,17 +193,16 @@ const revisionHandle = async (req,res)=>{
     let req_id = req.params.id;
     let receieved_qty = JSON.parse(JSON.stringify(req.body)). receieved_quantity;
 
-
     //update state partially completed
     await storekeeperModel.updateRequestState(req_id,'Partially Completed');
     //update issued date
     await storekeeperModel.updateIssueDate(req_id);
     //update received quantity
     await storekeeperModel.updateReceivedQuantityWithChange(receieved_qty,req_id);
-    console.log("updated received qt");
+    // console.log("updated received qt");
     //updating stocks
     await storekeeperModel.updateStocksReduce(req_id);
-    console.log("stock updated");
+    // console.log("stock updated");
     //notify onsite supervisor
     await storekeeperModel.newNotification('Request Fulfilled(Quantities updated)','on-site supervisor');
 
@@ -226,7 +212,7 @@ const revisionHandle = async (req,res)=>{
 
 
 //received orders handling
-
+// test-done
 const renderMaterialOrders = async (req,res) =>{
 
     let notifications = await storekeeperModel.getNotification();
@@ -242,9 +228,9 @@ const renderMaterialOrders = async (req,res) =>{
 
     ord_dates = [];
 
-    if (orders.length>0){
+    // if (orders.length>0){
         ord_dates = await convertOrd(orders);
-    }
+    // }
 
     res.render('materialorders',{
         name:req.user.name,
@@ -274,6 +260,7 @@ function convertOrd(list) {
 }
 
 
+//test-done
 const renderMaterialOrderView  = async (req,res) =>{
     let req_id = req.params.id;
 
@@ -289,16 +276,18 @@ const renderMaterialOrderView  = async (req,res) =>{
     });
 }
 
+
+//test-done
 const renderChangeMaterialOrderView = async(req,res) =>{
 
     let req_id = req.params.id;
 
     let req_materials = await storekeeperModel.getOrderedMaterials(req_id);
-    console.log("requested materials");
-    console.log(req_materials);
+    // console.log("requested materials");
+    // console.log(req_materials);
     let req_det = await storekeeperModel.getOrderByID(req_id);
-    console.log("order details");
-    console.log(req_det);
+    // console.log("order details");
+    // console.log(req_det);
 
     res.render('materialorderchangeview',
         {
@@ -341,10 +330,10 @@ const updateStocksWithChange = async (req,res) =>{
 
     //update received quantity
     await storekeeperModel.updateOrderQuantityWithChange(receieved_qty,req_id);
-    console.log("updated received qt");
+    // console.log("updated received qt");
     //updating stocks
     await storekeeperModel.updateStocksAdd(req_id);
-    console.log("stock updated");
+    // console.log("stock updated");
     //notify expeditor
     await storekeeperModel.newNotification('Request Fulfilled(Quantites Changed)','expeditor');
     res.redirect('/store/materialorders');
@@ -352,16 +341,16 @@ const updateStocksWithChange = async (req,res) =>{
 }
 
 
-const markAsRead = async(req,res) => {
-    let notifications = passNotification;
-    for(var i=0;i<notifications.length;i++){
-        await storekeeperModel.markAsRead(notifications[i].notifi_id);
-    }
-    await res.redirect(notificationView);
-    passNotification=[];
-    notificationView='';
-    console.log("redirected");
-}
+// const markAsRead = async(req,res) => {
+//     let notifications = passNotification;
+//     for(var i=0;i<notifications.length;i++){
+//         await storekeeperModel.markAsRead(notifications[i].notifi_id);
+//     }
+//     await res.redirect(notificationView);
+//     passNotification=[];
+//     notificationView='';
+//     // console.log("redirected");
+// }
 
 
 module.exports = {
@@ -378,5 +367,9 @@ module.exports = {
     renderChangeMaterialOrderView,
     updateStocksNoChange,
     updateStocksWithChange,
-    markAsRead
+
+    convertTime,
+    convertMat,
+    convertOrd,
+    checkAvailability
 }

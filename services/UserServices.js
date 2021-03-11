@@ -1,15 +1,4 @@
-// const User = require('../models/User');
-
-// class UserService {
-//     static async register() {
-//         return User.registerUser();
-//     }
-// }
-
-// module.exports = UserService;
-
 const User = require('../models/user');
-const Errors = require('../helpers/error');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 
@@ -19,7 +8,7 @@ class UserService {
         name, email, password, password2, category, gender, contactNo
     }) {
         if (!crypto.timingSafeEqual(Buffer.from(password), Buffer.from(password2))) {
-            throw new Errors.BadRequest('Password does not match retype password');
+            throw ('Password does not match retype password');
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -53,7 +42,6 @@ class UserService {
     }
    
     // eslint-disable-next-line no-empty-function
-    static async logout() {}
 }
 
 module.exports = UserService;
