@@ -1,6 +1,5 @@
 const admin = require('../models/admin');
 const userValidator = require('./validators/userValidator');
-//const userService = require('../services/UserServices');
 const adminService = require('../services/AdminServices');
 const bcrypt = require('bcrypt');
 
