@@ -3,10 +3,7 @@ const expeditorServices = require('../services/expeditorServices');
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
 
-var project_id = 0 
-const viewSendRequest = async (req, res) => {
-    res.render('sendRequest', {name: req.user.name});
-}
+
 const viewOrder = async (req, res) => {
     const projects = await expeditorServices.getProjects();
     const materials = await expeditorServices.showMaterials();
@@ -121,7 +118,6 @@ const renderReport = async (req,res)=>{
 //----------------------------------------
 
 module.exports = {
-    viewSendRequest,
     viewOrder,
     addNewOrder,
     sendOrder,
