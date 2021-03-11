@@ -33,7 +33,7 @@ router.post("/updatestocksnochange/:id",storekeeperController.updateStocksNoChan
 
 router.post("/updatestockswithchange/:id",storekeeperController.updateStocksWithChange)
 
-router.post("/markasread",storekeeperController.markAsRead)
+// router.post("/markasread",storekeeperController.markAsRead)
 
 // router.post("/submitmaterialorder/:id",storekeeperController.)
 
