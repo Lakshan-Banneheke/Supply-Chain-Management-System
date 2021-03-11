@@ -102,7 +102,7 @@ describe('viewestimation', ()=>{
         expect(res.send).toHaveBeenCalledWith(expected);
     });
 
-    it('should not send estimation', async ()=>{
+    it('should send estimation', async ()=>{
         await qsController.sendEstimation(req, res);
         const expected = {result: 'redirect', url: 'estimationView',err: ''}
         expect(res.send).toHaveBeenCalledWith(expected);
