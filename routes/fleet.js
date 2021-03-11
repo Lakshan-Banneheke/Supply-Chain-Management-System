@@ -25,13 +25,11 @@ router.get('/supplies/edit/:id', auth.checkNotAuthenticated, FleetController.edi
 router.post('/supplies/editSupplySubmit', auth.checkNotAuthenticated, FleetController.editSupplySubmit);
 router.get('/supplies/delete/:id', auth.checkNotAuthenticated, FleetController.deleteSupply);
 
-router.get('/supplies/req', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;next()}, FleetController.supplies);
-router.get('/supplies/new/req', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;next()}, FleetController.newSupply);
-router.post('/supplies/addNew/req', auth.checkNotAuthenticated, (req, res, next) => {req.req=true;next()}, FleetController.addNewSupply);
+router.get('/supplies/req', auth.checkNotAuthenticated, (req, res, next) => { req.req = true; next() }, FleetController.supplies);
+router.get('/supplies/new/req', auth.checkNotAuthenticated, (req, res, next) => { req.req = true; next() }, FleetController.newSupply);
+router.post('/supplies/addNew/req', auth.checkNotAuthenticated, (req, res, next) => { req.req = true; next() }, FleetController.addNewSupply);
 
 router.get('/requests', auth.checkNotAuthenticated, FleetController.requests);
 router.post('/requests', auth.checkNotAuthenticated, FleetController.handelRequests);
-
-router.get('/test', auth.checkNotAuthenticated, FleetController.test);
 
 module.exports = router;
