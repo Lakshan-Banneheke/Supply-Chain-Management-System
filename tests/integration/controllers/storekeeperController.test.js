@@ -35,31 +35,31 @@ describe('get stock', ()=>{
             notifications: [],
             stocks: [
               {
-                stock_id: 7,
+                stock_id: 1,
                 material_name: 'Cement',
                 material_quantity: 100,
                 unit: 'pct'
               },
               {
-                stock_id: 8,
+                stock_id: 2,
                 material_name: 'Steel',
                 material_quantity: 100,
                 unit: 'pct'
               },
               {
-                stock_id: 9,
+                stock_id: 3,
                 material_name: 'Sand',
                 material_quantity: 100,
                 unit: 'cube'
               },
               {
-                stock_id: 10,
+                stock_id: 4,
                 material_name: 'Plate',
                 material_quantity: 100,
                 unit: 'pcs'
               },
               {
-                stock_id: 11,
+                stock_id: 5,
                 material_name: 'Bolts',
                 material_quantity: 100,
                 unit: 'pcs'
