@@ -33,7 +33,7 @@ const renderCreateNewReqP = async (req,res)=>{
     user_name = req.user.name;
     console.log(user_id);
     var allprojects = await supervisorModel.getAllprojects();
-    initiateProject();
+    var result = initiateProject();
     res.render('create_new_reqP',{
         projects: allprojects
     })
@@ -93,7 +93,7 @@ const collectSumbitData = async (req,res)=>{
         }
         //console.log(matLis)
         saveToSiteReqTable(projectData,matLis)
-        initiateProject()
+        var result = initiateProject();
         var msg = saveToNotificationTable("New Material Request Create","store-keeper","on-site-supervisor")
         return res.status(200).send({ result: 'redirect', url: '/' });
     } catch (err) {
@@ -124,6 +124,8 @@ function initiateProject(){
     section_name = ''
     
     req_note = ''
+
+    return "reset"
 }
 
 
@@ -200,5 +202,7 @@ module.exports = {
     collectSumbitData,
     renderReqReport,
     renderReport,
-    sendToExpeditor
+    sendToExpeditor,
+
+    initiateProject;
 }
